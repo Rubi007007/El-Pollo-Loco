@@ -51,7 +51,10 @@ class World {
         if (mO.otherDirection) {
             this.flipImage(mO);
         }
-        this.ctx.drawImage(mO.img, mO.x, mO.y, mO.width, mO.height);
+
+        mO.draw(this.ctx);
+        mO.drawCollisionFrame(this.ctx);
+
         if (mO.otherDirection) {
             this.flipImageBack(mO);
         }

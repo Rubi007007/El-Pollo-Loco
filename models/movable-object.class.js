@@ -25,6 +25,18 @@ class MovableObject {
         return this.y < 150
     }
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawCollisionFrame(ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = '2';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+    }
+
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
