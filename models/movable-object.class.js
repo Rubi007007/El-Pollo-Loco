@@ -39,6 +39,19 @@ class MovableObject {
         }
     }
 
+    // character.isColliding(chicken);
+    isColliding (obj) {
+        return this.x + this.width > obj.x &&
+            this.y + this.height > obj.y &&
+            this.x < obj.x &&
+            this.y < obj.y + obj.height
+        /* DA -> s. unter Video Modul 12, Pollo Loco 2, Video 10
+        return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
+                (this.y + this.offsetY + this.height) >= obj.y &&
+                (this.y + this.offsetY) <= (obj.y + obj.height) && 
+                obj.onCollisionCourse;*/
+    }
+
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
