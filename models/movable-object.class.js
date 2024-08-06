@@ -10,6 +10,8 @@ class MovableObject {
     speedY = 0;
     acceleration = 1;
     otherDirection = false;
+    energy = 100;
+    lastHit = 0;
 
 
     applyGravity() {
@@ -52,6 +54,25 @@ class MovableObject {
                 obj.onCollisionCourse;*/
     }
 
+    hit() {
+        this.energy -= 10;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime()
+        }
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
+        timePassed = timePassed / 1000; // Difference in s
+        return timePassed < 1
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
@@ -74,7 +95,7 @@ class MovableObject {
     }
 
     playAnimation(images) {
-        let i = this.currentImage % this.IMAGES_WALKING.length;
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
