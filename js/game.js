@@ -29,6 +29,10 @@ window.addEventListener('keydown', (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
     }
+
+    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) {
+        keyboard.THROW = true;
+    }
 });
 
 window.addEventListener('keyup', (e) => {
