@@ -30,7 +30,7 @@ window.addEventListener('keydown', (e) => {
         keyboard.SPACE = true;
     }
 
-    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) {
+    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) { // 70: F 13: Enter 82: R
         keyboard.THROW = true;
     }
 });
