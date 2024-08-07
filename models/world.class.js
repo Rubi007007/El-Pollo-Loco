@@ -28,6 +28,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy);
                     if (this.character.energy <= 0) {
                         console.log('Game Over');
                     } else {
@@ -43,11 +44,15 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-        this.addObjectsToMap(this.level.enemies);
+
+        this.ctx.translate(-this.camera_x, 0); // - Kamera -> verschiebt die Statusbar nicht
+        // ----- Space for fixed Objects ----- //
         this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0); // hier wieder aufheben
+        
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
