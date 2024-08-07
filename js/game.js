@@ -55,4 +55,8 @@ window.addEventListener('keyup', (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
     }
+
+    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) {
+        keyboard.THROW = false;
+    }
 });
