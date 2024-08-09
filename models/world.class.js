@@ -10,7 +10,7 @@ class World {
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
-    collectableObjects = [];
+    collectableObjects = [new CollectableObject(), new CollectableObject()];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -53,7 +53,6 @@ class World {
         }
     }
 
-
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -64,11 +63,12 @@ class World {
         this.ctx.translate(-this.camera_x, 0); // - Kamera -> verschiebt die Statusbar nicht
         // ----- Space for fixed Objects ----- //
         this.addToMap(this.statusBar);
-        this.ctx.translate(this.camera_x, 0); // hier wieder aufheben
+        this.ctx.translate(this.camera_x, 0); // hier wieder aufgehoben
         
+        this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-        this.addToMap(this.character);
+        this.addObjectsToMap(this.collectableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
