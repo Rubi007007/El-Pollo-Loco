@@ -4,13 +4,13 @@ class World {
     enemies = level1.enemies;
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
+    collectableBottles = level1.collectableBottles;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
     throwableObjects = [];
-    collectableObjects = [new CollectableObject(), new CollectableObject()];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -66,9 +66,9 @@ class World {
         this.ctx.translate(this.camera_x, 0); // hier wieder aufgehoben
         
         this.addToMap(this.character);
+        this.addObjectsToMap(this.level.collectableBottles);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.collectableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
