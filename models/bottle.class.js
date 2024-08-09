@@ -1,5 +1,8 @@
 class Bottle extends MovableObject {
     bottles;
+    width = 70;
+    height = 70;
+    y = 350;
     
     IMAGES_BOTTLE_COLLECTABLE = [
         './img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
@@ -12,10 +15,6 @@ class Bottle extends MovableObject {
         this.loadImages(this.IMAGES_BOTTLE_COLLECTABLE);
 
         this.x = 300 + Math.random() * 700; // Zahl zwischen 200 und 700
-        this.y =  350;
-
-        this.width = 70;
-        this.height = 70;
  
         this.animate();      
     }
