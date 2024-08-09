@@ -45,6 +45,11 @@ class World {
                 }
             };
         });
+        this.level.collectableCoins.forEach((coin) => {
+            if (this.character.isColliding(coin)) {
+                coin.collectCoin();
+            }
+        })
     }
 
     checkThrowObjects() {
