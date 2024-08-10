@@ -7,6 +7,7 @@ class World {
     collectableBottles = level1.collectableBottles;
     collectableCoins = level1.collectableCoins;
     collect_coin_sound = new Audio('./audio/collect_coin.mp3');
+    collect_bottle_sound = new Audio('./audio/collect_bottle.mp3');
     canvas;
     ctx;
     keyboard;
@@ -63,6 +64,9 @@ class World {
             if (this.character.isColliding(bottle)) {
                 let index = this.level.collectableBottles.indexOf(bottle);
                 this.level.collectableBottles.splice(index, 1);
+                this.collect_bottle_sound.play();
+                this.collect_bottle_sound.volume = 0.4;
+                this.statusbarBottle.collectBottle();
             }
         });
     }
