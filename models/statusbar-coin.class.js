@@ -30,9 +30,6 @@ class StatusbarCoin extends DrawableObject {
 
     collectCoin() {
         this.collectedCoins += 1;
-        /*
-            Coins verschwinden
-        */
         this.setPercentage(this.collectedCoins * 10); // * 10 für schnelleren Progress in Bar
     }
 }
