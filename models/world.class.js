@@ -6,6 +6,7 @@ class World {
     backgroundObjects = level1.backgroundObjects;
     collectableBottles = level1.collectableBottles;
     collectableCoins = level1.collectableCoins;
+    collect_coin_sound = new Audio('./audio/collect_coin.mp3');
     canvas;
     ctx;
     keyboard;
@@ -47,11 +48,14 @@ class World {
                 }
             };
         });
+
         this.level.collectableCoins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
-                coin.collectCoin();
+                this.collect_coin_sound.play();
+                this.collect_coin_sound.volume = 0.6;
+                this.statusbarCoin.collectCoin();
             }
-        })
+        });
     }
 
     checkThrowObjects() {

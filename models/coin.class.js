@@ -1,6 +1,5 @@
 class Coin extends MovableObject {
     coins = 0;
-    collect_coin_sound = new Audio('./audio/collect_coin.mp3');
     width = 60;
     height = 60;
 
@@ -21,15 +20,5 @@ class Coin extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_COINS);
         }, 600);
-    }
-
-    collectCoin() {
-        this.collect_coin_sound.play();
-        this.coins += 1;
-        /*
-            Statusbar einbinden,
-            Coins müssen verschwinden
-        */
-        console.log(this.coins)
     }
 }
