@@ -25,4 +25,8 @@ class StatusbarBottle extends DrawableObject {
         let path = this.IMAGES_BOTTLEBAR[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
+
+    collectBottle() {
+        console.log('collected Bottle')
+    }
 }
