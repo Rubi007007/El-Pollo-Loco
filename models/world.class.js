@@ -10,7 +10,9 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new StatusBar();
+    statusbarHealth = new StatusbarHealth();
+    statusbarCoin = new StatusbarCoin();
+    statusbarBottle = new StatusbarBottle();
     throwableObjects = [];
 
     constructor(canvas, keyboard) {
@@ -37,7 +39,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                this.statusbarHealth.setPercentage(this.character.energy);
                 if (this.character.energy <= 0) {
                     console.log('Game Over');
                 } else {
@@ -68,7 +70,9 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); // - Kamera -> verschiebt die Statusbar nicht
         // ----- Space for fixed Objects ----- //
-        this.addToMap(this.statusBar);
+        this.addToMap(this.statusbarHealth);
+        this.addToMap(this.statusbarCoin);
+        this.addToMap(this.statusbarBottle);
         this.ctx.translate(this.camera_x, 0); // hier wieder aufgehoben
         
         this.addToMap(this.character);

@@ -26,6 +26,10 @@ class Coin extends MovableObject {
     collectCoin() {
         this.collect_coin_sound.play();
         this.coins += 1;
+        /*
+            Statusbar einbinden,
+            Coins müssen verschwinden
+        */
         console.log(this.coins)
     }
 }
