@@ -8,6 +8,7 @@ class World {
     collectableCoins = level1.collectableCoins;
     collect_coin_sound = new Audio('./audio/collect_coin.mp3');
     collect_bottle_sound = new Audio('./audio/collect_bottle.mp3');
+    out_of_bottles_sound = new Audio('./audio/out_of_bottles.mp3')
     canvas;
     ctx;
     keyboard;
@@ -72,9 +73,14 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.THROW) {
+        if (this.keyboard.THROW && this.statusbarBottle.availableBottles()) {
             let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120);
             this.throwableObjects.push(bottle);
+            this.statusbarBottle.collectedBottles -= 1;
+            this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10)
+        } else if (this.keyboard.THROW) {
+            this.out_of_bottles_sound.play();
+            this.out_of_bottles_sound.volume = 0.1;
         }
     }
 
