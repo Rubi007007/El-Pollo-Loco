@@ -74,10 +74,16 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.THROW && this.statusbarBottle.availableBottles()) {
-            let bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120);
+            let bottle;
+            if (this.character.otherDirection == false) {
+                bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120, false);
+            } else if (this.character.otherDirection == true) {
+                bottle = new ThrowableObject(this.character.x, this.character.y + 145, true);
+            }
             this.throwableObjects.push(bottle);
             this.statusbarBottle.collectedBottles -= 1;
             this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10)
+            
         } else if (this.keyboard.THROW) {
             this.out_of_bottles_sound.play();
             this.out_of_bottles_sound.volume = 0.1;
