@@ -26,8 +26,11 @@ class ThrowableObject extends MovableObject {
         this.speedY = 17;
         this.applyGravity();
         this.animate();
-        setInterval(() => {
+        setInterval(() => { // 117
             this.x += 13;
+            if (this.y == 117) {
+                console.log('test')
+            }
         }, 25);
     }
     
@@ -35,7 +38,7 @@ class ThrowableObject extends MovableObject {
         this.speedY = 8;
         this.applyGravity();
         this.animate();
-        setInterval(() => {
+        setInterval(() => { // 259
             this.x -= 10;
         }, 25);
     }
