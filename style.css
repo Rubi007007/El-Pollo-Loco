@@ -7,3 +7,16 @@ body {
 #canvas {
     background-color: #000;
 }
+
+.headline {
+    font-family: var(--font-family-inter);
+}
+
+@font-face {
+    font-family: inter;
+    src: url(/fonts/Inter-VariableFont_slnt\,wght.ttf);
+}
+
+:root {
+  --font-family-inter: "Inter", sans-serif;
+}
