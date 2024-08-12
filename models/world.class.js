@@ -22,6 +22,8 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.collisionHandler = new CollisionHandler(this);
+
         this.draw();
         this.setWorld();
         this.run();
@@ -33,43 +35,9 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.collisionHandler.checkCollisions();
             this.checkThrowObjects();
         }, 200);
-    }
-
-    checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusbarHealth.setPercentage(this.character.energy);
-                if (this.character.energy <= 0) {
-                    console.log('Game Over');
-                } else {
-                    console.log(this.character.energy);
-                }
-            };
-        });
-
-        this.level.collectableCoins.forEach((coin) => {
-            if (this.character.isColliding(coin)) {
-                let index = this.level.collectableCoins.indexOf(coin);
-                this.level.collectableCoins.splice(index, 1);
-                this.collect_coin_sound.play();
-                this.collect_coin_sound.volume = 0.6;
-                this.statusbarCoin.collectCoin();
-            }
-        });
-
-        this.level.collectableBottles.forEach((bottle) => {
-            if (this.character.isColliding(bottle)) {
-                let index = this.level.collectableBottles.indexOf(bottle);
-                this.level.collectableBottles.splice(index, 1);
-                this.collect_bottle_sound.play();
-                this.collect_bottle_sound.volume = 0.4;
-                this.statusbarBottle.collectBottle();
-            }
-        });
     }
 
     checkThrowObjects() {

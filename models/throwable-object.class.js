@@ -1,6 +1,7 @@
 class ThrowableObject extends MovableObject {
 
     throw_bottle_sound = new Audio('./audio/throw_bottle.mp3');
+    throwableBottles = [];
 
     IMAGES_BOTTLE_THROW = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -47,7 +48,8 @@ class ThrowableObject extends MovableObject {
                 this.speedY = 0;
                 this.acceleration = 0;
                 this.y = 350;
-                this.animateSplashedBottle(); // ToDo: STOPPING BOTH ANIMATIONS 
+                this.animateSplash(); // ToDo: STOPPING BOTH ANIMATIONS
+                
             }
         }, 25);
     }
@@ -67,7 +69,7 @@ class ThrowableObject extends MovableObject {
         }, 1000 / 100);
     }
 
-    animateSplashedBottle() {
+    animateSplash() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
         }, 1000 / 100);
