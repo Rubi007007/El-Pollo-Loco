@@ -19,7 +19,7 @@ class ThrowableObject extends MovableObject {
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
     
-    constructor(x, y, otherDirection) {
+    constructor(x, y) {
         super().loadImage('./img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_BOTTLE_THROW);
         this.loadImages(this.IMAGES_BOTTLE_SPLASH);
@@ -29,27 +29,29 @@ class ThrowableObject extends MovableObject {
         this.height = 70;
         this.throw_bottle_sound.play();
         this.throw_bottle_sound.volume = 0.4;
-        if (otherDirection == false) {
-            this.throwRight();
-        } else if (otherDirection == true) {
-            this.throwLeft();
-        }
     }
 
     throwRight() {
         this.speedY = 17;
         this.applyGravity();
-        this.animateThrowingBottle();
         let intervalID = setInterval(() => {
             if (this.y <= 350) {
                 this.x += 13;
+                this.playAnimation(this.IMAGES_BOTTLE_THROW);
+
             } else {
                 clearInterval(intervalID);
                 this.speedY = 0;
                 this.acceleration = 0;
                 this.y = 350;
-                this.animateSplash(); // ToDo: STOPPING BOTH ANIMATIONS
-                
+                this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+
+                setTimeout(() => {
+                    let index = world.throwableObjects.indexOf(this);
+                    if (index > -1) {
+                        world.throwableObjects.splice(index, 1);
+                    }
+                }, 300);
             }
         }, 25);
     }
@@ -57,21 +59,17 @@ class ThrowableObject extends MovableObject {
     throwLeft() {
         this.speedY = 8;
         this.applyGravity();
-        this.animateThrowingBottle();
-        setInterval(() => {
-            this.x -= 10;
+        let intervalID = setInterval(() => {
+            if (this.y <= 350) {
+                this.x -= 10;
+                this.playAnimation(this.IMAGES_BOTTLE_THROW);
+            } else {
+                clearInterval(intervalID);
+                this.speedY = 0;
+                this.acceleration = 0;
+                this.y = 350;
+                this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+            }
         }, 25);
-    }
-
-    animateThrowingBottle() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_BOTTLE_THROW);
-        }, 1000 / 100);
-    }
-
-    animateSplash() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-        }, 1000 / 100);
     }
 }
