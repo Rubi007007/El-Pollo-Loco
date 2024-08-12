@@ -45,13 +45,7 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.playAnimationStopLastImage(this.IMAGES_BOTTLE_SPLASH);
-
-                setTimeout(() => {
-                    let index = world.throwableObjects.indexOf(this);
-                    if (index > -1) {
-                        world.throwableObjects.splice(index, 1);
-                    }
-                }, 250);
+                this.deleteBottle();   
             }
         }, 25);
     }
@@ -69,7 +63,17 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.playAnimationStopLastImage(this.IMAGES_BOTTLE_SPLASH);
+                this.deleteBottle();
             }
         }, 25);
+    }
+
+    deleteBottle() {
+        setTimeout(() => {
+            let index = world.throwableObjects.indexOf(this);
+            if (index > -1) {
+                world.throwableObjects.splice(index, 1);
+            }
+        }, 250);
     }
 }
