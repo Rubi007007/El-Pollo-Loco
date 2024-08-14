@@ -7,7 +7,7 @@ body {
 #canvas {
     background-color: #000;
 }
-
+/* 
 .headline {
     font-family: var(--font-family-inter);
 }
@@ -19,4 +19,4 @@ body {
 
 :root {
   --font-family-inter: "Inter", sans-serif;
-}
+} */
