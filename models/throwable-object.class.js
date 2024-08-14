@@ -1,6 +1,7 @@
 class ThrowableObject extends MovableObject {
 
     throw_bottle_sound = new Audio('./audio/throw_bottle.mp3');
+    splash_bottle_sound = new Audio('./audio/broken_glass_bottle.mp3');
     throwableBottles = [];
 
     IMAGES_BOTTLE_THROW = [
@@ -45,6 +46,8 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.playAnimationStopLastImage(this.IMAGES_BOTTLE_SPLASH);
+                this.splash_bottle_sound.play();
+                this.splash_bottle_sound.volume = 0.1;
                 this.deleteBottle();   
             }
         }, 25);
