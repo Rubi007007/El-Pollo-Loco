@@ -6,6 +6,12 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('./audio/walking.mp3');
 
+    JUMP_SOUNDS = [
+        new Audio('./audio/jump_1.mp3'),
+        new Audio('./audio/jump_2.mp3'),
+        new Audio('./audio/jump_3.mp3'),
+    ];
+
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
         './img/2_character_pepe/2_walk/W-22.png',
@@ -73,6 +79,8 @@ class Character extends MovableObject {
 
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.JUMP_SOUNDS[this.playRandomSound(this.JUMP_SOUNDS)].play();
+                this.JUMP_SOUNDS[this.playRandomSound(this.JUMP_SOUNDS)].volume = 0.5;
             }
 
             this.world.camera_x = -this.x + 100;
@@ -93,5 +101,9 @@ class Character extends MovableObject {
                 }
             }
         }, 50);
+    }
+
+    playRandomSound(array) {
+        return Math.round(Math.random() * (array.length - 1))
     }
 }
