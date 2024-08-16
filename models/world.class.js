@@ -26,6 +26,10 @@ class World {
 
         this.draw();
         this.setWorld();
+        this.startGame();
+    }
+
+    startGame() {
         this.run();
     }
 
