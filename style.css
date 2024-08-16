@@ -4,9 +4,29 @@ body {
     align-items: center;
 }
 
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 720px;
+    height: 480px;
+}
+
 #canvas {
     background-color: #000;
 }
+
+#start-screen {
+    background-color: red;
+    width: 720px;
+    height: 480px;
+}
+
+.start-screen-bg {
+    width: 720px;
+    height: 480px;
+}
+
 /* 
 .headline {
     font-family: var(--font-family-inter);

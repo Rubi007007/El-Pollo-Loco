@@ -4,6 +4,11 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
+}
+
+function startGame() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
     world = new World(canvas, keyboard);
 
     console.log('My Char is', world.character);
