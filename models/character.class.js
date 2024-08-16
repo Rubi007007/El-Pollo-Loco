@@ -7,9 +7,16 @@ class Character extends MovableObject {
     walking_sound = new Audio('./audio/walking.mp3');
 
     JUMP_SOUNDS = [
-        new Audio('./audio/jump_1.mp3'),
-        new Audio('./audio/jump_2.mp3'),
-        new Audio('./audio/jump_3.mp3'),
+        new Audio('./audio/1_jump.mp3'),
+        new Audio('./audio/2_jump.mp3'),
+        new Audio('./audio/3_jump.mp3'),
+        new Audio('./audio/4_jump.mp3'),
+        new Audio('./audio/5_jump.mp3'),
+        new Audio('./audio/6_jump.mp3'),
+        new Audio('./audio/7_jump.mp3'),
+        new Audio('./audio/8_jump.mp3'),
+        new Audio('./audio/9_jump.mp3'),
+        new Audio('./audio/10_jump.mp3'),
     ];
 
     IMAGES_WALKING = [
@@ -80,7 +87,10 @@ class Character extends MovableObject {
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
                 this.JUMP_SOUNDS[this.playRandomSound(this.JUMP_SOUNDS)].play();
-                this.JUMP_SOUNDS[this.playRandomSound(this.JUMP_SOUNDS)].volume = 0.5;
+                
+                for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
+                    this.JUMP_SOUNDS[i].volume = 0.2;
+                }
             }
 
             this.world.camera_x = -this.x + 100;
