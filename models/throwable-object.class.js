@@ -48,7 +48,7 @@ class ThrowableObject extends MovableObject {
                 this.playAnimationStopLastImage(this.IMAGES_BOTTLE_SPLASH);
                 this.splash_bottle_sound.play();
                 this.splash_bottle_sound.volume = 0.1;
-                this.deleteBottle();   
+                this.deleteBottle();
             }
         }, 25);
     }
@@ -66,6 +66,8 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.playAnimationStopLastImage(this.IMAGES_BOTTLE_SPLASH);
+                this.splash_bottle_sound.play();
+                this.splash_bottle_sound.volume = 0.1;
                 this.deleteBottle();
             }
         }, 25);
