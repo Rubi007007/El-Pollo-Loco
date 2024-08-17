@@ -9,6 +9,7 @@ function init() {
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+    initLevel();
     world = new World(canvas, keyboard);
 
     console.log('My Char is', world.character);
