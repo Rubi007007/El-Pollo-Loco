@@ -62,6 +62,17 @@ body {
     background-position: right center;
 }
 
+#end-screen {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+}
+
+.end-screen-bg {
+    width: 720px;
+    height: 480px;
+}
+
 
 /* 
 .headline {

@@ -11,8 +11,16 @@ function startGame() {
     document.getElementById('canvas').style.display = 'block';
     initLevel();
     world = new World(canvas, keyboard);
-
+    
     console.log('My Char is', world.character);
+}
+
+function restartGame() {
+    document.getElementById('start-screen').style.display = 'block';
+}
+
+function endGame() {
+    document.getElementById('end-screen').style.display = 'block';
 }
 
 window.addEventListener('keydown', (e) => {
