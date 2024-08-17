@@ -17,15 +17,38 @@ body {
 }
 
 #start-screen {
-    background-color: red;
     width: 720px;
     height: 480px;
+    position: relative;
 }
 
 .start-screen-bg {
     width: 720px;
     height: 480px;
 }
+
+.start-game-btn {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translate(-50%);
+    margin-right: auto;
+    transform: calc(-50%);
+    background-image: linear-gradient(to right, #FEDD03 0%, #FEA700 51%, #FEDD03 100%);
+    padding: 15px 20px;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.start-game-btn:hover {
+    background-position: right center;
+}
+
 
 /* 
 .headline {
