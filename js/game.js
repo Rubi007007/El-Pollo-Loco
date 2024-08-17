@@ -21,6 +21,8 @@ function restartGame() {
 
 function endGame() {
     document.getElementById('end-screen').style.display = 'block';
+    /*      ToDo: world deleten         */
+    // world = null;
 }
 
 window.addEventListener('keydown', (e) => {
