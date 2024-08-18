@@ -34,10 +34,15 @@ class World {
     };
 
     run() {
-        setInterval(() => {
+        this.gameInterval = setInterval(() => {
             this.collisionHandler.checkCollisions();
             this.checkThrowObjects();
         }, 200);
+    }
+
+    stopGame() {
+        clearInterval(this.gameInterval);
+        cancelAnimationFrame(this.animationFrame);
     }
 
     checkThrowObjects() {
@@ -87,7 +92,7 @@ class World {
 
         // Draw() wird immer wieder aufgerufen
         let self = this; // this wird innerhalb der u.a. Funktion nicht erkannt
-        requestAnimationFrame(function() {
+        this.animationFrame = requestAnimationFrame(function() {
             self.draw();
         })
     }
