@@ -69,27 +69,44 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.walking_sound.pause();
+            let isMoving = false;
+
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                this.walking_sound.play();
-                this.walking_sound.volume = 0.1;
-            }
+                isMoving = true;
 
+                if (this.walking_sound.paused) {
+                    this.walking_sound.play();
+                    this.walking_sound.volume = 0.1;
+                }
+            }
+            
             if (this.world.keyboard.LEFT && this.x > -350) {
                 this.moveLeft();
                 this.otherDirection = true;
-                this.walking_sound.play();
-                this.walking_sound.volume = 0.1;
+                isMoving = true;
+                
+                if (this.walking_sound.paused) {
+                    this.walking_sound.play();
+                    this.walking_sound.volume = 0.1;
+                }
+            }
+
+            if (!isMoving) {
+                this.walking_sound.pause();
             }
 
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
-                this.JUMP_SOUNDS[this.playRandomSound(this.JUMP_SOUNDS)].play();
-                
-                for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
-                    this.JUMP_SOUNDS[i].volume = 0.2;
+
+                const jumpSound = this.JUMP_SOUNDS[this.playRandomSound(this.JUMP_SOUNDS)];
+                if (jumpSound.paused) {
+                    jumpSound.play();
+                    
+                    for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
+                        this.JUMP_SOUNDS[i].volume = 0.2;
+                    }
                 }
             }
 
