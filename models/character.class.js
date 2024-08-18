@@ -9,6 +9,7 @@ class Character extends MovableObject {
     idleTime = 5000;
     longIdleActive = false;
     walking_sound = new Audio('./audio/walking.mp3');
+    snore_sound = new Audio('./audio/snore.mp3');
 
     JUMP_SOUNDS = [
         new Audio('./audio/jump_sounds/1_jump.mp3'),
@@ -115,6 +116,7 @@ class Character extends MovableObject {
             this.isMoving = false;
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+                this.snore_sound.pause();
                 this.moveRight();
                 this.otherDirection = false;
                 this.isMoving = true;
@@ -127,6 +129,7 @@ class Character extends MovableObject {
             }
             
             if (this.world.keyboard.LEFT && this.x > -350) {
+                this.snore_sound.pause();
                 this.moveLeft();
                 this.otherDirection = true;
                 this.isMoving = true;
@@ -139,6 +142,7 @@ class Character extends MovableObject {
             }
 
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.snore_sound.pause();
                 this.jump();
                 this.resetIdleTimer();
 
@@ -168,6 +172,8 @@ class Character extends MovableObject {
             if (!this.isMoving && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 if (this.longIdleActive) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);
+                    this.snore_sound.play();
+                    this.snore_sound.volume = 0.9;
                 } else {
                     this.playAnimation(this.IMAGES_IDLE);
                 }
