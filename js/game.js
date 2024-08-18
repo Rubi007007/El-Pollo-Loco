@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let btn_click_sound = new Audio('./audio/btn_click.mp3')
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -37,6 +38,10 @@ function endGame() {
     document.getElementById('end-screen').style.display = 'block';
     world.stopGame();
     removeKeyboardListeners();
+}
+
+function btnSound() {
+    btn_click_sound.play();
 }
 
 function addKeyboardListeners() {

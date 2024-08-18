@@ -10,6 +10,7 @@ class Character extends MovableObject {
     longIdleActive = false;
     walking_sound = new Audio('./audio/walking.mp3');
     snore_sound = new Audio('./audio/snore.mp3');
+    gameover_sound = new Audio('./audio/game_over.mp3')
 
     JUMP_SOUNDS = [
         new Audio('./audio/jump_sounds/1_jump.mp3'),
@@ -179,10 +180,13 @@ class Character extends MovableObject {
         }, 200);
 
         // Andere Animationen (Jumping, Walking, Hurt, Dead)
-        setInterval(() => {
+        let animationInterval = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 endGame();
+                this.gameover_sound.play();
+                clearInterval(animationInterval);
+                this.idleTime = 100000;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
 
