@@ -135,7 +135,7 @@ class Character extends MovableObject {
                     hurtSound.play();
 
                     for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
-                        this.HURT_SOUNDS[i].volume = 0.2;
+                        this.HURT_SOUNDS[i].volume = 0.4;
                     }
                 }
 
