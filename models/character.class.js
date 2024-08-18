@@ -5,6 +5,9 @@ class Character extends MovableObject {
     speed = 7;
     world;
     isMoving = false;
+    idleTimer;
+    idleTime = 5000;
+    longIdleActive = false;
     walking_sound = new Audio('./audio/walking.mp3');
 
     JUMP_SOUNDS = [
@@ -105,6 +108,9 @@ class Character extends MovableObject {
     }
 
     animate() {
+        this.resetIdleTimer();
+
+        // Bewegung und Interaktionen
         setInterval(() => {
             this.isMoving = false;
 
@@ -112,6 +118,7 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.otherDirection = false;
                 this.isMoving = true;
+                this.resetIdleTimer();
 
                 if (this.walking_sound.paused) {
                     this.walking_sound.play();
@@ -123,6 +130,7 @@ class Character extends MovableObject {
                 this.moveLeft();
                 this.otherDirection = true;
                 this.isMoving = true;
+                this.resetIdleTimer();
                 
                 if (this.walking_sound.paused) {
                     this.walking_sound.play();
@@ -132,6 +140,7 @@ class Character extends MovableObject {
 
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.resetIdleTimer();
 
                 const jumpSound = this.JUMP_SOUNDS[this.world.playRandomSound(this.JUMP_SOUNDS)];
                 if (jumpSound.paused) {
@@ -150,13 +159,22 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-        // Interval für Idleanimation
+        this.startAnimationIntervals();
+    }
+
+    startAnimationIntervals() {
+        // Idle und Long Idle Animationen
         setInterval(() => {
             if (!this.isMoving && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_IDLE);
+                if (this.longIdleActive) {
+                    this.playAnimation(this.IMAGES_LONG_IDLE);
+                } else {
+                    this.playAnimation(this.IMAGES_IDLE);
+                }
             }
         }, 200);
 
+        // Andere Animationen (Jumping, Walking, Hurt, Dead)
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
@@ -180,5 +198,18 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 50);
+    }
+
+    resetIdleTimer() {
+        if (this.idleTimer) {
+            clearTimeout(this.idleTimer);
+        }
+
+        this.longIdleActive = false;
+
+        this.idleTimer = setTimeout(() => {
+            this.longIdleActive = true;
+            this.idleTimer = null;
+        }, this.idleTime);
     }
 }
