@@ -76,6 +76,7 @@ class Character extends MovableObject {
         './img/2_character_pepe/1_idle/idle/I-10.png',
     ];
 
+    // TODO: nächste Todo -> Idle animation erstellen
     IMAGES_LONG_IDLE = [
         './img/2_character_pepe/1_idle/long_idle/I-11.png',
         './img/2_character_pepe/1_idle/long_idle/I-12.png',
