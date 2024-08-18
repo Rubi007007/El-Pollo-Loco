@@ -22,7 +22,7 @@ function restartGame() {
     startGame();
 }
 
-// TODO: Sounds resetten
+// TODO: Sounds resetten, werden dauerhaft abgespielt, sobald gameOver ist
 function resetGame() {
     world.character.energy = 100;
     world.keyboard.DOWN = false;
