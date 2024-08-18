@@ -58,7 +58,6 @@ class World {
             }
             
             this.throwableObjects.push(bottle);
-            console.log(this.throwableObjects)
             this.statusbarBottle.collectedBottles -= 1;
             this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10);
 
