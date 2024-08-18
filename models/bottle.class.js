@@ -1,6 +1,10 @@
 class Bottle extends MovableObject {
     width = 70;
     height = 70;
+    offsetY = 10;
+    offsetX = 15;
+    hitboxWidth = this.width - 20;
+    hitboxHeight = this.height - 10;
     y = 350;
     
     IMAGES_BOTTLE_COLLECTABLE = [

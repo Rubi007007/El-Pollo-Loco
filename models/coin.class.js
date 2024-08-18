@@ -2,6 +2,10 @@ class Coin extends MovableObject {
     coins = 0;
     width = 60;
     height = 60;
+    offsetY = 8;
+    offsetX = 8;
+    hitboxWidth = this.width - 16;
+    hitboxHeight = this.height - 16;
 
     IMAGES_COINS = [
         './img/8_coin/coin_1.png',
