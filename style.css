@@ -40,7 +40,7 @@ body {
     height: 480px;
 }
 
-.start-game-btn {
+.game-btn {
     position: absolute;
     top: 32px;
     left: 50%;
@@ -58,7 +58,7 @@ body {
     cursor: pointer;
 }
 
-.start-game-btn:hover {
+.game-btn:hover {
     background-position: right center;
 }
 
