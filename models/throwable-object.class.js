@@ -35,6 +35,7 @@ class ThrowableObject extends MovableObject {
     throwRight() {
         this.speedY = 17;
         this.applyGravity();
+        world.character.resetIdleTimer();
         let intervalID = setInterval(() => {
             if (this.y <= 350) {
                 this.x += 13;

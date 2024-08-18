@@ -116,7 +116,7 @@ class Character extends MovableObject {
             this.isMoving = false;
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.snore_sound.pause();
+                
                 this.moveRight();
                 this.otherDirection = false;
                 this.isMoving = true;
@@ -129,7 +129,6 @@ class Character extends MovableObject {
             }
             
             if (this.world.keyboard.LEFT && this.x > -350) {
-                this.snore_sound.pause();
                 this.moveLeft();
                 this.otherDirection = true;
                 this.isMoving = true;
@@ -142,7 +141,6 @@ class Character extends MovableObject {
             }
 
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.snore_sound.pause();
                 this.jump();
                 this.resetIdleTimer();
 
@@ -212,6 +210,7 @@ class Character extends MovableObject {
         }
 
         this.longIdleActive = false;
+        this.snore_sound.pause();
 
         this.idleTimer = setTimeout(() => {
             this.longIdleActive = true;
