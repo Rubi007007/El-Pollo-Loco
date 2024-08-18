@@ -22,6 +22,7 @@ function restartGame() {
     startGame();
 }
 
+// TODO: Sounds resetten
 function resetGame() {
     world.character.energy = 100;
     world.keyboard.DOWN = false;

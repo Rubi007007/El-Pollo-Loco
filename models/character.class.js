@@ -7,16 +7,23 @@ class Character extends MovableObject {
     walking_sound = new Audio('./audio/walking.mp3');
 
     JUMP_SOUNDS = [
-        new Audio('./audio/1_jump.mp3'),
-        new Audio('./audio/2_jump.mp3'),
-        new Audio('./audio/3_jump.mp3'),
-        new Audio('./audio/4_jump.mp3'),
-        new Audio('./audio/5_jump.mp3'),
-        new Audio('./audio/6_jump.mp3'),
-        new Audio('./audio/7_jump.mp3'),
-        new Audio('./audio/8_jump.mp3'),
-        new Audio('./audio/9_jump.mp3'),
-        new Audio('./audio/10_jump.mp3'),
+        new Audio('./audio/jump_sounds/1_jump.mp3'),
+        new Audio('./audio/jump_sounds/2_jump.mp3'),
+        new Audio('./audio/jump_sounds/3_jump.mp3'),
+        new Audio('./audio/jump_sounds/4_jump.mp3'),
+        new Audio('./audio/jump_sounds/5_jump.mp3'),
+        new Audio('./audio/jump_sounds/6_jump.mp3'),
+        new Audio('./audio/jump_sounds/7_jump.mp3'),
+        new Audio('./audio/jump_sounds/8_jump.mp3'),
+        new Audio('./audio/jump_sounds/9_jump.mp3'),
+        new Audio('./audio/jump_sounds/10_jump.mp3'),
+    ];
+
+    HURT_SOUNDS = [
+        new Audio('./audio/hurt_sounds/hurt_1.mp3'),
+        new Audio('./audio/hurt_sounds/hurt_2.mp3'),
+        new Audio('./audio/hurt_sounds/hurt_3.mp3'),
+        new Audio('./audio/hurt_sounds/hurt_4.mp3'),
     ];
 
     IMAGES_WALKING = [
@@ -120,6 +127,18 @@ class Character extends MovableObject {
                 endGame();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                
+
+                // TODO: Sound darf nur einmal abgespielt werden
+                const hurtSound = this.HURT_SOUNDS[this.playRandomSound(this.HURT_SOUNDS)];
+                if (hurtSound.paused) {
+                    hurtSound.play();
+
+                    for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
+                        this.HURT_SOUNDS[i].volume = 0.2;
+                    }
+                }
+
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
