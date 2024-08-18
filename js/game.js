@@ -17,7 +17,19 @@ function startGame() {
 }
 
 function restartGame() {
-    document.getElementById('start-screen').style.display = 'block';
+    document.getElementById('end-screen').style.display = 'none';
+    resetGame();
+    startGame();
+}
+
+function resetGame() {
+    world.character.energy = 100;
+    world.keyboard.DOWN = false;
+    world.keyboard.UP = false;
+    world.keyboard.LEFT = false;
+    world.keyboard.RIGHT = false;
+    world.keyboard.SPACE = false;
+    world.keyboard.THROW = false;
 }
 
 function endGame() {
