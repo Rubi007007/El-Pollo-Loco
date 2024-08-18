@@ -126,4 +126,8 @@ class World {
         mO.x = mO.x * -1;
         this.ctx.restore();
     }
+
+    playRandomSound(array) {
+        return Math.round(Math.random() * (array.length - 1))
+    }
 }

@@ -4,6 +4,7 @@ class Character extends MovableObject {
     y = 150;
     speed = 7;
     world;
+    isMoving = false;
     walking_sound = new Audio('./audio/walking.mp3');
 
     JUMP_SOUNDS = [
@@ -97,18 +98,20 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_LONG_IDLE);
         this.applyGravity();
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            let isMoving = false;
+            this.isMoving = false;
 
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                isMoving = true;
+                this.isMoving = true;
 
                 if (this.walking_sound.paused) {
                     this.walking_sound.play();
@@ -119,7 +122,7 @@ class Character extends MovableObject {
             if (this.world.keyboard.LEFT && this.x > -350) {
                 this.moveLeft();
                 this.otherDirection = true;
-                isMoving = true;
+                this.isMoving = true;
                 
                 if (this.walking_sound.paused) {
                     this.walking_sound.play();
@@ -127,14 +130,10 @@ class Character extends MovableObject {
                 }
             }
 
-            if (!isMoving) {
-                this.walking_sound.pause();
-            }
-
             if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
 
-                const jumpSound = this.JUMP_SOUNDS[this.playRandomSound(this.JUMP_SOUNDS)];
+                const jumpSound = this.JUMP_SOUNDS[this.world.playRandomSound(this.JUMP_SOUNDS)];
                 if (jumpSound.paused) {
                     jumpSound.play();
                     
@@ -144,20 +143,28 @@ class Character extends MovableObject {
                 }
             }
 
+            if (!this.isMoving) {
+                this.walking_sound.pause();
+            }
+
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
+        // Interval für Idleanimation
         setInterval(() => {
+            if (!this.isMoving && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+        }, 200);
 
+        setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 endGame();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                
 
-                // TODO: Sound darf nur einmal abgespielt werden
-                const hurtSound = this.HURT_SOUNDS[this.playRandomSound(this.HURT_SOUNDS)];
+                const hurtSound = this.HURT_SOUNDS[this.world.playRandomSound(this.HURT_SOUNDS)];
                 if (hurtSound.paused) {
                     hurtSound.play();
 
@@ -168,16 +175,10 @@ class Character extends MovableObject {
 
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    // walk animation
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+            
+            } else if (this.isMoving) {
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 50);
-    }
-
-    playRandomSound(array) {
-        return Math.round(Math.random() * (array.length - 1))
     }
 }
