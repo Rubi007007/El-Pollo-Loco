@@ -26,7 +26,7 @@ class MovableObject extends DrawableObject {
     }
 
     // character.isColliding(chicken);
-    isColliding (obj) {
+    isColliding(obj) {
         return this.x + this.width > obj.x &&
             this.y + this.height > obj.y &&
             this.x < obj.x &&
@@ -38,21 +38,14 @@ class MovableObject extends DrawableObject {
                 obj.onCollisionCourse;*/
     }
 
-    isCollidingAbove(obj) {
+    /*isCollidingAbove(obj) {
         return this.y + this.height <= obj.y + 20;
     }
 
     isCollidingFrontOrBack(obj) {
         return (this.x + this.width >= obj.x && this.x <= obj.x + obj.width) &&
                (this.y + this.height <= obj.y + obj.height);
-    }
-
-    isColliding(obj) {
-        return this.x + this.width > obj.x &&
-            this.y + this.height > obj.y &&
-            this.x < obj.x + obj.width &&
-            this.y < obj.y + obj.height;
-    }
+    }*/
 
     hit() {
         this.energy -= 10;
