@@ -8,6 +8,7 @@ class CollisionHandler {
         this.world.level.enemies.forEach((enemy) => {
             if (this.world.character.isColliding(enemy)) {
                 if (this.world.character.isCollidingFrontOrBack(enemy)) {
+                    this.world.character.bounceEffectHit(enemy);
                     console.log('Front or Back Collision Detected with:', enemy);
                 } else if (this.world.character.isCollidingAbove(enemy)) {
                     this.world.character.killEnemy(enemy);

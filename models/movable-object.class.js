@@ -89,6 +89,25 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    bounceEffectHit(enemy) {
+        const bounceDistance = 150;  // Gesamte Distanz für den Bounce-Effekt
+        const bounceSpeed = 15;      // Geschwindigkeit der Bewegung (je kleiner, desto langsamer)
+        const bounceSteps = 25;      // Anzahl der Schritte für den Bounce-Effekt
+        
+        let direction = this.x < enemy.x ? -1 : 1;  // Wenn der Gegner rechts ist, bounce nach links, sonst nach rechts
+        let step = 0;
+        const distancePerStep = bounceDistance / bounceSteps;
+        
+        let bounceInterval = setInterval(() => {
+            if (step >= bounceSteps) {
+                clearInterval(bounceInterval);
+            } else {
+                this.x += direction * distancePerStep;
+                step++;
+            }
+        }, bounceSpeed);
+    }
+
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
