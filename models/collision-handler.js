@@ -3,9 +3,17 @@ class CollisionHandler {
         this.world = world;
     }
 
+    // TODO: killEnemy umsetzen
     checkCollisions() {
         this.world.level.enemies.forEach((enemy) => {
             if (this.world.character.isColliding(enemy)) {
+                if (this.world.character.isCollidingFrontOrBack(enemy)) {
+                    console.log('Front or Back Collision Detected with:', enemy);
+                } else if (this.world.character.isCollidingAbove(enemy)) {
+                    this.world.character.killEnemy(enemy);
+                } else {
+                    console.log('Collision detected with:', enemy);
+                }
                 this.world.character.hit();
                 this.world.statusbarHealth.setPercentage(this.world.character.energy);
                 if (this.world.character.energy <= 0) {

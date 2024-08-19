@@ -34,12 +34,17 @@ class MovableObject extends DrawableObject {
     }
 
     isCollidingAbove(obj) {
-        return this.y + this.height <= obj.y + 20;
+        return this.y + this.height - this.offsetY <= obj.y &&
+                this.y + this.height - this.offsetY > obj.y - this.speedY &&
+                this.x + this.width > obj.x &&
+                this.x < obj.x + obj.width;
     }
 
     isCollidingFrontOrBack(obj) {
-        return (this.x + this.width >= obj.x && this.x <= obj.x + obj.width) &&
-               (this.y + this.height <= obj.y + obj.height);
+        return (this.x + this.offsetX + this.width >= obj.x + obj.offsetX &&
+            this.x + this.offsetX <= obj.x + obj.width + obj.offsetX) &&
+           (this.y + this.offsetY + this.height >= obj.y + obj.offsetY &&
+            this.y + this.offsetY <= obj.y + obj.height + obj.offsetY);
     }
 
     hit() {
@@ -71,6 +76,19 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 21;
+    }
+
+    killEnemy(enemy) {
+        console.log('Character landed on top of the enemy');
+        // Reverse the vertical speed to simulate bouncing
+        this.speedY = -15; // Adjust the bounce force as needed
+
+        // Remove the enemy from the level
+        let index = this.world.level.enemies.indexOf(enemy);
+        if (index > -1) {
+            this.world.level.enemies.splice(index, 1);
+            console.log('Enemy defeated!');
+        }
     }
 
     playAnimation(images) {
