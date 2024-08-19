@@ -29,7 +29,7 @@ class Coin extends MovableObject {
         let isColliding;
         do {
             this.x = 300 + Math.random() * 700;
-            this.y = 120 + Math.random() * 130;
+            this.y = 120 + Math.random() * 50;
             isColliding = existingCoins.some(coin => this.isColliding(coin));
         } while (isColliding);
     }
