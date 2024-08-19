@@ -12,11 +12,10 @@ class Coin extends MovableObject {
         './img/8_coin/coin_2.png'
     ];
 
-    constructor() {
+    constructor(existingCoins) {
         super().loadImage('./img/8_coin/coin_1.png');
         this.loadImages(this.IMAGES_COINS);
-        this.x = 300 + Math.random() * 700;
-        this.y = 120 + Math.random() * 130;
+        this.notCollidingCoins(existingCoins);
         this.animate();
     }
 
@@ -24,5 +23,14 @@ class Coin extends MovableObject {
         setInterval(() => {
             this.playAnimation(this.IMAGES_COINS);
         }, 600);
+    }
+
+    notCollidingCoins(existingCoins) {
+        let isColliding;
+        do {
+            this.x = 300 + Math.random() * 700;
+            this.y = 120 + Math.random() * 130;
+            isColliding = existingCoins.some(coin => this.isColliding(coin));
+        } while (isColliding);
     }
 }
