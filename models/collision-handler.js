@@ -6,6 +6,10 @@ class CollisionHandler {
     // TODO: killEnemy umsetzen
     checkCollisions() {
         this.world.level.enemies.forEach((enemy) => {
+            if (this.world.character.invulnerable) {
+                return;
+            }
+
             if (this.world.character.isColliding(enemy)) {
                 if (this.world.character.isCollidingFrontOrBack(enemy)) {
                     this.world.character.bounceEffectHit(enemy);

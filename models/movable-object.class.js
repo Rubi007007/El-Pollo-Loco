@@ -5,6 +5,8 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     energy = 100;
     lastHit = 0;
+    invulnerable = false;
+    invulnerableEndTime = 0;
 
 
     applyGravity() {
@@ -48,11 +50,18 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.energy -= 10;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime()
+        if (!this.invulnerable) {
+            this.energy -= 10;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+                this.invulnerable = true; // Setze auf unverwundbar
+                this.invulnerableEndTime = new Date().getTime() + 1000; // 1 Sekunde Unverwundbarkeit
+                setTimeout(() => {
+                    this.invulnerable = false; // Setze nach 1 Sekunde zurück
+                }, 1000);
+            }
         }
     }
 
