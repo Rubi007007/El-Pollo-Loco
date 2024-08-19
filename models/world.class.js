@@ -63,7 +63,7 @@ class World {
 
         } else if (this.keyboard.THROW) {
             this.out_of_bottles_sound.play();
-            this.out_of_bottles_sound.volume = 0.1;
+            volume(this.out_of_bottles_sound, 0.1);
         }
     }
 

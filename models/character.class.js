@@ -130,7 +130,7 @@ class Character extends MovableObject {
 
                 if (this.walking_sound.paused) {
                     this.walking_sound.play();
-                    this.walking_sound.volume = 0.1;
+                    volume(this.walking_sound, 0.1);
                 }
             }
             
@@ -142,7 +142,7 @@ class Character extends MovableObject {
                 
                 if (this.walking_sound.paused) {
                     this.walking_sound.play();
-                    this.walking_sound.volume = 0.1;
+                    volume(this.walking_sound, 0.1);
                 }
             }
 
@@ -155,7 +155,7 @@ class Character extends MovableObject {
                     jumpSound.play();
                     
                     for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
-                        this.JUMP_SOUNDS[i].volume = 0.2;
+                        volume(this.JUMP_SOUNDS[i], 0.2);
                     }
                 }
             }
@@ -177,7 +177,7 @@ class Character extends MovableObject {
                 if (this.longIdleActive) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);
                     this.snore_sound.play();
-                    this.snore_sound.volume = 0.9;
+                    volume(this.snore_sound, 0.9)
                 } else {
                     this.playAnimation(this.IMAGES_IDLE);
                 }
@@ -190,6 +190,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 endGame();
                 this.gameover_sound.play();
+                volume(this.gameover_sound, 1);
                 clearInterval(animationInterval);
                 this.idleTime = 100000;
             } else if (this.isHurt()) {
@@ -200,7 +201,7 @@ class Character extends MovableObject {
                     hurtSound.play();
 
                     for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
-                        this.HURT_SOUNDS[i].volume = 0.4;
+                        volume(this.HURT_SOUNDS[i], 0.4);
                     }
                 }
 

@@ -29,7 +29,7 @@ class CollisionHandler {
                 let index = this.world.level.collectableCoins.indexOf(coin);
                 this.world.level.collectableCoins.splice(index, 1);
                 this.world.collect_coin_sound.play();
-                this.world.collect_coin_sound.volume = 0.6;
+                volume(this.world.collect_coin_sound, 0.6);
                 this.world.statusbarCoin.collectCoin();
             }
         });
@@ -39,7 +39,7 @@ class CollisionHandler {
                 let index = this.world.level.collectableBottles.indexOf(bottle);
                 this.world.level.collectableBottles.splice(index, 1);
                 this.world.collect_bottle_sound.play();
-                this.world.collect_bottle_sound.volume = 0.4;
+                volume(this.world.collect_bottle_sound, 0.4);
                 this.world.statusbarBottle.collectBottle();
             }
         });

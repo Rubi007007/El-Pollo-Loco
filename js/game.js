@@ -1,6 +1,5 @@
 let canvas;
 let world;
-let gameIsRunning = false;
 let keyboard = new Keyboard();
 let isMuted;
 let btn_click_sound = new Audio('./audio/btn_click.mp3')
@@ -15,15 +14,12 @@ function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
     start_screen_music.pause();
-    gameIsRunning = true;
     addKeyboardListeners();
     initLevel();
     world = new World(canvas, keyboard);
     
-    if (!isMuted) {
-        game_music.play();
-        game_music.volume = 0.04;
-    }
+    game_music.play();
+    volume(game_music, 0.04);
     
     console.log('My Char is', world.character);
 }
@@ -49,7 +45,6 @@ function endGame() {
     document.getElementById('end-screen').style.display = 'block';
     game_music.pause();
     world.stopGame();
-    gameIsRunning = false;
     removeKeyboardListeners();
 }
 
@@ -57,26 +52,26 @@ function btnSound() {
     btn_click_sound.play();
 }
 
-// TODO: Sounds stumm schalten
 function toggleVolume() {
     let speaker = document.getElementById('speaker-btn');
     
     if (!isMuted) {
         speaker.src = './img/11_menu/speaker_volume_off.png';
+        game_music.volume = 0;
         isMuted = true;
-        if (gameIsRunning) {
-            game_music.pause();
-        }
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
         isMuted = false;
-        if (gameIsRunning) {
-            game_music.play();
-            game_music.volume = 0.04;
-        }
+        game_music.volume = 0.04;
     }
+}
 
-    console.log('Sounds noch nicht deaktivierbar');
+function volume(sound, volume) {
+    if (!isMuted || isMuted == null) {
+        sound.volume = volume;
+    } else {
+        sound.volume = 0;
+    }
 }
 
 function addKeyboardListeners() {

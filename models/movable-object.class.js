@@ -80,10 +80,8 @@ class MovableObject extends DrawableObject {
 
     killEnemy(enemy) {
         console.log('Character landed on top of the enemy');
-        // Reverse the vertical speed to simulate bouncing
-        this.speedY = -15; // Adjust the bounce force as needed
+        this.speedY = -15;
 
-        // Remove the enemy from the level
         let index = this.world.level.enemies.indexOf(enemy);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
