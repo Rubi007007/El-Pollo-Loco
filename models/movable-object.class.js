@@ -56,10 +56,10 @@ class MovableObject extends DrawableObject {
                 this.energy = 0;
             } else {
                 this.lastHit = new Date().getTime();
-                this.invulnerable = true; // Setze auf unverwundbar
-                this.invulnerableEndTime = new Date().getTime() + 1000; // 1 Sekunde Unverwundbarkeit
+                this.invulnerable = true;
+                this.invulnerableEndTime = new Date().getTime() + 1000;
                 setTimeout(() => {
-                    this.invulnerable = false; // Setze nach 1 Sekunde zurück
+                    this.invulnerable = false;
                 }, 1000);
             }
         }
