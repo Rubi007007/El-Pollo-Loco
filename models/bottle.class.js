@@ -14,17 +14,13 @@ class Bottle extends MovableObject {
 
     
     constructor() {
-        super().loadImage('./img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
+        super();
         this.loadImages(this.IMAGES_BOTTLE_COLLECTABLE);
-
+        this.loadImage(`./img/6_salsa_bottle/${this.randomBottleImage()}_salsa_bottle_on_ground.png`);
         this.x = 300 + Math.random() * 700;
- 
-        this.animate();      
     }
 
-    animate() {
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_BOTTLE_COLLECTABLE);
-        }, 600);
+    randomBottleImage() {
+        return Math.floor(1 + Math.random() * 2);
     }
 }
