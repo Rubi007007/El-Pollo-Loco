@@ -2,6 +2,8 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let btn_click_sound = new Audio('./audio/btn_click.mp3')
+let game_music = new Audio('./audio/game_music.mp3')
+let start_screen_music = new Audio('./audio/start_screen_music.mp3')
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -10,6 +12,9 @@ function init() {
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+    start_screen_music.pause();
+    game_music.play();
+    game_music.volume = 0.07;
     addKeyboardListeners();
     initLevel();
     world = new World(canvas, keyboard);
@@ -36,6 +41,7 @@ function resetGame() {
 
 function endGame() {
     document.getElementById('end-screen').style.display = 'block';
+    game_music.pause();
     world.stopGame();
     removeKeyboardListeners();
 }
