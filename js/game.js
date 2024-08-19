@@ -14,7 +14,7 @@ function startGame() {
     document.getElementById('canvas').style.display = 'block';
     start_screen_music.pause();
     game_music.play();
-    game_music.volume = 0.07;
+    game_music.volume = 0.04;
     addKeyboardListeners();
     initLevel();
     world = new World(canvas, keyboard);
