@@ -1,5 +1,6 @@
 let canvas;
 let world;
+let gameIsRunning = false;
 let keyboard = new Keyboard();
 let isMuted;
 let btn_click_sound = new Audio('./audio/btn_click.mp3')
@@ -14,11 +15,15 @@ function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
     start_screen_music.pause();
-    game_music.play();
-    game_music.volume = 0.04;
+    gameIsRunning = true;
     addKeyboardListeners();
     initLevel();
     world = new World(canvas, keyboard);
+    
+    if (!isMuted) {
+        game_music.play();
+        game_music.volume = 0.04;
+    }
     
     console.log('My Char is', world.character);
 }
@@ -44,6 +49,7 @@ function endGame() {
     document.getElementById('end-screen').style.display = 'block';
     game_music.pause();
     world.stopGame();
+    gameIsRunning = false;
     removeKeyboardListeners();
 }
 
@@ -58,11 +64,16 @@ function toggleVolume() {
     if (!isMuted) {
         speaker.src = './img/11_menu/speaker_volume_off.png';
         isMuted = true;
-        game_music.pause();
+        if (gameIsRunning) {
+            game_music.pause();
+        }
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
-        game_music.play();
         isMuted = false;
+        if (gameIsRunning) {
+            game_music.play();
+            game_music.volume = 0.04;
+        }
     }
 
     console.log('Sounds noch nicht deaktivierbar');

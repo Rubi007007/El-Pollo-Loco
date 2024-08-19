@@ -1,12 +1,13 @@
 * {
     font-family: Mexcellent;
-    margin: 0;
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url('./img/11_menu/background_v2.png');
+    background-position-y: -200px;
 }
 
 :root {
@@ -72,6 +73,13 @@ body {
 .end-screen-bg {
     width: 720px;
     height: 480px;
+}
+
+.menu {
+    width: 720px;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 24px;
 }
 
 #speaker-btn {
