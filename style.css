@@ -1,5 +1,6 @@
 * {
     font-family: Mexcellent;
+    margin: 0;
 }
 
 body {
@@ -73,17 +74,7 @@ body {
     height: 480px;
 }
 
-
-/* 
-.headline {
-    font-family: var(--font-family-inter);
+#speaker-btn {
+    width: 48px;
+    cursor: pointer;
 }
-
-@font-face {
-    font-family: inter;
-    src: url(/fonts/Inter-VariableFont_slnt\,wght.ttf);
-}
-
-:root {
-  --font-family-inter: "Inter", sans-serif;
-} */

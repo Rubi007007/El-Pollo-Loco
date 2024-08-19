@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let isMuted;
 let btn_click_sound = new Audio('./audio/btn_click.mp3')
 let game_music = new Audio('./audio/game_music.mp3')
 let start_screen_music = new Audio('./audio/start_screen_music.mp3')
@@ -48,6 +49,23 @@ function endGame() {
 
 function btnSound() {
     btn_click_sound.play();
+}
+
+// TODO: Sounds stumm schalten
+function toggleVolume() {
+    let speaker = document.getElementById('speaker-btn');
+    
+    if (!isMuted) {
+        speaker.src = './img/11_menu/speaker_volume_off.png';
+        isMuted = true;
+        game_music.pause();
+    } else if (isMuted) {
+        speaker.src = './img/11_menu/speaker_volume_on.png';
+        game_music.play();
+        isMuted = false;
+    }
+
+    console.log('Sounds noch nicht deaktivierbar');
 }
 
 function addKeyboardListeners() {
