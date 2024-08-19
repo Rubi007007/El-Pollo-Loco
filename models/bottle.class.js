@@ -17,7 +17,7 @@ class Bottle extends MovableObject {
         super().loadImage('./img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.loadImages(this.IMAGES_BOTTLE_COLLECTABLE);
 
-        this.x = 300 + Math.random() * 700; // Zahl zwischen 200 und 700
+        this.x = 300 + Math.random() * 700;
  
         this.animate();      
     }
