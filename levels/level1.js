@@ -1,6 +1,13 @@
 let level1;
 
 function initLevel() {
+    let bottles = [];
+
+    for (let i = 0; i < 8; i++) {
+        let bottle = new Bottle(bottles);
+        bottles.push(bottle);
+    }
+
     level1 = new Level(
         [
             new Chicken(),
@@ -35,16 +42,7 @@ function initLevel() {
             new BackgroundObject('./img/5_background/layers/2_second_layer/2.png', 719 * 3),
             new BackgroundObject('./img/5_background/layers/1_first_layer/2.png', 719 * 3)
         ],
-        [
-            new Bottle(),
-            new Bottle(),
-            new Bottle(),
-            new Bottle(),
-            new Bottle(),
-            new Bottle(),
-            new Bottle(),
-            new Bottle(),
-        ],
+        bottles,
         [
             new Coin(),
             new Coin(),

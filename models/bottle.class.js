@@ -13,14 +13,22 @@ class Bottle extends MovableObject {
     ];
 
     
-    constructor() {
+    constructor(existingBottles) {
         super();
         this.loadImages(this.IMAGES_BOTTLE_COLLECTABLE);
         this.loadImage(`./img/6_salsa_bottle/${this.randomBottleImage()}_salsa_bottle_on_ground.png`);
-        this.x = 300 + Math.random() * 700;
+        this.notCollidingBottles(existingBottles);
     }
 
     randomBottleImage() {
         return Math.floor(1 + Math.random() * 2);
+    }
+
+    notCollidingBottles(existingBottles) {
+        let isColliding;
+        do {
+            this.x = 300 + Math.random() * 700;
+            isColliding = existingBottles.some(bottle => this.isColliding(bottle));
+        } while (isColliding);
     }
 }
