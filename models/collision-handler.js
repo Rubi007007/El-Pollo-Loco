@@ -7,7 +7,7 @@ class CollisionHandler {
         const char = this.world.character;
         
         this.world.level.enemies.forEach((enemy) => {
-            if (char.invulnerable) {
+            if (char.invulnerable || enemy.isDead) {
                 return;
             }
 
