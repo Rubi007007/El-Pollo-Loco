@@ -40,7 +40,6 @@ class ThrowableObject extends MovableObject {
             if (this.y <= 350) {
                 this.x += 13;
                 this.playAnimation(this.IMAGES_BOTTLE_THROW);
-
             } else {
                 clearInterval(intervalID);
                 this.speedY = 0;
