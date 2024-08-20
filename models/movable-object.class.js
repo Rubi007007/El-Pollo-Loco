@@ -32,8 +32,9 @@ class MovableObject extends DrawableObject {
         
     }
 
+    // TODO: Funktion anpassen
     isFalling() {
-        return this.speedY < 0;
+        return this.speedY < 0// && this.isAboveGround();
     }
 
     // character.isColliding(chicken);
@@ -84,6 +85,7 @@ class MovableObject extends DrawableObject {
 
     killEnemy(enemy) {
         let index = this.world.level.enemies.indexOf(enemy);
+        // TODO: this.world.level.enemies[index].loadImage('./img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
         }

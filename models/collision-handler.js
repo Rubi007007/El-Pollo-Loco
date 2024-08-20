@@ -5,30 +5,32 @@ class CollisionHandler {
 
     // TODO: killEnemy umsetzen
     checkCollisions() {
+        const char = this.world.character;
+        
         this.world.level.enemies.forEach((enemy) => {
-            if (this.world.character.invulnerable) {
+            if (char.invulnerable) {
                 return;
             }
 
-            if (this.world.character.isColliding(enemy)) {
-                if (this.world.character.isFalling()) {
-                    this.world.character.killEnemy(enemy);
-                    this.world.character.speedY = 20;
+            if (char.isColliding(enemy)) {
+                if (char.isFalling()) {
+                    char.killEnemy(enemy);
+                    char.speedY = 20;
                 } else {
-                    this.world.character.hit();
-                    this.world.character.bounceEffectHit(enemy);
+                    char.hit();
+                    char.bounceEffectHit(enemy);
                 }
-                this.world.statusbarHealth.setPercentage(this.world.character.energy);
-                if (this.world.character.energy <= 0) {
+                this.world.statusbarHealth.setPercentage(char.energy);
+                if (char.energy <= 0) {
                     console.log('Game Over');
                 } else {
-                    console.log(this.world.character.energy);
+                    console.log(char.energy);
                 }
             };
         });
 
         this.world.level.collectableCoins.forEach((coin) => {
-            if (this.world.character.isColliding(coin)) {
+            if (char.isColliding(coin)) {
                 let index = this.world.level.collectableCoins.indexOf(coin);
                 this.world.level.collectableCoins.splice(index, 1);
                 this.world.collect_coin_sound.play();
@@ -38,7 +40,7 @@ class CollisionHandler {
         });
 
         this.world.level.collectableBottles.forEach((bottle) => {
-            if (this.world.character.isColliding(bottle)) {
+            if (char.isColliding(bottle)) {
                 let index = this.world.level.collectableBottles.indexOf(bottle);
                 this.world.level.collectableBottles.splice(index, 1);
                 this.world.collect_bottle_sound.play();
