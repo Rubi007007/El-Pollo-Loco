@@ -82,12 +82,6 @@ class MovableObject extends DrawableObject {
         let index = this.world.level.enemies.indexOf(enemy);
         this.enemyDies(enemy);
 
-        /*if (enemy.type == 'Chicken') {
-            enemy.loadImage('./img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
-        } else if (enemy.type == 'SmallChicken') {
-            enemy.loadImage('./img/3_enemies_chicken/chicken_small/2_dead/dead.png');
-        }*/
-
         setTimeout(() => {
             if (index > -1) {
                 this.world.level.enemies.splice(index, 1);
