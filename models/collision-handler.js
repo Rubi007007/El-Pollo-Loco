@@ -3,7 +3,6 @@ class CollisionHandler {
         this.world = world;
     }
 
-    // TODO: killEnemy umsetzen
     checkCollisions() {
         const char = this.world.character;
         

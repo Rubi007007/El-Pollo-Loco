@@ -40,6 +40,7 @@ class World {
         }, 25);
     }
 
+    // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
     stopGame() {
         clearInterval(this.gameInterval);
         cancelAnimationFrame(this.animationFrame);

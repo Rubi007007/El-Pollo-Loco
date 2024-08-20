@@ -6,6 +6,8 @@ class SmallChicken extends MovableObject {
     offsetX = 0;
     hitboxWidth = this.width;
     hitboxHeight = this.height;
+    type = 'SmallChicken';
+    isDead = false;
 
     IMAGES_WALKING = [
         './img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
