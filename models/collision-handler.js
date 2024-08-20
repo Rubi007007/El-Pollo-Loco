@@ -26,6 +26,17 @@ class CollisionHandler {
                     console.log(char.energy);
                 }
             };
+            
+
+            // TODO: muss noch korrekt implementiert werden (Flasche muss Gegner töten)
+            this.world.throwableObjects.forEach((bottle) => {
+                console.log(bottle.isColliding(enemy))
+                
+                if (bottle.isColliding(enemy)) {
+                    console.log(bottle)
+                    bottle.killEnemy(enemy);
+                }
+            })
         });
 
         this.world.level.collectableCoins.forEach((coin) => {
