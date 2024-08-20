@@ -17,7 +17,7 @@ class ThrowableObject extends MovableObject {
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        // './img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+        './img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
     
     constructor(x, y) {
@@ -46,7 +46,7 @@ class ThrowableObject extends MovableObject {
                 this.speedY = 0;
                 this.acceleration = 0;
                 this.y = 350;
-                this.playAnimationStopLastImage(this.IMAGES_BOTTLE_SPLASH);
+                this.splashAnimation();
                 this.splash_bottle_sound.play();
                 volume(this.splash_bottle_sound, 0.1);
                 this.deleteBottle();
@@ -66,7 +66,7 @@ class ThrowableObject extends MovableObject {
                 this.speedY = 0;
                 this.acceleration = 0;
                 this.y = 350;
-                this.playAnimationStopLastImage(this.IMAGES_BOTTLE_SPLASH);
+                this.splashAnimation();
                 this.splash_bottle_sound.play();
                 volume(this.splash_bottle_sound, 0.1);
                 this.deleteBottle();
@@ -81,5 +81,18 @@ class ThrowableObject extends MovableObject {
                 world.throwableObjects.splice(index, 1);
             }
         }, 250);
+    }
+
+    splashAnimation() {
+        let splashIndex = 0;
+        let splashInterval = setInterval(() => {
+            if (splashIndex < this.IMAGES_BOTTLE_SPLASH.length) {
+                this.img = this.imageCache[this.IMAGES_BOTTLE_SPLASH[splashIndex]];
+                splashIndex++;
+            } else {
+                clearInterval(splashInterval);
+                this.deleteBottle();
+            }
+        }, 60);
     }
 }

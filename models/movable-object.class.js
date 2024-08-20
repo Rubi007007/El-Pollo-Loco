@@ -120,15 +120,4 @@ class MovableObject extends DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
-
-    playAnimationStopLastImage(images) {
-        if (this.currentImage < images.length) {
-            let path = images[this.currentImage];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-        } else {
-            let path = images[images.length - 1];
-            this.img = this.imageCache[path];
-        }
-    }
 }
