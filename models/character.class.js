@@ -16,7 +16,7 @@ class Character extends MovableObject {
     longIdleActive = false;
     walking_sound = new Audio('./audio/walking.mp3');
     snore_sound = new Audio('./audio/snore.mp3');
-    gameover_sound = new Audio('./audio/game_over.mp3')
+    gameover_sound = new Audio('./audio/game_over.mp3');
 
     JUMP_SOUNDS = [
         new Audio('./audio/jump_sounds/1_jump.mp3'),
