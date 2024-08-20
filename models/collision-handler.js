@@ -14,7 +14,7 @@ class CollisionHandler {
             if (char.isColliding(enemy)) {
                 if (char.isFalling()) {
                     char.killEnemy(enemy);
-                    char.speedY = 20;
+                    char.speedY = 15;
                 } else {
                     char.hit();
                     char.bounceEffectHit(enemy);
