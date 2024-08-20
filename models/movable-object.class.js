@@ -14,11 +14,6 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
-
-                if (this.y > 150) {
-                    this.y = 150;
-                    this.speedY = 0;
-                }
             }
         }, 1000 / 60);
     }
@@ -34,7 +29,7 @@ class MovableObject extends DrawableObject {
 
     // TODO: Funktion anpassen
     isFalling() {
-        return this.speedY < 0// && this.isAboveGround();
+        return this.speedY < 0 && this.isAboveGround();
     }
 
     // character.isColliding(chicken);

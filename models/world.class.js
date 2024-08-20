@@ -37,7 +37,7 @@ class World {
         this.gameInterval = setInterval(() => {
             this.collisionHandler.checkCollisions();
             this.checkThrowObjects();
-        }, 200);
+        }, 25);
     }
 
     stopGame() {
