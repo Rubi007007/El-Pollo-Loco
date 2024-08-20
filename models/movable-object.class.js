@@ -80,7 +80,7 @@ class MovableObject extends DrawableObject {
 
     killEnemy(enemy) {
         let index = this.world.level.enemies.indexOf(enemy);
-        enemy.die();
+        this.enemyDies(enemy);
 
         /*if (enemy.type == 'Chicken') {
             enemy.loadImage('./img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
@@ -93,6 +93,12 @@ class MovableObject extends DrawableObject {
                 this.world.level.enemies.splice(index, 1);
             }
         }, 1000);
+    }
+
+    enemyDies(enemy) {
+        enemy.isDead = true;
+        enemy.animate();
+        enemy.speed = 0;
     }
 
     bounceEffectHit(enemy) {

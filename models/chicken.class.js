@@ -45,10 +45,4 @@ class Chicken extends MovableObject {
             }
         }, 200);
     }
-
-    die() {
-        this.isDead = true;
-        this.animate();
-        this.speed = 0;
-    }
 }
