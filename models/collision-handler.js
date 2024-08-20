@@ -11,15 +11,13 @@ class CollisionHandler {
             }
 
             if (this.world.character.isColliding(enemy)) {
-                if (this.world.character.isCollidingFrontOrBack(enemy)) {
-                    this.world.character.bounceEffectHit(enemy);
-                } else if (this.world.character.isCollidingAbove(enemy)) {
-                    console.log('Collision detected with:', enemy);
+                if (this.world.character.isFalling()) {
                     this.world.character.killEnemy(enemy);
+                    this.world.character.speedY = 20;
                 } else {
-                    console.log('Collision detected with:', enemy);
+                    this.world.character.hit();
+                    this.world.character.bounceEffectHit(enemy);
                 }
-                this.world.character.hit();
                 this.world.statusbarHealth.setPercentage(this.world.character.energy);
                 if (this.world.character.energy <= 0) {
                     console.log('Game Over');

@@ -14,6 +14,11 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
+
+                if (this.y > 150) {
+                    this.y = 150;
+                    this.speedY = 0;
+                }
             }
         }, 1000 / 60);
     }
@@ -27,26 +32,16 @@ class MovableObject extends DrawableObject {
         
     }
 
+    isFalling() {
+        return this.speedY < 0;
+    }
+
     // character.isColliding(chicken);
     isColliding(obj) {
         return this.x + this.offsetX < obj.x + obj.width &&
            this.x + this.offsetX + this.hitboxWidth > obj.x &&
            this.y + this.offsetY < obj.y + obj.height &&
            this.y + this.offsetY + this.hitboxHeight > obj.y;
-    }
-
-    isCollidingAbove(obj) {
-        return this.y + this.height - this.offsetY <= obj.y &&
-                this.y + this.height - this.offsetY > obj.y - this.speedY &&
-                this.x + this.width > obj.x &&
-                this.x < obj.x + obj.width;
-    }
-
-    isCollidingFrontOrBack(obj) {
-        return (this.x + this.offsetX + this.width >= obj.x + obj.offsetX &&
-            this.x + this.offsetX <= obj.x + obj.width + obj.offsetX) &&
-           (this.y + this.offsetY + this.height >= obj.y + obj.offsetY &&
-            this.y + this.offsetY <= obj.y + obj.height + obj.offsetY);
     }
 
     hit() {
@@ -88,13 +83,9 @@ class MovableObject extends DrawableObject {
     }
 
     killEnemy(enemy) {
-        console.log('Character landed on top of the enemy');
-        this.speedY = -15;
-
         let index = this.world.level.enemies.indexOf(enemy);
         if (index > -1) {
             this.world.level.enemies.splice(index, 1);
-            console.log('Enemy defeated!');
         }
     }
 
