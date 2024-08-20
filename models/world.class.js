@@ -17,6 +17,7 @@ class World {
     statusbarCoin = new StatusbarCoin();
     statusbarBottle = new StatusbarBottle();
     throwableObjects = [];
+    throwPressed = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -47,13 +48,13 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.THROW && this.statusbarBottle.availableBottles()) {
+        if (this.keyboard.THROW && !this.throwPressed && this.statusbarBottle.availableBottles()) {
             let bottle;
             
-            if (this.character.otherDirection == false) {
+            if (!this.character.otherDirection) {
                 bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120);
                 bottle.throwRight();
-            } else if (this.character.otherDirection == true) {
+            } else if (this.character.otherDirection) {
                 bottle = new ThrowableObject(this.character.x, this.character.y + 145);
                 bottle.throwLeft();
             }
@@ -62,9 +63,15 @@ class World {
             this.statusbarBottle.collectedBottles -= 1;
             this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10);
 
-        } else if (this.keyboard.THROW) {
+            this.throwPressed = true;
+        } else if (this.keyboard.THROW && !this.statusbarBottle.availableBottles()) {
             this.out_of_bottles_sound.play();
             volume(this.out_of_bottles_sound, 0.1);
+            this.throwPressed = true;
+        }
+
+        if (!this.keyboard.THROW) {
+            this.throwPressed = false;
         }
     }
 
