@@ -29,7 +29,7 @@ class ThrowableObject extends MovableObject {
         this.width = 70;
         this.height = 70;
         this.throw_bottle_sound.play();
-        this.throw_bottle_sound.volume = 0.4;
+        volume(this.throw_bottle_sound, 0.4);
     }
 
     throwRight() {
@@ -48,7 +48,6 @@ class ThrowableObject extends MovableObject {
                 this.splashAnimation();
                 this.splash_bottle_sound.play();
                 volume(this.splash_bottle_sound, 0.1);
-                this.deleteBottle();
             }
         }, 25);
     }
@@ -68,7 +67,6 @@ class ThrowableObject extends MovableObject {
                 this.splashAnimation();
                 this.splash_bottle_sound.play();
                 volume(this.splash_bottle_sound, 0.1);
-                this.deleteBottle();
             }
         }, 25);
     }
