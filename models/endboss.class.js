@@ -70,6 +70,8 @@ class Endboss extends MovableObject {
         }, 200);
     }
     
+
+    // TODO: Endbosskollision muss aktiviert werden (auch Hitbox gezeichnet)
     attack(intervalId) {
         clearInterval(intervalId);
         let interval = setInterval(() => {
