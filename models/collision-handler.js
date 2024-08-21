@@ -26,17 +26,19 @@ class CollisionHandler {
                     console.log(char.energy);
                 }
             };
-            
 
-            // TODO: muss noch korrekt implementiert werden (Flasche muss Gegner töten)
-            this.world.throwableObjects.forEach((bottle) => {
-                console.log(bottle.isColliding(enemy))
+            // for Schleife dafür, dass jede Flasche nur einen Gegner töten kann.
+            for (let i = 0; i < this.world.throwableObjects.length; i++) {
+                let bottle = this.world.throwableObjects[i];
                 
-                if (bottle.isColliding(enemy)) {
-                    console.log(bottle)
+                if (!bottle.isUsed && enemy.isColliding(bottle)) {
                     bottle.killEnemy(enemy);
+
+                    bottle.isUsed = true;
+                    bottle.splashAnimation();
+                    break;
                 }
-            })
+            }
         });
 
         this.world.level.collectableCoins.forEach((coin) => {

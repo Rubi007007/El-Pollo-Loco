@@ -52,10 +52,10 @@ class World {
             let bottle;
             
             if (!this.character.otherDirection) {
-                bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120);
+                bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120, this);
                 bottle.throwRight();
             } else if (this.character.otherDirection) {
-                bottle = new ThrowableObject(this.character.x, this.character.y + 145);
+                bottle = new ThrowableObject(this.character.x, this.character.y + 145, this);
                 bottle.throwLeft();
             }
             
