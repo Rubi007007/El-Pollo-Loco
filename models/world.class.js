@@ -18,6 +18,7 @@ class World {
     statusbarHealth = new StatusbarHealth();
     statusbarCoin = new StatusbarCoin();
     statusbarBottle = new StatusbarBottle();
+    statusbarEndboss = new StatusbarEndboss();
     throwableObjects = [];
     throwPressed = false;
 
@@ -102,6 +103,9 @@ class World {
         this.addToMap(this.statusbarHealth);
         this.addToMap(this.statusbarCoin);
         this.addToMap(this.statusbarBottle);
+        if (this.endbossSpawned) {
+            this.addToMap(this.statusbarEndboss);
+        }
         this.ctx.translate(this.camera_x, 0); // hier wieder aufgehoben
         
         this.addToMap(this.character);
