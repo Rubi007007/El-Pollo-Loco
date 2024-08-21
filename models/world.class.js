@@ -77,7 +77,7 @@ class World {
             
             this.throwableObjects.push(bottle);
             this.statusbarBottle.collectedBottles -= 1;
-            this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10);
+            this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10, this.statusbarBottle.IMAGES_BOTTLEBAR);
 
             this.throwPressed = true;
         } else if (this.keyboard.THROW && !this.statusbarBottle.availableBottles()) {
