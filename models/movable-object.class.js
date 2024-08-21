@@ -15,6 +15,10 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
+
+            if (this instanceof Character && !this.isAboveGround()) {
+                this.y = 150;
+            }
         }, 1000 / 60);
     }
 
@@ -86,7 +90,7 @@ class MovableObject extends DrawableObject {
             if (index > -1) {
                 this.world.level.enemies.splice(index, 1);
             }
-        }, 1000);
+        }, 400);
     }
 
     enemyDies(enemy) {
