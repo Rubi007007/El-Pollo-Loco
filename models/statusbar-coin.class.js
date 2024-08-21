@@ -19,17 +19,11 @@ class StatusbarCoin extends DrawableObject {
         this.y = 55;
         this.width = 200;
         this.height = 60;
-        this.setPercentage(0);
-    }
-
-    setPercentage(percentage) {
-        this.percentage = percentage; // Zahl zwischen 0 und 5
-        let path = this.IMAGES_COINBAR[this.resolveImageIndex()];
-        this.img = this.imageCache[path];
+        this.setPercentage(0, this.IMAGES_COINBAR);
     }
 
     collectCoin() {
         this.collectedCoins += 1;
-        this.setPercentage(this.collectedCoins * 10); // * 10 für schnelleren Progress in Bar
+        this.setPercentage(this.collectedCoins * 10, this.IMAGES_COINBAR); // * 10 für schnelleren Progress in Bar
     }
 }

@@ -35,6 +35,12 @@ class DrawableObject {
         });
     }
 
+    setPercentage(percentage, array) {
+        this.percentage = percentage; // Zahl zwischen 0 und 5
+        let path = array[this.resolveImageIndex()];
+        this.img = this.imageCache[path];
+    }
+
     resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5

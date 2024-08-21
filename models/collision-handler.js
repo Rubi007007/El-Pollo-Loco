@@ -19,7 +19,7 @@ class CollisionHandler {
                     char.hit();
                     char.bounceEffectHit(enemy);
                 }
-                this.world.statusbarHealth.setPercentage(char.energy);
+                this.world.statusbarHealth.setPercentage(char.energy, this.world.statusbarHealth.IMAGES_HEALTHBAR);
                 if (char.energy <= 0) {
                     console.log('Game Over');
                 } else {
