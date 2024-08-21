@@ -31,7 +31,6 @@ class MovableObject extends DrawableObject {
         
     }
 
-    // TODO: Funktion anpassen
     isFalling() {
         return this.speedY < 0 && this.isAboveGround();
     }
