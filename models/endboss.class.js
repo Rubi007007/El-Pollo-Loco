@@ -46,27 +46,39 @@ class Endboss extends MovableObject {
         './img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
 
-    constructor() {
+    constructor(world) {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+        this.world = world;
         this.x = 3000;
-        this.speed = 0.15 + Math.random() * 0.25;
+        // this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
     }
 
     animate() {
-        setInterval(() => {
-            if (this.speed != 0) {
+        let interval = setInterval(() => {
+            if (this.world.character.x < 2720) {
                 this.playAnimation(this.IMAGES_ALERT);
+            } else {
+                this.attack(interval);
             }
+            console.log(this.world.character.x)
         }, 200);
-
-        /*setInterval(() => {
+    }
+    
+    attack(intervalId) {
+        clearInterval(intervalId);
+        let interval = setInterval(() => {
+            this.playAnimation(this.IMAGES_WALKING);
+        }, 200);
+        this.speed = 0.15 + Math.random() * 0.25;
+        
+        let moveInterval = setInterval(() => {
             this.moveLeft();
-        }, 40);*/
-    }    
+        }, 40)
+    }
 }

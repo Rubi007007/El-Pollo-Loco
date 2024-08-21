@@ -57,7 +57,7 @@ class World {
     }
 
     spawnEndboss() {
-        this.endboss = new Endboss();
+        this.endboss = new Endboss(this);
         this.level.enemies.push(this.endboss);
         this.endbossSpawned = true;
     }
