@@ -8,6 +8,7 @@ class Endboss extends MovableObject {
     hitboxHeight = this.height - 75;
     offsetY = 60;
     offsetX = 15;
+    type = 'Endboss';
     isMoving = false;
 
     IMAGES_WALKING = [

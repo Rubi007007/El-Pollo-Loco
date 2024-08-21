@@ -12,20 +12,22 @@ class CollisionHandler {
             }
 
             if (char.isColliding(enemy)) {
+                console.log(enemy)
                 if (char.isFalling()) {
                     char.killEnemy(enemy);
                     char.speedY = 15;
                 } else if (!char.isAboveGround()) {
-                    char.hit();
+                    char.hit(enemy.type);
                     char.bounceEffectHit(enemy);
                 }
                 this.world.statusbarHealth.setPercentage(char.energy, this.world.statusbarHealth.IMAGES_HEALTHBAR);
-                if (char.energy <= 0) {
-                    console.log('Game Over');
-                } else {
-                    console.log(char.energy);
-                }
             };
+
+            if (this.world.endboss && char.isColliding(this.world.endboss)) {
+                char.hit(this.world.endboss.type);
+                char.bounceEffectHit(this.world.endboss);
+                this.world.statusbarHealth.setPercentage(char.energy, this.world.statusbarHealth.IMAGES_HEALTHBAR);
+            }
 
             // for Schleife dafür, dass jede Flasche nur einen Gegner töten kann.
             for (let i = 0; i < this.world.throwableObjects.length; i++) {
@@ -37,6 +39,8 @@ class CollisionHandler {
                     bottle.isUsed = true;
                     bottle.splashAnimation();
                     break;
+                } else if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
+                    console.log('Endboss hitted!')
                 }
             }
         });

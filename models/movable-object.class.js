@@ -43,9 +43,16 @@ class MovableObject extends DrawableObject {
            this.y + this.offsetY + this.hitboxHeight > obj.y;
     }
 
-    hit() {
+    hit(enemyType) {
         if (!this.invulnerable) {
-            this.energy -= 20;
+            if (enemyType == 'Chicken') {
+                this.energy -= 20;
+            } else if (enemyType == 'SmallChicken') {
+                this.energy -= 10;
+            } else if (enemyType == 'Endboss') {
+                this.energy -= 40;
+            }
+            
             if (this.energy < 0) {
                 this.energy = 0;
             } else {
