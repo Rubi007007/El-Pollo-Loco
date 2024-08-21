@@ -60,17 +60,13 @@ class Endboss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            console.log(this.world.character)
-            if (this.world.character.x >= 2640) {
-                this.playAnimation(this.IMAGES_WALKING);
-                this.moveLeft();
-            } else {
+            if (this.speed != 0) {
                 this.playAnimation(this.IMAGES_ALERT);
             }
         }, 200);
-    }
 
-    // TODO: Triggern ab ca. x = 2.640
-
-    
+        /*setInterval(() => {
+            this.moveLeft();
+        }, 40);*/
+    }    
 }

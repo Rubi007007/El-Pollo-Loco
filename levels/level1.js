@@ -22,7 +22,6 @@ function initLevel() {
             new SmallChicken(),
             new Chicken(),
             new SmallChicken(),
-            new Endboss()
         ],
         [
             new Cloud()

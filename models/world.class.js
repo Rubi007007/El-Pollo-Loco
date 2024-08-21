@@ -3,6 +3,8 @@ class World {
     level = level1;
     enemies = level1.enemies;
     clouds = level1.clouds;
+    endboss = null;
+    endbossSpawned = false;
     backgroundObjects = level1.backgroundObjects;
     collectableBottles = level1.collectableBottles;
     collectableCoins = level1.collectableCoins;
@@ -38,6 +40,7 @@ class World {
         this.gameInterval = setInterval(() => {
             this.collisionHandler.checkCollisions();
             this.checkThrowObjects();
+            this.checkEndbossSpawn();
         }, 25);
     }
 
@@ -45,6 +48,18 @@ class World {
     stopGame() {
         clearInterval(this.gameInterval);
         cancelAnimationFrame(this.animationFrame);
+    }
+
+    checkEndbossSpawn() {
+        if (!this.endbossSpawned && this.character.x >= 2420) {
+            this.spawnEndboss();
+        }
+    }
+
+    spawnEndboss() {
+        this.endboss = new Endboss();
+        this.level.enemies.push(this.endboss);
+        this.endbossSpawned = true;
     }
 
     checkThrowObjects() {
