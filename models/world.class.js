@@ -42,6 +42,7 @@ class World {
             this.collisionHandler.checkCollisions();
             this.checkThrowObjects();
             this.checkEndbossSpawn();
+            this.checkEndbossRage();
         }, 25);
     }
 
@@ -51,16 +52,22 @@ class World {
         cancelAnimationFrame(this.animationFrame);
     }
 
+    spawnEndboss() {
+        this.endboss = new Endboss(this);
+        this.level.enemies.push(this.endboss);
+        this.endbossSpawned = true;
+    }
+
     checkEndbossSpawn() {
         if (!this.endbossSpawned && this.character.x >= 2420) {
             this.spawnEndboss();
         }
     }
 
-    spawnEndboss() {
-        this.endboss = new Endboss(this);
-        this.level.enemies.push(this.endboss);
-        this.endbossSpawned = true;
+    checkEndbossRage() {
+        if (this.endboss && this.endboss.inRageRange()) {
+            console.log('in Rage Range');
+        }
     }
 
     checkThrowObjects() {

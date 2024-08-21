@@ -61,30 +61,49 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.world = world;
         this.x = 3000;
-        // this.speed = 0.15 + Math.random() * 0.25;
-        this.animate();
+        this.animateIdle();
     }
 
-    animate() {
-        let interval = setInterval(() => {
-            if (this.world.character.x < 2720) {
-                this.playAnimation(this.IMAGES_ALERT);
-            } else {
-                this.attack(interval);
-            }
-            // console.log(this.world.character.x)
+    animateIdle() {
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_ALERT);
         }, 200);
     }
+
+    inRageRange() {
+        if (this.world.character.x > 2720) {
+            return true
+        }
+    }
     
-    attack(intervalId) {
-        clearInterval(intervalId);
-        let interval = setInterval(() => {
+    walk() {
+        setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
         this.speed = 0.15 + Math.random() * 0.25;
         
-        let moveInterval = setInterval(() => {
+        setInterval(() => {
             this.moveLeft();
-        }, 40)
+        }, 2500)
+    }
+
+    attack() {
+        setTimeout(() => {
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_ATTACK);
+            }, 200);
+            this.speed = 0;
+        }, 1000);
+    }
+
+    endbossHitted() {
+        this.speed = 0;
+        this.energy -= 20; // TODO: Hier wird so lange Enegie abgezogen, bis die Flasche gelöscht wurde -> fixen
+        console.log(this.energy)
+        setTimeout(() => {
+            let interval = setInterval(() => {
+                this.playAnimation(this.IMAGES_HURT);
+            }, 200);
+        }, 1000);
     }
 }

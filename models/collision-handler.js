@@ -23,9 +23,13 @@ class CollisionHandler {
                 this.world.statusbarHealth.setPercentage(char.energy, this.world.statusbarHealth.IMAGES_HEALTHBAR);
             };
 
-            if (this.world.endboss && char.isColliding(this.world.endboss)) {
+            // Endboss Kollisionen
+            if (this.world.endboss
+                && char.isColliding(this.world.endboss)) {
+
                 char.hit(this.world.endboss.type);
                 char.bounceEffectHit(this.world.endboss);
+                this.world.endboss.attack();
                 this.world.statusbarHealth.setPercentage(char.energy, this.world.statusbarHealth.IMAGES_HEALTHBAR);
             }
 
@@ -40,6 +44,8 @@ class CollisionHandler {
                     bottle.splashAnimation();
                     break;
                 } else if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
+                    this.world.endboss.endbossHitted();
+                    // this.world.statusbarEndboss.setPercentage(this.world.statusbarEndboss.setPercentage(this.world.endboss.energy, this.world.statusbarEndboss.IMAGES_ENDBOSSBAR))
                     console.log('Endboss hitted!')
                 }
             }
