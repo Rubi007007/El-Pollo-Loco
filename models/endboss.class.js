@@ -3,6 +3,11 @@ class Endboss extends MovableObject {
     height = 400;
     width = 400;
     y = 55;
+    x;
+    hitboxWidth = this.width - 50;
+    hitboxHeight = this.height - 75;
+    offsetY = 60;
+    offsetX = 15;
     isMoving = false;
 
     IMAGES_WALKING = [
@@ -66,12 +71,10 @@ class Endboss extends MovableObject {
             } else {
                 this.attack(interval);
             }
-            console.log(this.world.character.x)
+            // console.log(this.world.character.x)
         }, 200);
     }
     
-
-    // TODO: Endbosskollision muss aktiviert werden (auch Hitbox gezeichnet)
     attack(intervalId) {
         clearInterval(intervalId);
         let interval = setInterval(() => {
