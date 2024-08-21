@@ -43,11 +43,11 @@ class CollisionHandler {
                     bottle.isUsed = true;
                     bottle.splashAnimation();
                     break;
-                } else if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
+                } /*else if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
                     this.world.endboss.endbossHitted();
                     // this.world.statusbarEndboss.setPercentage(this.world.statusbarEndboss.setPercentage(this.world.endboss.energy, this.world.statusbarEndboss.IMAGES_ENDBOSSBAR))
                     console.log('Endboss hitted!')
-                }
+                }*/
             }
         });
 

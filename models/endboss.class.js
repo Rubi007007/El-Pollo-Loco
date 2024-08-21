@@ -97,11 +97,11 @@ class Endboss extends MovableObject {
     }
 
     endbossHitted() {
-        this.speed = 0;
         this.energy -= 20; // TODO: Hier wird so lange Enegie abgezogen, bis die Flasche gelöscht wurde -> fixen
         console.log(this.energy)
         setTimeout(() => {
             let interval = setInterval(() => {
+                this.speed = 0;
                 this.playAnimation(this.IMAGES_HURT);
             }, 200);
         }, 1000);
