@@ -4,10 +4,10 @@ class Endboss extends MovableObject {
     width = 400;
     y = 55;
     x;
-    hitboxWidth = this.width - 50;
-    hitboxHeight = this.height - 75;
-    offsetY = 60;
-    offsetX = 15;
+    hitboxWidth = this.width - 120;
+    hitboxHeight = this.height - 230;
+    offsetY = 150;
+    offsetX = 65;
     type = 'Endboss';
     isMoving = false;
 
