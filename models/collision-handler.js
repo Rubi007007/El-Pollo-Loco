@@ -12,7 +12,6 @@ class CollisionHandler {
             }
 
             if (char.isColliding(enemy)) {
-                console.log(enemy)
                 if (char.isFalling()) {
                     char.killEnemy(enemy);
                     char.speedY = 15;
@@ -23,9 +22,9 @@ class CollisionHandler {
                 this.world.statusbarHealth.setPercentage(char.energy, this.world.statusbarHealth.IMAGES_HEALTHBAR);
             };
 
-            // Endboss Kollisionen
+            // Endboss Kollisionen TODO: Hitbox passt noch nicht ganz
             if (this.world.endboss
-                && char.isColliding(this.world.endboss)) {
+                && this.world.endboss.isColliding(char)) {
 
                 char.hit(this.world.endboss.type);
                 char.bounceEffectHit(this.world.endboss);
@@ -43,7 +42,7 @@ class CollisionHandler {
                     bottle.isUsed = true;
                     bottle.splashAnimation();
                     break;
-                } /*else if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
+                } /* TODO: else if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
                     this.world.endboss.endbossHitted();
                     // this.world.statusbarEndboss.setPercentage(this.world.statusbarEndboss.setPercentage(this.world.endboss.energy, this.world.statusbarEndboss.IMAGES_ENDBOSSBAR))
                     console.log('Endboss hitted!')

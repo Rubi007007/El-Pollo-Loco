@@ -1,11 +1,11 @@
 class Endboss extends MovableObject {
 
-    height = 400;
     width = 400;
+    height = 400;
     y = 55;
-    x;
-    hitboxWidth = this.width - 120;
-    hitboxHeight = this.height - 230;
+    x = 3000;
+    hitboxWidth = 280;
+    hitboxHeight = 170;
     offsetY = 150;
     offsetX = 65;
     type = 'Endboss';
@@ -60,7 +60,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.world = world;
-        this.x = 3000;
         this.animateIdle();
     }
 
