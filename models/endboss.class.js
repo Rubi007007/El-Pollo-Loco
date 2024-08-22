@@ -65,39 +65,52 @@ class Endboss extends MovableObject {
         this.handleEndboss();
     }
 
-    alert() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
-        this.currentInterval = setInterval(() => {
-            this.playAnimation(this.IMAGES_ALERT);
-        }, 200);
-    }
-
     inRageRange() {
         if (this.world.character.x > 2720) {
             return true
         }
     }
-    
+
+    alert() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.currentInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_ALERT);
+        }, 200);
+
+        setTimeout(() => {
+            clearInterval(this.currentInterval);
+            // TODO: Hier einen kleinen Sprung nach vorne animieren! Als Attack sozusagen
+            this.endbossStatus = 'attack';
+            this.handleEndboss();
+        }, 2500);
+    }
+
     walk() {
         if (this.currentInterval) clearInterval(this.currentInterval);
-        this.speed = 0.15 + Math.random() * 0.25;
+        this.speed = 1.15;
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
         }, 200);
+
+        setTimeout(() => {
+            clearInterval(this.currentInterval);
+            this.endbossStatus = 'alert';
+            this.handleEndboss();
+        }, 4000);
     }
 
     attack() {
         if (this.currentInterval) clearInterval(this.currentInterval);
         this.speed = 0;
-        setInterval(() => {
+        this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_ATTACK);
-        }, 700);
+        }, 200);
         
         setTimeout(() => {
             this.endbossStatus = 'walk';
             this.handleEndboss();
-        }, 5000); 
+        }, 3000); 
     }
 
     endbossHitted() {
