@@ -65,9 +65,9 @@ class Endboss extends MovableObject {
         this.handleEndboss();
     }
 
-    animateAlert() {
+    alert() {
         if (this.currentInterval) clearInterval(this.currentInterval);
-        setInterval(() => {
+        this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
         }, 200);
     }
@@ -80,20 +80,20 @@ class Endboss extends MovableObject {
     
     walk() {
         if (this.currentInterval) clearInterval(this.currentInterval);
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200);
         this.speed = 0.15 + Math.random() * 0.25;
-        
-        setInterval(() => {
+        this.currentInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
-        }, 2500)
+        }, 200);
     }
 
     attack() {
         if (this.currentInterval) clearInterval(this.currentInterval);
         this.speed = 0;
-        this.playAnimation(this.IMAGES_ATTACK);
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_ATTACK);
+        }, 700);
+        
         setTimeout(() => {
             this.endbossStatus = 'walk';
             this.handleEndboss();
@@ -105,10 +105,7 @@ class Endboss extends MovableObject {
         this.energy -= 20; // TODO: Hier wird so lange Enegie abgezogen, bis die Flasche gelöscht wurde -> fixen
         console.log(this.energy)
         setTimeout(() => {
-            let interval = setInterval(() => {
-                this.speed = 0;
-                this.playAnimation(this.IMAGES_HURT);
-            }, 200);
+            this.playAnimation(this.IMAGES_HURT);
         }, 1000);
     }
 
@@ -124,7 +121,7 @@ class Endboss extends MovableObject {
                 break;
             case 'alert':
                 console.log('Endbossstatus: alert');
-                this.animateAlert();
+                this.alert();
                 break;
             case 'hurt':
                 console.log('Endbossstatus: Hurt');
