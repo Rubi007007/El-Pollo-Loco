@@ -10,6 +10,7 @@ class Endboss extends MovableObject {
     offsetX = 65;
     type = 'Endboss';
     isMoving = false;
+    endbossStatus = 'alert';
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -60,10 +61,12 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.world = world;
-        this.animateIdle();
+        this.currentInterval = null;
+        this.handleEndboss();
     }
 
-    animateIdle() {
+    animateAlert() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
         setInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
         }, 200);
@@ -76,6 +79,7 @@ class Endboss extends MovableObject {
     }
     
     walk() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 200);
@@ -87,15 +91,17 @@ class Endboss extends MovableObject {
     }
 
     attack() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.speed = 0;
+        this.playAnimation(this.IMAGES_ATTACK);
         setTimeout(() => {
-            setInterval(() => {
-                this.playAnimation(this.IMAGES_ATTACK);
-            }, 200);
-            this.speed = 0;
-        }, 1000);
+            this.endbossStatus = 'walk';
+            this.handleEndboss();
+        }, 5000); 
     }
 
     endbossHitted() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
         this.energy -= 20; // TODO: Hier wird so lange Enegie abgezogen, bis die Flasche gelöscht wurde -> fixen
         console.log(this.energy)
         setTimeout(() => {
@@ -104,5 +110,41 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             }, 200);
         }, 1000);
+    }
+
+    handleEndboss() {
+        switch (this.endbossStatus) {
+            case 'walk':
+                console.log('Endbossstatus: Walk');
+                this.walk();
+                break;
+            case 'attack':
+                console.log('Endbossstatus: Attack');
+                this.attack();
+                break;
+            case 'alert':
+                console.log('Endbossstatus: alert');
+                this.animateAlert();
+                break;
+            case 'hurt':
+                console.log('Endbossstatus: Hurt');
+                this.endbossHitted();
+                break;
+        }
+        
+        /*if (this.endbossStatus == 'walk') {
+            this.walk();
+        } else if (this.endbossStatus == 'attack') {
+            setTimeout(() => {
+                this.attack();
+                console.log('teset')
+            }, 1000);
+            this.endbossStatus = 'walk'
+            this.handleEndboss();
+        } else if (this.endbossStatus == 'alert') {
+            this.animateAlert()
+        } else if (this.endbossStatus == 'hurt') {
+            this.endbossHitted();
+        }*/
     }
 }

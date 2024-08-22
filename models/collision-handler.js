@@ -28,7 +28,8 @@ class CollisionHandler {
 
                 char.hit(this.world.endboss.type);
                 char.bounceEffectHit(this.world.endboss);
-                this.world.endboss.attack();
+                this.world.endboss.endbossStatus = 'attack';
+                this.world.endboss.handleEndboss();
                 this.world.statusbarHealth.setPercentage(char.energy, this.world.statusbarHealth.IMAGES_HEALTHBAR);
             }
 
