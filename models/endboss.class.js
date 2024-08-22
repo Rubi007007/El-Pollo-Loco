@@ -106,8 +106,23 @@ class Endboss extends MovableObject {
         this.speed = 0;
         this.resetPosition();
         this.currentInterval = setInterval(() => {
-            // TODO: Hier einen kleinen Sprung nach vorne animieren! Als Attack sozusagen
-            this.endbossJump();
+            if (this.x >= 1500) {
+                this.endbossJump();
+            }
+            this.playAnimation(this.IMAGES_ATTACK);
+        }, 200);
+        
+        setTimeout(() => {
+            this.endbossStatus = 'walk';
+            this.handleEndboss();
+        }, 900);
+    }
+
+    attackAfterHit() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.speed = 0;
+        this.resetPosition();
+        this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_ATTACK);
         }, 200);
         
@@ -120,23 +135,22 @@ class Endboss extends MovableObject {
     endbossJump() {
         if (this.currentInterval) clearInterval(this.currentInterval);
     
-        let jumpDuration = 600; // Gesamtdauer des Sprungs
-        let jumpSteps = 60; // Anzahl der Animationsschritte
-        let stepDuration = jumpDuration / jumpSteps; // Dauer eines Schritts
-        let startX = this.x; // Ursprüngliche X-Position
-        let startY = 55; // Ursprüngliche Y-Position
-        let jumpStepX = this.jumpDistance / jumpSteps; // Schrittweite in X-Richtung
+        let jumpDuration = 600;
+        let jumpSteps = 60;
+        let stepDuration = jumpDuration / jumpSteps;
+        let startX = this.x;
+        let startY = 55;
+        let jumpStepX = this.jumpDistance / jumpSteps;
         let step = 0;
     
         this.currentInterval = setInterval(() => {
             this.x = startX - (step * jumpStepX);
     
-            // Simuliere den Sprungbogen (parabolische Bewegung)
             if (step <= jumpSteps / 2) {
-                // Aufstieg
+                // Sprung nach oben
                 this.y = startY - (step / (jumpSteps / 2)) * this.jumpHeight;
             } else {
-                // Abstieg
+                // Sprung nach unten
                 this.y = startY - ((jumpSteps - step) / (jumpSteps / 2)) * this.jumpHeight;
             }
     
@@ -144,22 +158,21 @@ class Endboss extends MovableObject {
 
             if (this.world.character.isColliding(this)) {
                 console.log("Collision detected during jump!");
-                this.resetPosition(); // Setze die Y-Koordinate zurück
+                this.resetPosition();
                 clearInterval(this.currentInterval);
-                return; // Beende die Methode
+                return;
             }
     
-            // Wenn der Sprung abgeschlossen ist
             if (step >= jumpSteps) {
                 clearInterval(this.currentInterval);
-                this.resetPosition(); // Stelle sicher, dass er auf der ursprünglichen Y-Position landet
+                this.resetPosition();
                 console.log(`Jump finished. Final Y: ${this.y}`);
             }
         }, stepDuration);
     }
 
     resetPosition() {
-        this.y = 55; // Setzt die Y-Koordinate auf die ursprüngliche Höhe zurück
+        this.y = 55;
     }
 
     endbossHitted() {
@@ -177,13 +190,13 @@ class Endboss extends MovableObject {
                 console.log('Endbossstatus: Walk');
                 this.walk();
                 break;
-            case 'walkBack':
-                console.log('Endbossstatus: Walk Back')
-                this.endbossGoesBack();
-                break;
             case 'attack':
                 console.log('Endbossstatus: Attack');
                 this.attack();
+                break;
+            case 'attackAfterHit':
+                console.log('Endbossstatus: Attack after hit');
+                this.attackAfterHit();
                 break;
             case 'alert':
                 console.log('Endbossstatus: Alert');
