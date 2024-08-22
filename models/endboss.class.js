@@ -157,7 +157,7 @@ class Endboss extends MovableObject {
             step++;
 
             if (this.world.character.isColliding(this)) {
-                console.log("Collision detected during jump!");
+                // console.log("Collision detected during jump!");
                 this.resetPosition();
                 clearInterval(this.currentInterval);
                 return;
@@ -166,7 +166,7 @@ class Endboss extends MovableObject {
             if (step >= jumpSteps) {
                 clearInterval(this.currentInterval);
                 this.resetPosition();
-                console.log(`Jump finished. Final Y: ${this.y}`);
+                // console.log(`Jump finished. Final Y: ${this.y}`);
             }
         }, stepDuration);
     }
@@ -187,23 +187,18 @@ class Endboss extends MovableObject {
     handleEndboss() {
         switch (this.endbossStatus) {
             case 'walk':
-                console.log('Endbossstatus: Walk');
                 this.walk();
                 break;
             case 'attack':
-                console.log('Endbossstatus: Attack');
                 this.attack();
                 break;
             case 'attackAfterHit':
-                console.log('Endbossstatus: Attack after hit');
                 this.attackAfterHit();
                 break;
             case 'alert':
-                console.log('Endbossstatus: Alert');
                 this.alert();
                 break;
             case 'hurt':
-                console.log('Endbossstatus: Hurt');
                 this.endbossHitted();
                 break;
         }
