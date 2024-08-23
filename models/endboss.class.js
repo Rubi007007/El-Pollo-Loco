@@ -9,7 +9,7 @@ class Endboss extends MovableObject {
     offsetY = 150;
     offsetX = 65;
     type = 'Endboss';
-    isMoving = false;
+    isEndbossDead = false;
     endbossStatus = 'alert';
     jumpDistance = 100;
     jumpHeight = 50;
@@ -156,6 +156,10 @@ class Endboss extends MovableObject {
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_DEAD);
         }, 200);
+        
+        setTimeout(() => {
+            this.isEndbossDead = true;
+        }, 1000);
     }
 
     endbossJump() {

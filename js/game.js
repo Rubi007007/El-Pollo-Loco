@@ -26,6 +26,7 @@ function startGame() {
 
 function restartGame() {
     document.getElementById('end-screen').style.display = 'none';
+    document.getElementById('win-screen').style.display = 'none';
     resetGame();
     startGame();
 }
@@ -42,6 +43,13 @@ function resetGame() {
 }
 
 function endGame() {
+    document.getElementById('end-screen').style.display = 'block';
+    game_music.pause();
+    world.stopGame();
+    removeKeyboardListeners();
+}
+
+function winGame() {
     document.getElementById('end-screen').style.display = 'block';
     game_music.pause();
     world.stopGame();
