@@ -73,8 +73,15 @@ class Endboss extends MovableObject {
         }
     }*/
 
+    clearAnimation() {
+        if (this.currentInterval) {
+            clearInterval(this.currentInterval);
+            this.currentInterval = null;
+        }
+    }
+
     alert() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
         this.resetPosition();
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
@@ -88,7 +95,7 @@ class Endboss extends MovableObject {
     }
 
     walk() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
         this.speed = 2.15;
         this.resetPosition();
         this.currentInterval = setInterval(() => {
@@ -104,7 +111,7 @@ class Endboss extends MovableObject {
     }
 
     attack() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
         this.speed = 0;
         this.resetPosition();
         this.currentInterval = setInterval(() => {
@@ -121,7 +128,7 @@ class Endboss extends MovableObject {
     }
 
     attackAfterHit() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
         this.speed = 0;
         this.resetPosition();
         this.currentInterval = setInterval(() => {
@@ -135,7 +142,7 @@ class Endboss extends MovableObject {
     }
 
     attackAfterDamage() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
         this.speed = 80;
         this.resetPosition();
         this.currentInterval = setInterval (() => {
@@ -150,7 +157,7 @@ class Endboss extends MovableObject {
     }
 
     dead() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
         this.speed = 0;
         this.resetPosition();
         this.currentInterval = setInterval(() => {
@@ -164,7 +171,7 @@ class Endboss extends MovableObject {
     }
 
     endbossJump() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
     
         let jumpDuration = 600;
         let jumpSteps = 60;
@@ -207,13 +214,15 @@ class Endboss extends MovableObject {
     }
 
     endbossHitted() {
-        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.clearAnimation();
         this.resetPosition();
         this.energy -= 20;
         this.world.statusbarEndboss.setPercentage(this.energy, world.statusbarEndboss.IMAGES_ENDBOSSBAR)
         this.checkEndbossIsDead();
         console.log(this.energy)
+
         this.currentInterval = setInterval(() => {
+            this.endbossStatus = 'hurt';
             this.playAnimation(this.IMAGES_HURT);
         }, 200);
 
@@ -235,6 +244,8 @@ class Endboss extends MovableObject {
     }
 
     handleEndboss() {
+        this.clearAnimation();
+
         switch (this.endbossStatus) {
             case 'walk':
                 this.walk();
