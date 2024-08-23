@@ -75,6 +75,7 @@ class Endboss extends MovableObject {
 
     alert() {
         if (this.currentInterval) clearInterval(this.currentInterval);
+        this.resetPosition();
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
         }, 200);
@@ -89,6 +90,7 @@ class Endboss extends MovableObject {
     walk() {
         if (this.currentInterval) clearInterval(this.currentInterval);
         this.speed = 2.15;
+        this.resetPosition();
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
@@ -130,6 +132,21 @@ class Endboss extends MovableObject {
             this.endbossStatus = 'walk';
             this.handleEndboss();
         }, 900);
+    }
+
+    attackAfterDamage() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.speed = 80;
+        this.resetPosition();
+        this.currentInterval = setInterval (() => {
+            this.playAnimation(this.IMAGES_WALKING);
+            this.moveLeft();
+        }, 200);
+
+        setTimeout(() => {
+            this.endbossStatus = 'walk';
+            this.handleEndboss();
+        }, 1900);
     }
 
     endbossJump() {
@@ -177,6 +194,7 @@ class Endboss extends MovableObject {
 
     endbossHitted() {
         if (this.currentInterval) clearInterval(this.currentInterval);
+        this.resetPosition();
         this.energy -= 20;
         // this.setPercentage(this.energy, )
         console.log(this.energy)
@@ -184,7 +202,10 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_HURT);
         }, 200);
 
-        // TODO: -> hier noch einfügen, dass er nach einem Treffer nach vorne schnellt und angreift
+        setTimeout(() => {
+            this.endbossStatus = 'attackAfterDamage';
+            this.handleEndboss();
+        }, 1800);
     }
 
     handleEndboss() {
@@ -197,6 +218,9 @@ class Endboss extends MovableObject {
                 break;
             case 'attackAfterHit':
                 this.attackAfterHit();
+                break;
+            case 'attackAfterDamage':
+                this.attackAfterDamage();
                 break;
             case 'alert':
                 this.alert();
