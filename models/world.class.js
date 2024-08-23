@@ -22,6 +22,10 @@ class World {
     throwableObjects = [];
     throwPressed = false;
 
+    // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
+    // TODO: Sounds stoppen nach Lose oder Win
+    // TODO: 
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
