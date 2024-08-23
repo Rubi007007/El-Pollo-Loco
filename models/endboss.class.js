@@ -196,7 +196,7 @@ class Endboss extends MovableObject {
         if (this.currentInterval) clearInterval(this.currentInterval);
         this.resetPosition();
         this.energy -= 20;
-        // this.setPercentage(this.energy, )
+        this.world.statusbarEndboss.setPercentage(this.energy, world.statusbarEndboss.IMAGES_ENDBOSSBAR)
         console.log(this.energy)
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_HURT);
