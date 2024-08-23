@@ -87,11 +87,13 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_ALERT);
         }, 200);
 
-        setTimeout(() => {
-            clearInterval(this.currentInterval);
-            this.endbossStatus = 'attack';
-            this.handleEndboss();
-        }, 2500);
+        if (this.endbossStatus != 'hurt') {
+            setTimeout(() => {
+                clearInterval(this.currentInterval);
+                this.endbossStatus = 'attack';
+                this.handleEndboss();
+            }, 2500);
+        }
     }
 
     walk() {
@@ -103,11 +105,13 @@ class Endboss extends MovableObject {
             this.moveLeft();
         }, 200);
 
-        setTimeout(() => {
-            clearInterval(this.currentInterval);
-            this.endbossStatus = 'alert';
-            this.handleEndboss();
-        }, 2000);
+        if (this.endbossStatus != 'hurt') {
+            setTimeout(() => {
+                clearInterval(this.currentInterval);
+                this.endbossStatus = 'alert';
+                this.handleEndboss();
+            }, 2000);
+        }
     }
 
     attack() {
@@ -121,10 +125,12 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_ATTACK);
         }, 200);
         
-        setTimeout(() => {
-            this.endbossStatus = 'walk';
-            this.handleEndboss();
-        }, 900);
+        if (this.endbossStatus != 'hurt') {
+            setTimeout(() => {
+                this.endbossStatus = 'walk';
+                this.handleEndboss();
+            }, 900);
+        }
     }
 
     attackAfterHit() {
@@ -135,10 +141,12 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_ATTACK);
         }, 200);
         
-        setTimeout(() => {
-            this.endbossStatus = 'walk';
-            this.handleEndboss();
-        }, 900);
+        if (this.endbossStatus != 'hurt') {
+            setTimeout(() => {
+                this.endbossStatus = 'walk';
+                this.handleEndboss();
+            }, 900);
+        }
     }
 
     attackAfterDamage() {
@@ -150,10 +158,12 @@ class Endboss extends MovableObject {
             this.moveLeft();
         }, 200);
 
-        setTimeout(() => {
-            this.endbossStatus = 'walk';
-            this.handleEndboss();
-        }, 1900);
+        if (this.endbossStatus != 'hurt') {
+            setTimeout(() => {
+                this.endbossStatus = 'walk';
+                this.handleEndboss();
+            }, 1900);
+        }
     }
 
     dead() {

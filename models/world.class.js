@@ -24,7 +24,7 @@ class World {
 
     // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
     // TODO: Sounds stoppen nach Lose oder Win
-    // TODO: 
+    // TODO: Endboss hit animation durchlaufen lassen nach Hit, egal ob andere Animation fertig ist
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
