@@ -17,6 +17,7 @@ body {
 @font-face {
     font-family: Mexcellent;
     src: url(./fonts/mexcellent/mexcellent\ rg.otf);
+    src: url(./fonts/mexican-fiesta-cdnfonts/mexicanfiesta.ttf);
 }
 
 #content {
@@ -97,5 +98,6 @@ body {
 
 #speaker-btn {
     width: 48px;
+    height: 48px;
     cursor: pointer;
 }
