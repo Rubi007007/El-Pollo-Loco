@@ -67,12 +67,6 @@ class Endboss extends MovableObject {
         this.handleEndboss();
     }
 
-    /*inRageRange() {
-        if (this.world.character.x > 2720) {
-            return true
-        }
-    }*/
-
     clearAnimation() {
         if (this.currentInterval) {
             clearInterval(this.currentInterval);

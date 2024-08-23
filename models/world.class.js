@@ -46,7 +46,6 @@ class World {
             this.collisionHandler.checkCollisions();
             this.checkThrowObjects();
             this.checkEndbossSpawn();
-            // this.checkEndbossRage();
             this.checkEndbossDead();
         }, 25);
     }
@@ -68,12 +67,6 @@ class World {
             this.spawnEndboss();
         }
     }
-
-    /*checkEndbossRage() {
-        if (this.endboss && this.endboss.inRageRange()) {
-            console.log('in Rage Range');
-        }
-    }*/
 
     checkEndbossDead() {
         if (this.endboss && this.endboss.isEndbossDead) {
