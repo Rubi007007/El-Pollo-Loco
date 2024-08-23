@@ -1,13 +1,17 @@
 * {
-    font-family: Mexcellent;
+    font-family: Mexican;
+    margin: 0;
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-image: url('./img/11_menu/background_v2.png');
     background-position-y: -200px;
+    width: 100%;
+    height: 100vh;
 }
 
 :root {
@@ -15,8 +19,7 @@ body {
 }
 
 @font-face {
-    font-family: Mexcellent;
-    src: url(./fonts/mexcellent/mexcellent\ rg.otf);
+    font-family: Mexican;
     src: url(./fonts/mexican-fiesta-cdnfonts/mexicanfiesta.ttf);
 }
 
@@ -26,10 +29,16 @@ body {
     align-items: center;
     width: 720px;
     height: 480px;
+    position: relative;
+    margin-top: 24px;
 }
 
 #canvas {
     background-color: #000;
+}
+
+.headline {
+    font-size: 48px;
 }
 
 #start-screen {
@@ -51,8 +60,8 @@ body {
     margin-right: auto;
     transform: calc(-50%);
     background-image: linear-gradient(to right, #FEDD03 0%, #FEA700 51%, #FEDD03 100%);
-    padding: 15px 20px;
-    font-size: 24px;
+    padding: 6px 20px 12px 20px;
+    font-size: 40px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
@@ -94,6 +103,7 @@ body {
     display: flex;
     justify-content: flex-start;
     margin-top: 24px;
+    z-index: 1;
 }
 
 #speaker-btn {
