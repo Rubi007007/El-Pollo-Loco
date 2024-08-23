@@ -101,9 +101,12 @@ body {
 .menu {
     width: 720px;
     display: flex;
-    justify-content: flex-start;
-    margin-top: 24px;
+    justify-content: flex-end;
     z-index: 1;
+    position: absolute;
+    top: 420px;
+    right: 12px;
+    gap: 6px;
 }
 
 .menu-btn {

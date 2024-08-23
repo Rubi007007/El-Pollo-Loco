@@ -11,6 +11,10 @@
     <h1 class="headline">El Pollo Loco</h1>
 
     <div id="content">
+        <div class="menu">
+            <img id="speaker-btn" class="menu-btn" src="./img/11_menu/speaker_volume_on.png" onclick="toggleVolume()">
+            <img id="restart-btn-menu" class="menu-btn" src="./img/11_menu/restart_btn.png" onclick="toggleVolume()">
+        </div>
         <div id="start-screen">
             <button class="start-game-btn game-btn" onclick="startGame(), btnSound()">START</button>
             <img class="start-screen-bg" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="">
@@ -26,10 +30,6 @@
         </div>
     </div>
     
-    <div class="menu">
-        <img id="speaker-btn" class="menu-btn" src="./img/11_menu/speaker_volume_on.png" onclick="toggleVolume()">
-        <img id="restart-btn-menu" class="menu-btn" src="./img/11_menu/restart_btn.png" onclick="toggleVolume()">
-    </div>
 
 
     <script src="./models/drawable-object.class.js"></script>
