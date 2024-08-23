@@ -88,7 +88,7 @@ class Endboss extends MovableObject {
 
     walk() {
         if (this.currentInterval) clearInterval(this.currentInterval);
-        this.speed = 1.15;
+        this.speed = 2.15;
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
@@ -98,7 +98,7 @@ class Endboss extends MovableObject {
             clearInterval(this.currentInterval);
             this.endbossStatus = 'alert';
             this.handleEndboss();
-        }, 4000);
+        }, 2000);
     }
 
     attack() {
@@ -177,11 +177,14 @@ class Endboss extends MovableObject {
 
     endbossHitted() {
         if (this.currentInterval) clearInterval(this.currentInterval);
-        this.energy -= 20; // TODO: Hier wird so lange Enegie abgezogen, bis die Flasche gelöscht wurde -> fixen
+        this.energy -= 20;
+        // this.setPercentage(this.energy, )
         console.log(this.energy)
-        setTimeout(() => {
+        this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_HURT);
-        }, 1000);
+        }, 200);
+
+        // TODO: -> hier noch einfügen, dass er nach einem Treffer nach vorne schnellt und angreift
     }
 
     handleEndboss() {
