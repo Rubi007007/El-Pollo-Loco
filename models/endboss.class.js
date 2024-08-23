@@ -149,6 +149,15 @@ class Endboss extends MovableObject {
         }, 1900);
     }
 
+    dead() {
+        if (this.currentInterval) clearInterval(this.currentInterval);
+        this.speed = 0;
+        this.resetPosition();
+        this.currentInterval = setInterval(() => {
+            this.playAnimation(this.IMAGES_DEAD);
+        }, 200);
+    }
+
     endbossJump() {
         if (this.currentInterval) clearInterval(this.currentInterval);
     
@@ -197,15 +206,27 @@ class Endboss extends MovableObject {
         this.resetPosition();
         this.energy -= 20;
         this.world.statusbarEndboss.setPercentage(this.energy, world.statusbarEndboss.IMAGES_ENDBOSSBAR)
+        this.checkEndbossIsDead();
         console.log(this.energy)
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_HURT);
         }, 200);
 
-        setTimeout(() => {
-            this.endbossStatus = 'attackAfterDamage';
+        if (this.energy > 0) {
+            setTimeout(() => {
+                this.endbossStatus = 'attackAfterDamage';
+                this.handleEndboss();
+            }, 1800);
+        }
+    }
+
+    checkEndbossIsDead() {
+        if (this.energy > 0) {
+            return
+        } else {
+            this.endbossStatus = 'dead';
             this.handleEndboss();
-        }, 1800);
+        }
     }
 
     handleEndboss() {
@@ -227,6 +248,9 @@ class Endboss extends MovableObject {
                 break;
             case 'hurt':
                 this.endbossHitted();
+                break;
+            case 'dead':
+                this.dead();
                 break;
         }
     }
