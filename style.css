@@ -75,6 +75,17 @@ body {
     height: 480px;
 }
 
+#win-screen {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+}
+
+.win-screen-bg {
+    width: 720px;
+    height: 480px;
+}
+
 .menu {
     width: 720px;
     display: flex;

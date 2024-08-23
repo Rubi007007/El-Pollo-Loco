@@ -25,18 +25,6 @@ class CollisionHandler {
                 );
             }
 
-            // Endboss Kollisionen TODO: Hitbox passt noch nicht ganz
-            if (this.world.endboss && this.world.endboss.isColliding(char)) {
-                char.hit(this.world.endboss.type);
-                char.bounceEffectHit(this.world.endboss);
-                this.world.endboss.endbossStatus = 'attackAfterHit';
-                this.world.endboss.handleEndboss();
-                this.world.statusbarHealth.setPercentage(
-                    char.energy,
-                    this.world.statusbarHealth.IMAGES_HEALTHBAR
-                );
-            }
-
             // for Schleife dafür, dass jede Flasche nur einen Gegner töten kann.
             for (let i = 0; i < this.world.throwableObjects.length; i++) {
                 let bottle = this.world.throwableObjects[i];
@@ -50,26 +38,41 @@ class CollisionHandler {
                         this.world.throwableObjects.splice(i, 1);
                     }, 600);
                     break;
-                } else if (
-                    !bottle.isUsed &&
-                    this.world.endboss &&
-                    this.world.endboss.isColliding(bottle)
-                ) {
-                    this.world.endboss.endbossHitted();
-                    console.log('Endboss hitted!');
-                    bottle.isUsed = true;
-                    
-                    bottle.splashAnimation();
+                }
+            }
+        });
 
+        // Endboss Kollisionen TODO: Hitbox passt noch nicht ganz
+        if (this.world.endboss) {
+            if (this.world.endboss.isColliding(char)) {
+                console.log('Endboss and character collide!');
+                char.hit(this.world.endboss.type);
+                char.bounceEffectHit(this.world.endboss);
+                this.world.endboss.endbossStatus = 'attackAfterHit';
+                this.world.endboss.handleEndboss();
+                this.world.statusbarHealth.setPercentage(
+                    char.energy,
+                    this.world.statusbarHealth.IMAGES_HEALTHBAR
+                );
+            }
+    
+            // Überprüfe Kollisionen der Flaschen mit dem Endboss
+            for (let i = 0; i < this.world.throwableObjects.length; i++) {
+                let bottle = this.world.throwableObjects[i];
+    
+                if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
+                    this.world.endboss.endbossHitted();
+                    console.log('Endboss hit by bottle!');
+                    bottle.isUsed = true;
+                    bottle.splashAnimation();
                     // TODO: Hier soll eigentlich die Flasche erst nach 600ms gelöscht werden, damit die Splashanimation voll durchlaufen kann.
                     // setTimeout(() => {
                         this.world.throwableObjects.splice(i, 1);
                     // }, 600);
-
                     break;
                 }
             }
-        });
+        }
 
         this.world.level.collectableCoins.forEach((coin) => {
             if (char.isColliding(coin)) {

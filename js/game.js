@@ -24,6 +24,7 @@ function startGame() {
     console.log('My Char is', world.character);
 }
 
+// TODO: wenn Game gewonnen, zum startScreen zurück
 function restartGame() {
     document.getElementById('end-screen').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
@@ -50,7 +51,7 @@ function endGame() {
 }
 
 function winGame() {
-    document.getElementById('end-screen').style.display = 'block';
+    document.getElementById('win-screen').style.display = 'block';
     game_music.pause();
     world.stopGame();
     removeKeyboardListeners();

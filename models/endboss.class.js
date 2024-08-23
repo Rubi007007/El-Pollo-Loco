@@ -67,11 +67,11 @@ class Endboss extends MovableObject {
         this.handleEndboss();
     }
 
-    inRageRange() {
+    /*inRageRange() {
         if (this.world.character.x > 2720) {
             return true
         }
-    }
+    }*/
 
     alert() {
         if (this.currentInterval) clearInterval(this.currentInterval);
@@ -157,6 +157,7 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_DEAD);
         }, 200);
         
+        // TODO: Endboss kann Character nach Tot noch treffen -> deaktivieren
         setTimeout(() => {
             this.isEndbossDead = true;
         }, 1000);
