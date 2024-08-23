@@ -82,8 +82,10 @@ body {
 }
 
 .win-screen-bg {
-    width: 720px;
-    height: 480px;
+    margin-left: 64px;
+    margin-top: 96px;
+    width: 600px;
+    height: 320px;
 }
 
 .menu {
