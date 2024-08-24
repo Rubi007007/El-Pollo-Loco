@@ -4,7 +4,7 @@ function initLevel() {
     let bottles = [];
     let coins = [];
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 10; i++) {
         let bottle = new Bottle(bottles);
         bottles.push(bottle);
     }
@@ -22,6 +22,11 @@ function initLevel() {
             new SmallChicken(),
             new Chicken(),
             new SmallChicken(),
+            new Chicken(),
+            new SmallChicken(),
+            new Chicken(),
+            new SmallChicken(),
+            new Chicken(),
         ],
         [
             new Cloud(),

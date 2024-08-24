@@ -27,7 +27,7 @@ class Bottle extends MovableObject {
     notCollidingBottles(existingBottles) {
         let isColliding;
         do {
-            this.x = 300 + Math.random() * 700;
+            this.x = 300 + Math.random() * 1800;
             isColliding = existingBottles.some(bottle => this.isColliding(bottle));
         } while (isColliding);
     }

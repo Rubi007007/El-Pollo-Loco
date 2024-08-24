@@ -46,15 +46,17 @@ function resetGame() {
 
 function endGame() {
     document.getElementById('end-screen').style.display = 'block';
-    game_music.pause();
-    world.endboss.endboss_theme.pause();
-    world.stopGame();
-    removeKeyboardListeners();
+    finishedGame();
 }
 
 function winGame() {
     document.getElementById('win-screen').style.display = 'block';
+    finishedGame();
+}
+
+function finishedGame() {
     game_music.pause();
+    world.endboss.endboss_theme.pause();
     world.stopGame();
     removeKeyboardListeners();
 }
