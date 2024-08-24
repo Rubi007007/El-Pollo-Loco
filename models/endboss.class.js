@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
         volume(this.endboss_nearby_sound, 0.2);
         setTimeout(() => {
             this.endboss_theme.play();
-            volume(this.endboss_theme, 0.1);
+            volume(this.endboss_theme, 0.08);
             this.endboss_theme.loop = true;
         }, 1800);
     }
