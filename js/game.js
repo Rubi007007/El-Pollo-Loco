@@ -32,6 +32,8 @@ function restartGame() {
     document.getElementById('end-screen').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
     world.audioHandler.isStopped = false;
+    world.character.JUMP_SOUNDS = [];
+    world.character.HURT_SOUNDS = [];
     resetGame();
     startGame();
 }

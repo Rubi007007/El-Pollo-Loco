@@ -1,7 +1,7 @@
 class Character extends MovableObject {
     height = 280;
     width = 140;
-    
+
     offsetX = 15;
     offsetY = 100;
     hitboxWidth = this.width - 45;
@@ -16,26 +16,8 @@ class Character extends MovableObject {
     longIdleActive = false;
     walking_sound = new Audio('./audio/walking.mp3');
     snore_sound = new Audio('./audio/snore.mp3');
-
-    JUMP_SOUNDS = [
-        new Audio('./audio/jump_sounds/1_jump.mp3'),
-        new Audio('./audio/jump_sounds/2_jump.mp3'),
-        new Audio('./audio/jump_sounds/3_jump.mp3'),
-        new Audio('./audio/jump_sounds/4_jump.mp3'),
-        new Audio('./audio/jump_sounds/5_jump.mp3'),
-        new Audio('./audio/jump_sounds/6_jump.mp3'),
-        new Audio('./audio/jump_sounds/7_jump.mp3'),
-        new Audio('./audio/jump_sounds/8_jump.mp3'),
-        new Audio('./audio/jump_sounds/9_jump.mp3'),
-        new Audio('./audio/jump_sounds/10_jump.mp3'),
-    ];
-
-    HURT_SOUNDS = [
-        new Audio('./audio/hurt_sounds/hurt_1.mp3'),
-        new Audio('./audio/hurt_sounds/hurt_2.mp3'),
-        new Audio('./audio/hurt_sounds/hurt_3.mp3'),
-        new Audio('./audio/hurt_sounds/hurt_4.mp3'),
-    ];
+    JUMP_SOUNDS = [];
+    HURT_SOUNDS = [];
 
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
@@ -65,13 +47,13 @@ class Character extends MovableObject {
         './img/2_character_pepe/5_dead/D-54.png',
         './img/2_character_pepe/5_dead/D-55.png',
         './img/2_character_pepe/5_dead/D-56.png',
-        './img/2_character_pepe/5_dead/D-57.png'
+        './img/2_character_pepe/5_dead/D-57.png',
     ];
 
     IMAGES_HURT = [
         './img/2_character_pepe/4_hurt/H-41.png',
         './img/2_character_pepe/4_hurt/H-42.png',
-        './img/2_character_pepe/4_hurt/H-43.png'
+        './img/2_character_pepe/4_hurt/H-43.png',
     ];
 
     IMAGES_IDLE = [
@@ -100,7 +82,6 @@ class Character extends MovableObject {
         './img/2_character_pepe/1_idle/long_idle/I-20.png',
     ];
 
-
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -111,6 +92,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.applyGravity();
         this.animate();
+        this.addArraySounds();
     }
 
     animate() {
@@ -120,8 +102,10 @@ class Character extends MovableObject {
         setInterval(() => {
             this.isMoving = false;
 
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                
+            if (
+                this.world.keyboard.RIGHT &&
+                this.x < this.world.level.level_end_x
+            ) {
                 this.moveRight();
                 this.otherDirection = false;
                 this.isMoving = true;
@@ -129,32 +113,49 @@ class Character extends MovableObject {
 
                 if (this.walking_sound.paused) {
                     this.world.audioHandler.toggleSound(this.walking_sound);
-                    this.world.audioHandler.toggleVolume(this.walking_sound, 0.1);
+                    this.world.audioHandler.toggleVolume(
+                        this.walking_sound,
+                        0.1
+                    );
                 }
             }
-            
+
             if (this.world.keyboard.LEFT && this.x > -350) {
                 this.moveLeft();
                 this.otherDirection = true;
                 this.isMoving = true;
                 this.resetIdleTimer();
-                
+
                 if (this.walking_sound.paused) {
                     this.world.audioHandler.toggleSound(this.walking_sound);
-                    this.world.audioHandler.toggleVolume(this.walking_sound, 0.1);
+                    this.world.audioHandler.toggleVolume(
+                        this.walking_sound,
+                        0.1
+                    );
                 }
             }
 
-            if (this.world.keyboard.UP && !this.isAboveGround() || this.world.keyboard.SPACE && !this.isAboveGround()) {
+            if (
+                (this.world.keyboard.UP && !this.isAboveGround()) ||
+                (this.world.keyboard.SPACE && !this.isAboveGround())
+            ) {
                 this.jump();
                 this.resetIdleTimer();
 
-                const jumpSound = this.JUMP_SOUNDS[this.world.playRandomSound(this.JUMP_SOUNDS)];
-                if (jumpSound.paused) {
-                    this.world.audioHandler.toggleSound(jumpSound);
-                    
-                    for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
-                        this.world.audioHandler.toggleVolume(this.JUMP_SOUNDS[i], 0.2);
+                const jumpSound =
+                    this.JUMP_SOUNDS[
+                        this.world.playRandomSound(this.JUMP_SOUNDS)
+                    ];
+                if (this.JUMP_SOUNDS.length > 0) {
+                    if (jumpSound.paused) {
+                        this.world.audioHandler.toggleSound(jumpSound);
+
+                        for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
+                            this.world.audioHandler.toggleVolume(
+                                this.JUMP_SOUNDS[i],
+                                0.2
+                            );
+                        }
                     }
                 }
             }
@@ -172,7 +173,12 @@ class Character extends MovableObject {
     startAnimationIntervals() {
         // Idle und Long Idle Animationen
         setInterval(() => {
-            if (!this.isMoving && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
+            if (
+                !this.isMoving &&
+                !this.isDead() &&
+                !this.isHurt() &&
+                !this.isAboveGround()
+            ) {
                 if (this.longIdleActive) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);
                     this.world.audioHandler.toggleSound(this.snore_sound);
@@ -193,18 +199,24 @@ class Character extends MovableObject {
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
 
-                const hurtSound = this.HURT_SOUNDS[this.world.playRandomSound(this.HURT_SOUNDS)];
-                if (hurtSound.paused) {
-                    this.world.audioHandler.toggleSound(hurtSound);
-                    
-                    for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
-                        this.world.audioHandler.toggleVolume(this.HURT_SOUNDS[i], 0.4);
+                const hurtSound =
+                    this.HURT_SOUNDS[
+                        this.world.playRandomSound(this.HURT_SOUNDS)
+                    ];
+                if (this.HURT_SOUNDS.length > 0) {
+                    if (hurtSound.paused) {
+                        this.world.audioHandler.toggleSound(hurtSound);
+    
+                        for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
+                            this.world.audioHandler.toggleVolume(
+                                this.HURT_SOUNDS[i],
+                                0.4
+                            );
+                        }
                     }
                 }
-
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            
             } else if (this.isMoving) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
@@ -223,5 +235,27 @@ class Character extends MovableObject {
             this.longIdleActive = true;
             this.idleTimer = null;
         }, this.idleTime);
+    }
+
+    addArraySounds() {
+        this.JUMP_SOUNDS.push(
+            new Audio('./audio/jump_sounds/1_jump.mp3'),
+            new Audio('./audio/jump_sounds/2_jump.mp3'),
+            new Audio('./audio/jump_sounds/3_jump.mp3'),
+            new Audio('./audio/jump_sounds/4_jump.mp3'),
+            new Audio('./audio/jump_sounds/5_jump.mp3'),
+            new Audio('./audio/jump_sounds/6_jump.mp3'),
+            new Audio('./audio/jump_sounds/7_jump.mp3'),
+            new Audio('./audio/jump_sounds/8_jump.mp3'),
+            new Audio('./audio/jump_sounds/9_jump.mp3'),
+            new Audio('./audio/jump_sounds/10_jump.mp3')
+        );
+
+        this.HURT_SOUNDS.push(
+            new Audio('./audio/hurt_sounds/hurt_1.mp3'),
+            new Audio('./audio/hurt_sounds/hurt_2.mp3'),
+            new Audio('./audio/hurt_sounds/hurt_3.mp3'),
+            new Audio('./audio/hurt_sounds/hurt_4.mp3')
+        );
     }
 }
