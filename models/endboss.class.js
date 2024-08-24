@@ -15,6 +15,7 @@ class Endboss extends MovableObject {
     jumpHeight = 50;
     endboss_nearby_sound = new Audio('./audio/chicken/endboss_in_range.mp3');
     endboss_theme = new Audio('./audio/chicken/endboss_theme.mp3');
+    endboss_damage_sound = new Audio('./audio/chicken/endboss_damage_sound.mp3')
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -233,6 +234,8 @@ class Endboss extends MovableObject {
         this.energy -= 20;
         this.world.statusbarEndboss.setPercentage(this.energy, world.statusbarEndboss.IMAGES_ENDBOSSBAR)
         this.checkEndbossIsDead();
+        this.endboss_damage_sound.play();
+        volume(this.endboss_damage_sound, 0.2)
         console.log(this.energy)
 
         this.currentInterval = setInterval(() => {
