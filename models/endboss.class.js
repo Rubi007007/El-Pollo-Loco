@@ -13,6 +13,8 @@ class Endboss extends MovableObject {
     endbossStatus = 'alert';
     jumpDistance = 100;
     jumpHeight = 50;
+    endboss_nearby_sound = new Audio('./audio/chicken/endboss_in_range.mp3');
+    endboss_theme = new Audio('./audio/chicken/endboss_theme.mp3');
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -65,6 +67,14 @@ class Endboss extends MovableObject {
         this.world = world;
         this.currentInterval = null;
         this.handleEndboss();
+        game_music.pause();
+        this.endboss_nearby_sound.play();
+        volume(this.endboss_nearby_sound, 0.2);
+        setTimeout(() => {
+            this.endboss_theme.play();
+            volume(this.endboss_theme, 0.1);
+            this.endboss_theme.loop = true;
+        }, 1800);
     }
 
     clearAnimation() {

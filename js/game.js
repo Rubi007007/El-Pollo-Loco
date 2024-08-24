@@ -19,6 +19,7 @@ function startGame() {
     world = new World(canvas, keyboard);
     
     game_music.play();
+    game_music.loop = true;
     volume(game_music, 0.04);
     
     console.log('My Char is', world.character);
@@ -46,6 +47,7 @@ function resetGame() {
 function endGame() {
     document.getElementById('end-screen').style.display = 'block';
     game_music.pause();
+    world.endboss.endboss_theme.pause();
     world.stopGame();
     removeKeyboardListeners();
 }
