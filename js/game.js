@@ -2,9 +2,11 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let isMuted;
-let btn_click_sound = new Audio('./audio/btn_click.mp3')
-let game_music = new Audio('./audio/game_music.mp3')
-let start_screen_music = new Audio('./audio/start_screen_music.mp3')
+let btn_click_sound = new Audio('./audio/btn_click.mp3');
+let game_music = new Audio('./audio/game_music.mp3');
+let start_screen_music = new Audio('./audio/start_screen_music.mp3');
+let gameover_sound = new Audio('./audio/game_over.mp3');
+let winning_sound = new Audio('./audio/winning_sound.mp3');
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -46,11 +48,15 @@ function resetGame() {
 
 function endGame() {
     document.getElementById('end-screen').style.display = 'block';
+    gameover_sound.play();
+    volume(gameover_sound, 1);
     finishedGame();
 }
 
 function winGame() {
     document.getElementById('win-screen').style.display = 'block';
+    winning_sound.play();
+    volume(winning_sound, 0.7);
     finishedGame();
 }
 
