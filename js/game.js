@@ -20,9 +20,9 @@ function startGame() {
     initLevel();
     world = new World(canvas, keyboard);
     
-    game_music.play();
+    world.audioHandler.toggleSound(game_music);
+    world.audioHandler.toggleVolume(game_music, 0.04);
     game_music.loop = true;
-    volume(game_music, 0.04);
     
     console.log('My Char is', world.character);
 }
@@ -31,6 +31,7 @@ function startGame() {
 function restartGame() {
     document.getElementById('end-screen').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
+    world.audioHandler.isStopped = false;
     resetGame();
     startGame();
 }
@@ -48,15 +49,18 @@ function resetGame() {
 
 function endGame() {
     document.getElementById('end-screen').style.display = 'block';
-    gameover_sound.play();
-    volume(gameover_sound, 1);
+    world.audioHandler.toggleSound(gameover_sound);
+    world.audioHandler.toggleVolume(gameover_sound, 1);
+    setTimeout(() => {
+        world.audioHandler.isStopped = true;
+    }, 200);
     finishedGame();
 }
 
 function winGame() {
     document.getElementById('win-screen').style.display = 'block';
-    winning_sound.play();
-    volume(winning_sound, 0.7);
+    world.audioHandler.toggleSound(winning_sound);
+    world.audioHandler.toggleVolume(winning_sound, 0.7);
     finishedGame();
 }
 
@@ -70,7 +74,8 @@ function finishedGame() {
 }
 
 function btnSound() {
-    btn_click_sound.play();
+    world.audioHandler.toggleSound(btn_click_sound);
+    world.audioHandler.toggleVolume(btn_click_sound, 1);
 }
 
 function toggleVolume() {
@@ -83,15 +88,7 @@ function toggleVolume() {
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
         isMuted = false;
-        game_music.volume = 0.04;
-    }
-}
-
-function volume(sound, volume) {
-    if (!isMuted || isMuted == null) {
-        sound.volume = volume;
-    } else {
-        sound.volume = 0;
+        world.audioHandler.toggleVolume(game_music, 0.04)
     }
 }
 

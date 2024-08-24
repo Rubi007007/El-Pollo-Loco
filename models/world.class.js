@@ -99,8 +99,8 @@ class World {
             }, this.throwCooldownDuration);
 
         } else if (this.keyboard.THROW && !this.statusbarBottle.availableBottles()) {
-            this.out_of_bottles_sound.play();
-            volume(this.out_of_bottles_sound, 0.1);
+            this.audioHandler.toggleSound(this.out_of_bottles_sound);
+            this.audioHandler.toggleVolume(this.out_of_bottles_sound, 0.1);
             this.throwPressed = true;
         }
 
