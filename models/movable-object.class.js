@@ -7,6 +7,8 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     invulnerable = false;
     invulnerableEndTime = 0;
+    small_chicken_sound = new Audio('./audio/chicken/small_chicken_damage_sound.mp3');
+    chicken_sound = new Audio('./audio/chicken/chicken_damage_sound.mp3');
 
 
     applyGravity() {
@@ -103,6 +105,13 @@ class MovableObject extends DrawableObject {
         enemy.isDead = true;
         enemy.animate();
         enemy.speed = 0;
+        if (enemy.type == 'Chicken') {
+            this.chicken_sound.play();
+            volume(this.chicken_sound, 0.2);
+        } else if (enemy.type == 'SmallChicken') {
+            this.small_chicken_sound.play();
+            volume(this.small_chicken_sound, 0.2);
+        }
     }
 
     bounceEffectHit(enemy) {
