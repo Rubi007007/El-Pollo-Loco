@@ -106,11 +106,11 @@ class MovableObject extends DrawableObject {
         enemy.animate();
         enemy.speed = 0;
         if (enemy.type == 'Chicken') {
-            this.chicken_sound.play();
-            volume(this.chicken_sound, 0.2);
+            this.world.audioHandler.toggleSound(this.chicken_sound);
+            this.world.audioHandler.toggleVolume(this.chicken_sound, 0.2);
         } else if (enemy.type == 'SmallChicken') {
-            this.small_chicken_sound.play();
-            volume(this.small_chicken_sound, 0.2);
+            this.world.audioHandler.toggleSound(this.small_chicken_sound);
+            this.world.audioHandler.toggleVolume(this.small_chicken_sound, 0.2);
         }
     }
 

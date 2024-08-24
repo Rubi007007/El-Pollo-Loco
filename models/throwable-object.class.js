@@ -29,8 +29,8 @@ class ThrowableObject extends MovableObject {
         this.world = world;
         this.width = 70;
         this.height = 70;
-        this.throw_bottle_sound.play();
-        volume(this.throw_bottle_sound, 0.4);
+        this.world.audioHandler.toggleSound(this.throw_bottle_sound);
+        this.world.audioHandler.toggleVolume(this.throw_bottle_sound, 0.4);
     }
 
     throwRight() {
@@ -47,8 +47,8 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.splashAnimation();
-                this.splash_bottle_sound.play();
-                volume(this.splash_bottle_sound, 0.1);
+                this.world.audioHandler.toggleSound(this.splash_bottle_sound);
+                this.world.audioHandler.toggleVolume(this.splash_bottle_sound, 0.1);
             }
         }, 25);
     }
@@ -66,8 +66,8 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.splashAnimation();
-                this.splash_bottle_sound.play();
-                volume(this.splash_bottle_sound, 0.1);
+                this.world.audioHandler.toggleSound(this.splash_bottle_sound);
+                this.world.audioHandler.toggleVolume(this.splash_bottle_sound, 0.1);
             }
         }, 25);
     }
