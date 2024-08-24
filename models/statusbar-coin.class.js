@@ -1,6 +1,7 @@
 class StatusbarCoin extends DrawableObject {
     percentage = 100;
     collectedCoins = 0;
+    collect_coin_sound = new Audio('./audio/collect_coin.mp3');
 
     IMAGES_COINBAR = [
         './img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png',
@@ -22,6 +23,8 @@ class StatusbarCoin extends DrawableObject {
     }
 
     collectCoin() {
+        world.audioHandler.toggleSound(this.collect_coin_sound);
+        world.audioHandler.toggleVolume(this.collect_coin_sound, 0.6);
         this.collectedCoins += 1;
         this.setPercentage(this.collectedCoins * 5, this.IMAGES_COINBAR); // * 10 für schnelleren Progress in Bar
     }

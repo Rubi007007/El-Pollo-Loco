@@ -8,7 +8,7 @@ class AudioHandler {
     chicken_sound = new Audio('./audio/chicken/chicken_damage_sound.mp3');
     throw_bottle_sound = new Audio('./audio/throw_bottle.mp3');
     splash_bottle_sound = new Audio('./audio/broken_glass_bottle.mp3');
-    collect_coin_sound = new Audio('./audio/collect_coin.mp3');
+    // collect_coin_sound = new Audio('./audio/collect_coin.mp3');
     collect_bottle_sound = new Audio('./audio/collect_bottle.mp3');
     out_of_bottles_sound = new Audio('./audio/out_of_bottles.mp3');
 

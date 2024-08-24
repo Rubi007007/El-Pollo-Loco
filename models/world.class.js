@@ -8,8 +8,6 @@ class World {
     backgroundObjects = level1.backgroundObjects;
     collectableBottles = level1.collectableBottles;
     collectableCoins = level1.collectableCoins;
-    collect_coin_sound = new Audio('./audio/collect_coin.mp3');
-    collect_bottle_sound = new Audio('./audio/collect_bottle.mp3');
     out_of_bottles_sound = new Audio('./audio/out_of_bottles.mp3');
     canvas;
     ctx;

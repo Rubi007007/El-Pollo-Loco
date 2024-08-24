@@ -1,6 +1,7 @@
 class StatusbarBottle extends DrawableObject {
     percentage = 100;
     collectedBottles = 0;
+    collect_bottle_sound = new Audio('./audio/collect_bottle.mp3');
 
     IMAGES_BOTTLEBAR = [
         './img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png',
@@ -22,16 +23,17 @@ class StatusbarBottle extends DrawableObject {
     }
 
     collectBottle() {
+        world.audioHandler.toggleSound(this.collect_bottle_sound);
+        world.audioHandler.toggleVolume(this.collect_bottle_sound, 0.6);
         this.collectedBottles += 1;
         this.setPercentage(this.collectedBottles * 10, this.IMAGES_BOTTLEBAR); // * 10 für schnelleren Progress in Bar
     }
 
     availableBottles() {
         if (this.collectedBottles > 0) {
-            return true
+            return true;
         } else {
-            return false
+            return false;
         }
-        
     }
 }
