@@ -21,6 +21,8 @@ class World {
     statusbarEndboss = new StatusbarEndboss();
     throwableObjects = [];
     throwPressed = false;
+    throwCooldownActive = false;
+    throwCooldownDuration = 1000;
 
     // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
     // TODO: Sounds stoppen nach Lose oder Win
@@ -76,7 +78,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.THROW && !this.throwPressed && this.statusbarBottle.availableBottles()) {
+        if (this.keyboard.THROW && !this.throwPressed && this.statusbarBottle.availableBottles() && !this.throwCooldownActive) {
             let bottle;
             
             if (!this.character.otherDirection) {
@@ -92,6 +94,12 @@ class World {
             this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10, this.statusbarBottle.IMAGES_BOTTLEBAR);
 
             this.throwPressed = true;
+
+            this.throwCooldownActive = true;
+            setTimeout(() => {
+                this.throwCooldownActive = false;
+            }, this.throwCooldownDuration);
+
         } else if (this.keyboard.THROW && !this.statusbarBottle.availableBottles()) {
             this.out_of_bottles_sound.play();
             volume(this.out_of_bottles_sound, 0.1);
