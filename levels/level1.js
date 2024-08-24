@@ -24,7 +24,10 @@ function initLevel() {
             new SmallChicken(),
         ],
         [
-            new Cloud()
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
         ],
         [
             new BackgroundObject('./img/5_background/layers/air.png', -719),
