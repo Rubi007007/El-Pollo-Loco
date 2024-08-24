@@ -19,14 +19,14 @@ class SmallChicken extends MovableObject {
         './img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
     
-    constructor() {
+    constructor(existingSmallChickens) {
         super().loadImage('./img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGE_DEAD);
         
-        this.x = 500 + Math.random() * 2000; // Zahl zwischen 300 und 1100
-        this.speed = 0.55 + Math.random() * 0.25;
-
+        // this.x = 500 + Math.random() * 2400; // Zahl zwischen 300 und 1100
+        this.speed = 0.55 + Math.random() * 1.25;
+        this.notCollidingSmallChickens(existingSmallChickens);
         this.animate();
     }
 
@@ -44,5 +44,13 @@ class SmallChicken extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);
+    }
+
+    notCollidingSmallChickens(existingSmallChickens) {
+        let isColliding;
+        do {
+            this.x = 400 + Math.random() * 2400;
+            isColliding = existingSmallChickens.some(chicken => this.isColliding(chicken));
+        } while (isColliding);
     }
 }

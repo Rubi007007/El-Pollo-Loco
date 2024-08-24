@@ -11,7 +11,7 @@ class Endboss extends MovableObject {
     type = 'Endboss';
     isEndbossDead = false;
     endbossStatus = 'alert';
-    jumpDistance = 100;
+    jumpDistance = 170;
     jumpHeight = 50;
     endboss_nearby_sound = new Audio('./audio/chicken/endboss_in_range.mp3');
     endboss_theme = new Audio('./audio/chicken/endboss_theme.mp3');
