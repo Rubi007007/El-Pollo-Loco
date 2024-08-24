@@ -32,6 +32,7 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.collisionHandler = new CollisionHandler(this);
+        this.audioHandler = new AudioHandler(this);
 
         this.draw();
         this.setWorld();

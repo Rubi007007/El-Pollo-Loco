@@ -128,8 +128,8 @@ class Character extends MovableObject {
                 this.resetIdleTimer();
 
                 if (this.walking_sound.paused) {
-                    this.walking_sound.play();
-                    volume(this.walking_sound, 0.1);
+                    this.world.audioHandler.toggleSound(this.walking_sound);
+                    this.world.audioHandler.toggleVolume(this.walking_sound, 0.1);
                 }
             }
             
@@ -140,8 +140,8 @@ class Character extends MovableObject {
                 this.resetIdleTimer();
                 
                 if (this.walking_sound.paused) {
-                    this.walking_sound.play();
-                    volume(this.walking_sound, 0.1);
+                    this.world.audioHandler.toggleSound(this.walking_sound);
+                    this.world.audioHandler.toggleVolume(this.walking_sound, 0.1);
                 }
             }
 
@@ -151,10 +151,10 @@ class Character extends MovableObject {
 
                 const jumpSound = this.JUMP_SOUNDS[this.world.playRandomSound(this.JUMP_SOUNDS)];
                 if (jumpSound.paused) {
-                    jumpSound.play();
+                    this.world.audioHandler.toggleSound(jumpSound);
                     
                     for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
-                        volume(this.JUMP_SOUNDS[i], 0.2);
+                        this.world.audioHandler.toggleVolume(this.JUMP_SOUNDS[i], 0.2);
                     }
                 }
             }
@@ -175,8 +175,8 @@ class Character extends MovableObject {
             if (!this.isMoving && !this.isDead() && !this.isHurt() && !this.isAboveGround()) {
                 if (this.longIdleActive) {
                     this.playAnimation(this.IMAGES_LONG_IDLE);
-                    this.snore_sound.play();
-                    volume(this.snore_sound, 0.9)
+                    this.world.audioHandler.toggleSound(this.snore_sound);
+                    this.world.audioHandler.toggleVolume(this.snore_sound, 0.9);
                 } else {
                     this.playAnimation(this.IMAGES_IDLE);
                 }
@@ -195,10 +195,10 @@ class Character extends MovableObject {
 
                 const hurtSound = this.HURT_SOUNDS[this.world.playRandomSound(this.HURT_SOUNDS)];
                 if (hurtSound.paused) {
-                    hurtSound.play();
-
+                    this.world.audioHandler.toggleSound(hurtSound);
+                    
                     for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
-                        volume(this.HURT_SOUNDS[i], 0.4);
+                        this.world.audioHandler.toggleVolume(this.HURT_SOUNDS[i], 0.4);
                     }
                 }
 

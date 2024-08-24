@@ -1,6 +1,6 @@
 class AudioHandler {
-    walking_sound = new Audio('./audio/walking.mp3');
-    snore_sound = new Audio('./audio/snore.mp3');
+    // walking_sound = new Audio('./audio/walking.mp3');
+    // snore_sound = new Audio('./audio/snore.mp3');
     endboss_nearby_sound = new Audio('./audio/chicken/endboss_in_range.mp3');
     endboss_theme = new Audio('./audio/chicken/endboss_theme.mp3');
     endboss_damage_sound = new Audio('./audio/chicken/endboss_damage_sound.mp3');
@@ -14,7 +14,6 @@ class AudioHandler {
 
     isMuted;
     isStopped;
-
     
     constructor(world) {
         this.world = world;
@@ -28,9 +27,11 @@ class AudioHandler {
         }
     }
 
-    stopVolume(sound) {
+    toggleSound(sound) {
         if (this.isStopped) {
             sound.pause();
+        } else if (!this.isStopped) {
+            sound.play();
         }
     }
 }
