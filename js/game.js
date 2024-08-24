@@ -62,7 +62,9 @@ function winGame() {
 
 function finishedGame() {
     game_music.pause();
-    world.endboss.endboss_theme.pause();
+    if (world.endbossSpawned) {
+        world.endboss.endboss_theme.pause();
+    }
     world.stopGame();
     removeKeyboardListeners();
 }
