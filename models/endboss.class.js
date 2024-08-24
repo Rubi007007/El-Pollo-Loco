@@ -69,11 +69,11 @@ class Endboss extends MovableObject {
         this.currentInterval = null;
         this.handleEndboss();
         game_music.pause();
-        this.endboss_nearby_sound.play();
-        volume(this.endboss_nearby_sound, 0.2);
+        this.world.audioHandler.toggleSound(this.endboss_nearby_sound);
+        this.world.audioHandler.toggleVolume(this.endboss_nearby_sound, 0.2);
         setTimeout(() => {
-            this.endboss_theme.play();
-            volume(this.endboss_theme, 0.08);
+            this.world.audioHandler.toggleSound(this.endboss_theme);
+            this.world.audioHandler.toggleVolume(this.endboss_theme, 0.08);
             this.endboss_theme.loop = true;
         }, 1800);
     }
@@ -234,8 +234,8 @@ class Endboss extends MovableObject {
         this.energy -= 20;
         this.world.statusbarEndboss.setPercentage(this.energy, world.statusbarEndboss.IMAGES_ENDBOSSBAR)
         this.checkEndbossIsDead();
-        this.endboss_damage_sound.play();
-        volume(this.endboss_damage_sound, 0.2)
+        this.world.audioHandler.toggleSound(this.endboss_damage_sound);
+        this.world.audioHandler.toggleVolume(this.endboss_damage_sound, 0.2);
         console.log(this.energy)
 
         this.currentInterval = setInterval(() => {
