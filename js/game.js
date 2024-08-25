@@ -89,13 +89,23 @@ function btnSound() {
     world.audioHandler.toggleVolume(btn_click_sound, 1);
 }
 
-function openControls() {
+function openMenu() {
     document.getElementById('menu-control').style.display = 'flex';
     document.getElementById('background-overlay').style.display = 'block';
 }
 
-function closeControls() {
+function openImpressum() {
+    document.getElementById('impressum').style.display = 'flex';
+    document.getElementById('background-overlay').style.display = 'block';
+}
+
+function closeMenu() {
     document.getElementById('menu-control').style.display = 'none';
+    document.getElementById('background-overlay').style.display = 'none';
+}
+
+function closeImpressum() {
+    document.getElementById('impressum').style.display = 'none';
     document.getElementById('background-overlay').style.display = 'none';
 }
 
