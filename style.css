@@ -115,6 +115,12 @@ body {
     cursor: pointer;
 }
 
+.assign-buttons {
+    margin-top: 24px;
+    display: flex;
+    gap: 24px;
+}
+
 .arrow-buttons {
     display: flex;
     align-items: center;
