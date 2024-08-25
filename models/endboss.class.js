@@ -196,32 +196,38 @@ class Endboss extends MovableObject {
         let jumpStepX = this.jumpDistance / jumpSteps;
         let step = 0;
     
-        this.currentInterval = setInterval(() => {
-            this.x = startX - (step * jumpStepX);
+        if (this.isEndbossDead) {
+            this.speed = 0;
+            this.jumpDuration = 0;
+            this.jumpSteps = 0;
+        } else {
+            this.currentInterval = setInterval(() => {
+                this.x = startX - (step * jumpStepX);
+        
+                if (step <= jumpSteps / 2) {
+                    // Sprung nach oben
+                    this.y = startY - (step / (jumpSteps / 2)) * this.jumpHeight;
+                } else {
+                    // Sprung nach unten
+                    this.y = startY - ((jumpSteps - step) / (jumpSteps / 2)) * this.jumpHeight;
+                }
+        
+                step++;
     
-            if (step <= jumpSteps / 2) {
-                // Sprung nach oben
-                this.y = startY - (step / (jumpSteps / 2)) * this.jumpHeight;
-            } else {
-                // Sprung nach unten
-                this.y = startY - ((jumpSteps - step) / (jumpSteps / 2)) * this.jumpHeight;
-            }
-    
-            step++;
-
-            if (this.world.character.isColliding(this)) {
-                // console.log("Collision detected during jump!");
-                this.resetPosition();
-                clearInterval(this.currentInterval);
-                return;
-            }
-    
-            if (step >= jumpSteps) {
-                clearInterval(this.currentInterval);
-                this.resetPosition();
-                // console.log(`Jump finished. Final Y: ${this.y}`);
-            }
-        }, stepDuration);
+                if (this.world.character.isColliding(this)) {
+                    // console.log("Collision detected during jump!");
+                    this.resetPosition();
+                    clearInterval(this.currentInterval);
+                    return;
+                }
+        
+                if (step >= jumpSteps) {
+                    clearInterval(this.currentInterval);
+                    this.resetPosition();
+                    // console.log(`Jump finished. Final Y: ${this.y}`);
+                }
+            }, stepDuration);
+        }
     }
 
     resetPosition() {
