@@ -12,7 +12,7 @@ class Character extends MovableObject {
     world;
     isMoving = false;
     idleTimer;
-    idleTime = 5000;
+    idleTime = 10000;
     longIdleActive = false;
     walking_sound = new Audio('./audio/walking.mp3');
     snore_sound = new Audio('./audio/snore.mp3');
@@ -195,7 +195,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 endGame();
                 clearInterval(animationInterval);
-                this.idleTime = 100000;
+                this.idleTime = 1000000;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
 

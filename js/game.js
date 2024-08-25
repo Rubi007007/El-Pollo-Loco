@@ -38,6 +38,7 @@ function restartGame() {
 // TODO: Sounds resetten, werden dauerhaft abgespielt, sobald gameOver ist
 function resetGame() {
     world.audioHandler.isStopped = false;
+    world.character.invulnerable = false;
     world.character.JUMP_SOUNDS = [];
     world.character.HURT_SOUNDS = [];
     world.character.energy = 100;
@@ -56,8 +57,11 @@ function finishedGame() {
         world.endboss.endboss_theme.pause();
     }
     // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
+    world.character.invulnerable = true;
     clearInterval(world.gameInterval);
-    cancelAnimationFrame(world.animationFrame);
+    setTimeout(() => {
+        cancelAnimationFrame(world.animationFrame);
+    }, 300);
     removeKeyboardListeners();
 }
 
