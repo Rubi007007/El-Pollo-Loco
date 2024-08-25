@@ -198,6 +198,7 @@ class Character extends MovableObject {
                 this.idleTime = 1000000;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.resetIdleTimer();
 
                 const hurtSound =
                     this.HURT_SOUNDS[

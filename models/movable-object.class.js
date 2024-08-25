@@ -54,8 +54,6 @@ class MovableObject extends DrawableObject {
             } else if (enemyType == 'Endboss') {
                 this.energy -= 40;
             }
-            
-            this.resetIdleTimer();
 
             if (this.energy < 0) {
                 this.energy = 0;
