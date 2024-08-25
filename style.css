@@ -164,7 +164,7 @@ body {
     margin: auto;
     padding: 24px;
     border-radius: 16px;
-    background-color: #F3AD58;
+    background-color: #cd9b56/*#F3AD58*/;
     width: 300px;
     display: flex;
     flex-direction: column;
