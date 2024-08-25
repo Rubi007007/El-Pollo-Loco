@@ -123,14 +123,16 @@ class MovableObject extends DrawableObject {
         let step = 0;
         const distancePerStep = bounceDistance / bounceSteps;
         
-        let bounceInterval = setInterval(() => {
-            if (step >= bounceSteps) {
-                clearInterval(bounceInterval);
-            } else {
-                this.x += direction * distancePerStep;
-                step++;
-            }
-        }, bounceSpeed);
+        if (this.x >= -356) {
+            let bounceInterval = setInterval(() => {
+                if (step >= bounceSteps) {
+                    clearInterval(bounceInterval);
+                } else {
+                    this.x += direction * distancePerStep;
+                    step++;
+                }
+            }, bounceSpeed);
+        }
     }
 
     playAnimation(images) {

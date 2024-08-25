@@ -22,8 +22,8 @@ class World {
     throwCooldownActive = false;
     throwCooldownDuration = 1000;
 
-    // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
     // TODO: Sounds stoppen nach Lose oder Win
+    // TODO: nicht nach rechts oder links aus der Welt "fallen"
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -72,7 +72,7 @@ class World {
         clearInterval(world.gameInterval);
         setTimeout(() => {
             cancelAnimationFrame(world.animationFrame);
-        }, 300);
+        }, 650);
     }
 
     checkThrowObjects() {

@@ -192,9 +192,11 @@ class Character extends MovableObject {
         // Andere Animationen (Jumping, Walking, Hurt, Dead)
         let animationInterval = setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                endGame();
                 clearInterval(animationInterval);
+                setInterval(() => {
+                    this.playAnimation(this.IMAGES_DEAD);
+                }, 100);
+                endGame();
                 this.idleTime = 1000000;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);

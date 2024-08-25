@@ -48,7 +48,7 @@ class SmallChicken extends MovableObject {
     notCollidingSmallChickens(existingSmallChickens) {
         let isColliding;
         do {
-            this.x = 400 + Math.random() * 2400;
+            this.x = 700 + Math.random() * 2000;
             isColliding = existingSmallChickens.some(chicken => this.isColliding(chicken));
         } while (isColliding);
     }

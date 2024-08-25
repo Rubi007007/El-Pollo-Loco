@@ -62,7 +62,6 @@ function finishedGame() {
     if (world.endbossSpawned) {
         world.endboss.endboss_theme.pause();
     }
-    // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
     world.character.invulnerable = true;
     world.stopGame();
     setTimeout(() => {
