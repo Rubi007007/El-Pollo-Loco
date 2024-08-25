@@ -7,7 +7,7 @@
     <link rel="icon" href="./img/10_fav/sombrero2.png" type="image/x-icon">
     <title>El Pollo Loco</title>
 </head>
-<body onload="init()">
+<body id="body" onload="init()">
     <h1 class="headline">El Pollo Loco</h1>
 
     <div id="content">
@@ -50,11 +50,55 @@
     </div>
     <div class="assign-buttons-other">
         <div class="other-buttons">
-            <button class="other-controls-btn btn">Other Controls</button>
+            <button class="other-controls-btn btn" onclick="openControls()">Other Controls</button>
             <button class="other-controls-btn btn">Impressum</button>
         </div>
     </div>
 
+    <div id="menu-control" style="display: none">
+        <h2 class="subheadline">Regular Controls <img class="underline" src="./img/11_menu/underline.png" alt=""></h2>
+        <div class="standard-control-container">
+            <div class="standard-control controls arrow">
+                <img class="arrow-btn" src="./img/11_menu/arrow_left.png">
+                <p class="key-explanation-standard">move Left</p>
+            </div>
+            <div class="standard-control controls arrow">
+                <img class="arrow-btn" src="./img/11_menu/arrow_up.png">
+                <p class="key-explanation-standard">Jump</p>
+            </div>
+            <div class="standard-control controls arrow">
+                <img class="arrow-btn" src="./img/11_menu/arrow_right.png">
+                <p class="key-explanation-standard">move Right</p>
+            </div>
+            <div class="standard-control controls other">
+                <img class="arrow-btn" src="./img/11_menu/throw.png">
+                <p class="key-explanation-standard">throw</p>
+            </div>
+        </div>
+
+        <img class="dividing-line" src="./img/11_menu/mexican_line.png" alt="">
+
+        <h2 class="subheadline">Alternative Controls <img class="underline" src="./img/11_menu/underline.png" alt=""></h2>
+        <div class="alternative-control-container">
+            <div class="alternative-control controls">
+                <img class="arrow-btn" src="./img/11_menu/a_left.png">
+                <p class="key-explanation-standard">move Left</p>
+            </div>
+            <div class="alternative-control controls">
+                <img class="arrow-btn" src="./img/11_menu/w_up.png">
+                <p class="key-explanation-standard">Jump</p>
+            </div>
+            <div class="alternative-control controls">
+                <img class="arrow-btn" src="./img/11_menu/space.png">
+                <p class="key-explanation-standard">Jump</p>
+            </div>
+            <div class="alternative-control controls">
+                <img class="arrow-btn" src="./img/11_menu/d_right.png">
+                <p class="key-explanation-standard">move Right</p>
+            </div>
+        </div>
+    </div>
+    <div id="background-overlay" style="display: none"></div>
 
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/statusbar-health.class.js"></script>

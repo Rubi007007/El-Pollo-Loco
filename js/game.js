@@ -89,6 +89,11 @@ function btnSound() {
     world.audioHandler.toggleVolume(btn_click_sound, 1);
 }
 
+function openControls() {
+    document.getElementById('menu-control').style.display = 'flex';
+    document.getElementById('background-overlay').style.display = 'block';
+}
+
 function toggleVolume() {
     let speaker = document.getElementById('speaker-btn');
     
