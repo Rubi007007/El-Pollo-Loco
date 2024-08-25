@@ -104,14 +104,14 @@ body {
     justify-content: flex-end;
     z-index: 1;
     position: absolute;
-    top: 420px;
+    top: 428px;
     right: 12px;
-    gap: 6px;
+    gap: 12px;
 }
 
 .menu-btn {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
 }
 
@@ -121,8 +121,8 @@ body {
 }
 
 .arrow-btn {
-    width: 64px;
-    height: 64px;
+    width: 32px;
+    height: 32px;
 }
 
 .key-explanation {
