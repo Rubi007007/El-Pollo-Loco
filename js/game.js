@@ -94,6 +94,11 @@ function openControls() {
     document.getElementById('background-overlay').style.display = 'block';
 }
 
+function closeControls() {
+    document.getElementById('menu-control').style.display = 'none';
+    document.getElementById('background-overlay').style.display = 'none';
+}
+
 function toggleVolume() {
     let speaker = document.getElementById('speaker-btn');
     
