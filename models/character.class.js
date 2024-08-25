@@ -238,24 +238,16 @@ class Character extends MovableObject {
     }
 
     addArraySounds() {
-        this.JUMP_SOUNDS.push(
-            new Audio('./audio/jump_sounds/1_jump.mp3'),
-            new Audio('./audio/jump_sounds/2_jump.mp3'),
-            new Audio('./audio/jump_sounds/3_jump.mp3'),
-            new Audio('./audio/jump_sounds/4_jump.mp3'),
-            new Audio('./audio/jump_sounds/5_jump.mp3'),
-            new Audio('./audio/jump_sounds/6_jump.mp3'),
-            new Audio('./audio/jump_sounds/7_jump.mp3'),
-            new Audio('./audio/jump_sounds/8_jump.mp3'),
-            new Audio('./audio/jump_sounds/9_jump.mp3'),
-            new Audio('./audio/jump_sounds/10_jump.mp3')
-        );
+        for (let i = 1; i <= 10; i++) {
+            this.JUMP_SOUNDS.push(
+                new Audio(`./audio/jump_sounds/${i}_jump.mp3`),
+            );
+        }
 
-        this.HURT_SOUNDS.push(
-            new Audio('./audio/hurt_sounds/hurt_1.mp3'),
-            new Audio('./audio/hurt_sounds/hurt_2.mp3'),
-            new Audio('./audio/hurt_sounds/hurt_3.mp3'),
-            new Audio('./audio/hurt_sounds/hurt_4.mp3')
-        );
+        for (let i = 1; i <= 4; i++) {
+            this.HURT_SOUNDS.push(
+                new Audio(`./audio/hurt_sounds/hurt_${i}.mp3`),
+            );
+        }
     }
 }
