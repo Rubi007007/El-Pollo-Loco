@@ -55,6 +55,8 @@ class MovableObject extends DrawableObject {
                 this.energy -= 40;
             }
             
+            this.resetIdleTimer();
+
             if (this.energy < 0) {
                 this.energy = 0;
             } else {
