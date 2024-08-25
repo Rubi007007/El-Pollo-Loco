@@ -16,21 +16,21 @@
             <img id="restart-btn-menu" class="menu-btn" src="./img/11_menu/restart_btn.png" onclick="toggleVolume()">
         </div>
         <div id="start-screen">
-            <button class="start-game-btn game-btn" onclick="startGame(), btnSound()">Start</button>
+            <button class="start-game-btn game-btn btn" onclick="startGame(), btnSound()">Start</button>
             <img class="start-screen-bg" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="">
         </div>
         <canvas style="display: none" id="canvas" width="720" height="480"></canvas>
         <div id="end-screen" style="display: none">
-            <button class="end-game-btn game-btn" onclick="restartGame(), btnSound()">Neustarten</button>
+            <button class="end-game-btn game-btn btn" onclick="restartGame(), btnSound()">Neustarten</button>
             <img class="end-screen-bg" src="./img/9_intro_outro_screens/game_over/game over.png" alt="">
         </div>
         <div id="win-screen" style="display: none">
-            <button class="win-game-btn game-btn" onclick="goToHomescreen(), btnSound()">Verlassen</button>
+            <button class="win-game-btn game-btn btn" onclick="goToHomescreen(), btnSound()">Verlassen</button>
             <img class="win-screen-bg" src="./img/9_intro_outro_screens/win/won_2.png" alt="">
         </div>
     </div>
     
-    <div class="assign-buttons">
+    <div class="assign-buttons-arrow">
         <div class="arrow-buttons">
             <img class="arrow-btn" src="./img/11_menu/arrow_left.png">
             <p class="key-explanation">move Left</p>
@@ -42,6 +42,16 @@
         <div class="arrow-buttons">
             <img class="arrow-btn" src="./img/11_menu/arrow_right.png">
             <p class="key-explanation">move Right</p>
+        </div>
+        <div class="other-buttons">
+            <img class="arrow-btn" src="./img/11_menu/throw.png">
+            <p class="key-explanation">throw</p>
+        </div>
+    </div>
+    <div class="assign-buttons-other">
+        <div class="other-buttons">
+            <button class="other-controls-btn btn">Other Controls</button>
+            <button class="other-controls-btn btn">Impressum</button>
         </div>
     </div>
 

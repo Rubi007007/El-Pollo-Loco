@@ -52,11 +52,7 @@ body {
     height: 480px;
 }
 
-.game-btn {
-    position: absolute;
-    top: 32px;
-    left: 50%;
-    transform: translate(-50%);
+.btn {
     margin-right: auto;
     transform: calc(-50%);
     background-image: linear-gradient(to right, #FEDD03 0%, #FEA700 51%, #FEDD03 100%);
@@ -70,7 +66,20 @@ body {
     cursor: pointer;
 }
 
-.game-btn:hover {
+.game-btn {
+    transform: translate(-50%);
+    position: absolute;
+    top: 32px;
+    left: 50%;   
+}
+
+.other-controls-btn {
+    padding: 3px 12px 8px 12px;
+    font-size: 32px;
+    margin-right: 24px;
+}
+
+.game-btn:hover, .other-controls-btn:hover {
     background-position: right center;
 }
 
@@ -115,10 +124,21 @@ body {
     cursor: pointer;
 }
 
-.assign-buttons {
+.assign-buttons-arrow {
     margin-top: 24px;
     display: flex;
     gap: 24px;
+}
+
+.assign-buttons-other {
+    margin-top: 24px;
+    display: flex;
+    gap: 24px;
+}
+
+.other-buttons {
+    display: flex;
+    align-items: center;
 }
 
 .arrow-buttons {
@@ -133,6 +153,7 @@ body {
 
 .key-explanation {
     color: #fff;
-    font-size: 24px;
-    margin-left: 24px;
+    font-size: 32px;
+    padding-bottom: 4px;
+    margin-left: 12px;
 }
