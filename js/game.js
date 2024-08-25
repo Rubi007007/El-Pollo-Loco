@@ -58,10 +58,10 @@ function finishedGame() {
     }
     // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
     world.character.invulnerable = true;
-    clearInterval(world.gameInterval);
+    world.stopGame();
     setTimeout(() => {
-        cancelAnimationFrame(world.animationFrame);
-    }, 300);
+        world.audioHandler.isStopped = true;
+    }, 200);
     removeKeyboardListeners();
 }
 
@@ -69,9 +69,6 @@ function endGame() {
     document.getElementById('end-screen').style.display = 'block';
     world.audioHandler.toggleSound(gameover_sound);
     world.audioHandler.toggleVolume(gameover_sound, 1);
-    setTimeout(() => {
-        world.audioHandler.isStopped = true;
-    }, 200);
     finishedGame();
 }
 

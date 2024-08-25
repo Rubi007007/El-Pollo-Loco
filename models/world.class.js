@@ -65,8 +65,14 @@ class World {
     checkEndbossDead() {
         if (this.endboss && this.endboss.isEndbossDead) {
             winGame();
-            this.stopGame();
         }
+    }
+
+    stopGame() {
+        clearInterval(world.gameInterval);
+        setTimeout(() => {
+            cancelAnimationFrame(world.animationFrame);
+        }, 300);
     }
 
     checkThrowObjects() {
