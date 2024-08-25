@@ -31,15 +31,15 @@ function startGame() {
 function restartGame() {
     document.getElementById('end-screen').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
-    world.audioHandler.isStopped = false;
-    world.character.JUMP_SOUNDS = [];
-    world.character.HURT_SOUNDS = [];
     resetGame();
     startGame();
 }
 
 // TODO: Sounds resetten, werden dauerhaft abgespielt, sobald gameOver ist
 function resetGame() {
+    world.audioHandler.isStopped = false;
+    world.character.JUMP_SOUNDS = [];
+    world.character.HURT_SOUNDS = [];
     world.character.energy = 100;
     world.keyboard.DOWN = false;
     world.keyboard.UP = false;
@@ -47,6 +47,18 @@ function resetGame() {
     world.keyboard.RIGHT = false;
     world.keyboard.SPACE = false;
     world.keyboard.THROW = false;
+}
+
+
+function finishedGame() {
+    game_music.pause();
+    if (world.endbossSpawned) {
+        world.endboss.endboss_theme.pause();
+    }
+    // TODO: isDead animation noch ausführen lassen, dann Spiel beenden
+    clearInterval(world.gameInterval);
+    cancelAnimationFrame(world.animationFrame);
+    removeKeyboardListeners();
 }
 
 function endGame() {
@@ -64,15 +76,6 @@ function winGame() {
     world.audioHandler.toggleSound(winning_sound);
     world.audioHandler.toggleVolume(winning_sound, 0.7);
     finishedGame();
-}
-
-function finishedGame() {
-    game_music.pause();
-    if (world.endbossSpawned) {
-        world.endboss.endboss_theme.pause();
-    }
-    world.stopGame();
-    removeKeyboardListeners();
 }
 
 function btnSound() {
