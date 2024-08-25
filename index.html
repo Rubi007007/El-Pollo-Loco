@@ -16,16 +16,16 @@
             <img id="restart-btn-menu" class="menu-btn" src="./img/11_menu/restart_btn.png" onclick="toggleVolume()">
         </div>
         <div id="start-screen">
-            <button class="start-game-btn game-btn" onclick="startGame(), btnSound()">START</button>
+            <button class="start-game-btn game-btn" onclick="startGame(), btnSound()">Start</button>
             <img class="start-screen-bg" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="">
         </div>
         <canvas style="display: none" id="canvas" width="720" height="480"></canvas>
         <div id="end-screen" style="display: none">
-            <button class="end-game-btn game-btn" onclick="restartGame(), btnSound()">NEUSTARTEN</button>
+            <button class="end-game-btn game-btn" onclick="restartGame(), btnSound()">Neustarten</button>
             <img class="end-screen-bg" src="./img/9_intro_outro_screens/game_over/game over.png" alt="">
         </div>
         <div id="win-screen" style="display: none">
-            <button class="win-game-btn game-btn" onclick="restartGame(), btnSound()">VERLASSEN</button>
+            <button class="win-game-btn game-btn" onclick="goToHomescreen(), btnSound()">Verlassen</button>
             <img class="win-screen-bg" src="./img/9_intro_outro_screens/win/won_2.png" alt="">
         </div>
     </div>

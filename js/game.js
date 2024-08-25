@@ -30,9 +30,15 @@ function startGame() {
 // TODO: wenn Game gewonnen, zum startScreen zurück
 function restartGame() {
     document.getElementById('end-screen').style.display = 'none';
-    document.getElementById('win-screen').style.display = 'none';
     resetGame();
     startGame();
+}
+
+function goToHomescreen() {
+    resetGame();
+    document.getElementById('canvas').style.display = 'none';
+    document.getElementById('win-screen').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'block';
 }
 
 // TODO: Sounds resetten, werden dauerhaft abgespielt, sobald gameOver ist
