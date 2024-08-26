@@ -23,8 +23,8 @@ class World {
     throwCooldownDuration = 1000;
 
     // TODO: Sounds stoppen nach Lose oder Win
-    // TODO: nicht nach rechts oder links aus der Welt "fallen"
     // TODO: Mobile Ansicht
+    // TODO: Vollbildmodus
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
