@@ -35,6 +35,16 @@ body {
     margin-top: 24px;
 }
 
+.fullscreen {
+    width: 100% !important;
+    height: 100vh !important;
+}
+
+.fullscreen-win-screen {
+    width: 90% !important;
+    height: 100vh !important;
+}
+
 #canvas {
     background-color: #000;
 }
@@ -66,6 +76,7 @@ body {
     background-size: 200% auto;
     border-radius: 10px;
     cursor: pointer;
+    z-index: 50;
 }
 
 .game-btn {
@@ -110,7 +121,7 @@ body {
     height: 320px;
 }
 
-.menu {
+#menu-btns {
     width: 720px;
     display: flex;
     justify-content: flex-end;
@@ -119,6 +130,13 @@ body {
     top: 428px;
     right: 12px;
     gap: 12px;
+}
+
+.menu-fullscreen-btns {
+    width: 100% !important;
+    top: 0 !important;
+    bottom: 12px;
+    align-items: flex-end;
 }
 
 .menu-btn {
@@ -251,6 +269,16 @@ body {
 
 .address {
     font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* Mobilgeräte */
+
+@media only screen and (max-width: 720px) {
+    
+}
+
+@media only screen and (max-height: 480px) {
+    
 }
 
 /* Animation */

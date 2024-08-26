@@ -25,6 +25,9 @@ class World {
     // TODO: Sounds stoppen nach Lose oder Win
     // TODO: Mobile Ansicht
     // TODO: Vollbildmodus
+    // TODO: after Win -> länger warten im Startscreen -> schnarchen ausschalten
+    // TODO: Audio im Startscreen funktioniert nicht beim 2. Mal
+    // TODO: Restartbutton funktioniert noch nicht
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');

@@ -117,7 +117,16 @@ function closeImpressum() {
 }
 
 function fullscreen() {
+    document.getElementById('canvas').classList.add('fullscreen');
+    document.getElementById('start-screen').classList.add('fullscreen');
+    document.getElementById('start-screen-bg').classList.add('fullscreen');
+    document.getElementById('win-screen').classList.add('fullscreen');
+    document.getElementById('win-screen-bg').classList.add('fullscreen-win-screen');
+    document.getElementById('end-screen').classList.add('fullscreen');
+    document.getElementById('end-screen-bg').classList.add('fullscreen');
+    document.getElementById('menu-btns').classList.add('menu-fullscreen-btns');
     document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen_exit.png';
+    document.getElementById('fullscreen-btn').setAttribute('onClick', 'exitFullscreen()' );
     let fullscreen = document.getElementById('fullscreen');
     enterFullscreen(fullscreen);
 }
@@ -131,13 +140,20 @@ function enterFullscreen(element) {
     }
 }
 
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
+document.addEventListener('fullscreenchange', function(){ 
+    if (!document.fullscreenElement) { 
+        document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen.png';
+        document.getElementById('fullscreen-btn').setAttribute('onClick', 'fullscreen()' );
+        document.getElementById('canvas').classList.remove('fullscreen');
+        document.getElementById('start-screen').classList.remove('fullscreen');
+        document.getElementById('start-screen-bg').classList.remove('fullscreen');
+        document.getElementById('win-screen').classList.remove('fullscreen');
+        document.getElementById('win-screen-bg').classList.remove('fullscreen-win-screen');
+        document.getElementById('end-screen').classList.remove('fullscreen');
+        document.getElementById('end-screen-bg').classList.remove('fullscreen');
+        document.getElementById('menu-btns').classList.remove('menu-fullscreen-btns');
     }
-}
+})
 
 function toggleVolume() {
     let speaker = document.getElementById('speaker-btn');
