@@ -271,7 +271,30 @@ body {
     font-family: Arial, Helvetica, sans-serif !important;
 }
 
+.d-none {
+    display: none;
+}
+
 /* Mobilgeräte */
+
+@media (max-width: 720px) {
+    body {
+        background-image: none;
+        background-color: #000;
+    }
+
+    #fullscreen > *, .assign-buttons-arrow, .assign-buttons-other{
+        display: none;
+    }
+
+    #landscape {
+        display: block !important;
+        color: white;
+        position: absolute;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
 
 @media only screen and (max-width: 720px) {
     
