@@ -116,46 +116,7 @@ function closeImpressum() {
     document.getElementById('background-overlay').style.display = 'none';
 }
 
-function fullscreen() {
-    document.getElementById('canvas').classList.add('fullscreen');
-    document.getElementById('start-screen').classList.add('fullscreen');
-    document.getElementById('start-screen-bg').classList.add('fullscreen');
-    document.getElementById('win-screen').classList.add('fullscreen');
-    document.getElementById('win-screen-bg').classList.add('fullscreen-win-screen');
-    document.getElementById('end-screen').classList.add('fullscreen');
-    document.getElementById('end-screen-bg').classList.add('fullscreen');
-    document.getElementById('menu-btns').classList.add('menu-fullscreen-btns');
-    document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen_exit.png';
-    document.getElementById('fullscreen-btn').setAttribute('onClick', 'exitFullscreen()' );
-    let fullscreen = document.getElementById('fullscreen');
-    enterFullscreen(fullscreen);
-}
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.webkitRequestFullscreen) {
-        // iOS Safari
-        element.webkitRequestFullscreen();
-    }
-}
-
-document.addEventListener('fullscreenchange', function(){ 
-    if (!document.fullscreenElement) { 
-        document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen.png';
-        document.getElementById('fullscreen-btn').setAttribute('onClick', 'fullscreen()' );
-        document.getElementById('canvas').classList.remove('fullscreen');
-        document.getElementById('start-screen').classList.remove('fullscreen');
-        document.getElementById('start-screen-bg').classList.remove('fullscreen');
-        document.getElementById('win-screen').classList.remove('fullscreen');
-        document.getElementById('win-screen-bg').classList.remove('fullscreen-win-screen');
-        document.getElementById('end-screen').classList.remove('fullscreen');
-        document.getElementById('end-screen-bg').classList.remove('fullscreen');
-        document.getElementById('menu-btns').classList.remove('menu-fullscreen-btns');
-    }
-})
-
-function toggleVolume() {
+function toggleVolumeBtn() {
     let speaker = document.getElementById('speaker-btn');
 
     if (!isMuted) {
@@ -165,7 +126,9 @@ function toggleVolume() {
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
         isMuted = false;
-        world.audioHandler.toggleVolume(game_music, 0.04);
+        if (world) {
+            world.audioHandler.toggleVolume(game_music, 0.04);
+        }
     }
 }
 
@@ -221,3 +184,42 @@ function handleKeyUp(e) {
         keyboard.THROW = false;
     }
 }
+
+function fullscreen() {
+    document.getElementById('canvas').classList.add('fullscreen');
+    document.getElementById('start-screen').classList.add('fullscreen');
+    document.getElementById('start-screen-bg').classList.add('fullscreen');
+    document.getElementById('win-screen').classList.add('fullscreen');
+    document.getElementById('win-screen-bg').classList.add('fullscreen-win-screen');
+    document.getElementById('end-screen').classList.add('fullscreen');
+    document.getElementById('end-screen-bg').classList.add('fullscreen');
+    document.getElementById('menu-btns').classList.add('menu-fullscreen-btns');
+    document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen_exit.png';
+    document.getElementById('fullscreen-btn').setAttribute('onClick', 'exitFullscreen()' );
+    let fullscreen = document.getElementById('fullscreen');
+    enterFullscreen(fullscreen);
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        // iOS Safari
+        element.webkitRequestFullscreen();
+    }
+}
+
+document.addEventListener('fullscreenchange', function(){ 
+    if (!document.fullscreenElement) { 
+        document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen.png';
+        document.getElementById('fullscreen-btn').setAttribute('onClick', 'fullscreen()' );
+        document.getElementById('canvas').classList.remove('fullscreen');
+        document.getElementById('start-screen').classList.remove('fullscreen');
+        document.getElementById('start-screen-bg').classList.remove('fullscreen');
+        document.getElementById('win-screen').classList.remove('fullscreen');
+        document.getElementById('win-screen-bg').classList.remove('fullscreen-win-screen');
+        document.getElementById('end-screen').classList.remove('fullscreen');
+        document.getElementById('end-screen-bg').classList.remove('fullscreen');
+        document.getElementById('menu-btns').classList.remove('menu-fullscreen-btns');
+    }
+})
