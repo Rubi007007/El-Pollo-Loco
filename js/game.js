@@ -29,9 +29,12 @@ function startGame() {
 
 // TODO: wenn Game gewonnen, zum startScreen zurück
 function restartGame() {
-    document.getElementById('end-screen').style.display = 'none';
-    resetGame();
-    startGame();
+    if (world) {
+        document.getElementById('end-screen').style.display = 'none';
+        delete World;
+        resetGame();
+        startGame();
+    }
 }
 
 function goToHomescreen() {
@@ -43,6 +46,8 @@ function goToHomescreen() {
 
 // TODO: Sounds resetten, werden dauerhaft abgespielt, sobald gameOver ist
 function resetGame() {
+    world.collectedBottles = 0;
+    world.collectedCoins = 0;
     world.audioHandler.isStopped = false;
     world.character.invulnerable = false;
     world.character.JUMP_SOUNDS = [];
