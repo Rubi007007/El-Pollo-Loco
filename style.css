@@ -25,7 +25,7 @@ body {
     /* src: url(./fonts/ZABARS/Zabars.ttf); */
 }
 
-#content {
+#fullscreen {
     display: flex;
     justify-content: center;
     align-items: center;

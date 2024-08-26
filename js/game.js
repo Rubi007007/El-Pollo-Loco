@@ -19,11 +19,11 @@ function startGame() {
     addKeyboardListeners();
     initLevel();
     world = new World(canvas, keyboard);
-    
+
     world.audioHandler.toggleSound(game_music);
     world.audioHandler.toggleVolume(game_music, 0.04);
     game_music.loop = true;
-    
+
     console.log('My Char is', world.character);
 }
 
@@ -55,7 +55,6 @@ function resetGame() {
     world.keyboard.SPACE = false;
     world.keyboard.THROW = false;
 }
-
 
 function finishedGame() {
     game_music.pause();
@@ -117,9 +116,32 @@ function closeImpressum() {
     document.getElementById('background-overlay').style.display = 'none';
 }
 
+function fullscreen() {
+    document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen_exit.png';
+    let fullscreen = document.getElementById('fullscreen');
+    enterFullscreen(fullscreen);
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        // iOS Safari
+        element.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
+
 function toggleVolume() {
     let speaker = document.getElementById('speaker-btn');
-    
+
     if (!isMuted) {
         speaker.src = './img/11_menu/speaker_volume_off.png';
         game_music.volume = 0;
@@ -127,7 +149,7 @@ function toggleVolume() {
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
         isMuted = false;
-        world.audioHandler.toggleVolume(game_music, 0.04)
+        world.audioHandler.toggleVolume(game_music, 0.04);
     }
 }
 
@@ -157,7 +179,8 @@ function handleKeyDown(e) {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) { // 70: F 13: Enter 82: R
+    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) {
+        // 70: F 13: Enter 82: R
         keyboard.THROW = true;
     }
 }
