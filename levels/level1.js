@@ -4,7 +4,6 @@ function initLevel() {
     let bottles = [];
     let coins = [];
     let enemies = [];
-    // let enemyTypes = [new Chicken, new SmallChicken];
 
     for (let i = 0; i < 10; i++) {
         let bottle = new Bottle(bottles);
@@ -16,30 +15,17 @@ function initLevel() {
         coins.push(coin);
     }
 
-    for (let i = 0; i < Math.round(5 + Math.random() + 2); i++) {
+    for (let i = 0; i < Math.round(3 + Math.random() + 2); i++) {
         let enemy = new Chicken(enemies);
         enemies.push(enemy);
     }
 
-    for (let i = 0; i < Math.round(5 + Math.random() + 2); i++) {
+    for (let i = 0; i < Math.round(1 + Math.random() + 2); i++) {
         let enemy = new SmallChicken(enemies);
         enemies.push(enemy);
     }
 
     level1 = new Level(
-        /*[
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new Chicken(),
-        ],*/
         enemies,
         [
             new Cloud(),
