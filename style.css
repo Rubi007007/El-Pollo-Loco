@@ -1,5 +1,6 @@
 * {
     font-family: Mexican;
+    font-weight: 100;
     margin: 0;
 }
 
@@ -21,6 +22,7 @@ body {
 @font-face {
     font-family: Mexican;
     src: url(./fonts/mexican-fiesta-cdnfonts/mexicanfiesta.ttf);
+    /* src: url(./fonts/ZABARS/Zabars.ttf); */
 }
 
 #content {
