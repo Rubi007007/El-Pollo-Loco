@@ -193,6 +193,7 @@ class Character extends MovableObject {
         let animationInterval = setInterval(() => {
             if (this.isDead()) {
                 clearInterval(animationInterval);
+                this.currentImage = 0;
                 setInterval(() => {
                     this.playAnimation(this.IMAGES_DEAD);
                 }, 100);

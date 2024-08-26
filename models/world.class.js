@@ -73,7 +73,7 @@ class World {
         clearInterval(world.gameInterval);
         setTimeout(() => {
             cancelAnimationFrame(world.animationFrame);
-        }, 650);
+        }, 800);
     }
 
     checkThrowObjects() {
