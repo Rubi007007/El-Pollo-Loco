@@ -60,6 +60,7 @@ function resetGame() {
     world.character.JUMP_SOUNDS = [];
     world.character.HURT_SOUNDS = [];
     world.character.energy = 100;
+    world.invulnerable = false;
     world.keyboard.DOWN = false;
     world.keyboard.UP = false;
     world.keyboard.LEFT = false;
@@ -102,8 +103,10 @@ function winGame() {
 }
 
 function btnSound() {
-    world.audioHandler.toggleSound(btn_click_sound);
-    world.audioHandler.toggleVolume(btn_click_sound, 1);
+    if (world) {
+        world.audioHandler.toggleSound(btn_click_sound);
+        world.audioHandler.toggleVolume(btn_click_sound, 1);
+    }
 }
 
 function openMenu() {

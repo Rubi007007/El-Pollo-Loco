@@ -44,7 +44,6 @@ class CollisionHandler {
 
         if (this.world.endboss) {
             if (this.world.endboss.isColliding(char)) {
-                console.log('Endboss and character collide!');
                 char.hit(this.world.endboss.type);
                 char.bounceEffectHit(this.world.endboss);
                 this.world.endboss.endbossStatus = 'attackAfterHit';
@@ -61,7 +60,6 @@ class CollisionHandler {
     
                 if (!bottle.isUsed && this.world.endboss.isColliding(bottle)) {
                     this.world.endboss.endbossHitted();
-                    console.log('Endboss hit by bottle!');
                     bottle.isUsed = true;
                     bottle.splashAnimation();
                     this.world.throwableObjects.splice(i, 1);

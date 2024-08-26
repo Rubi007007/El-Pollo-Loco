@@ -174,6 +174,7 @@ class Endboss extends MovableObject {
     dead() {
         this.clearAnimation();
         this.speed = 0;
+        this.world.invulnerable = true;
         this.resetPosition();
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_DEAD);
@@ -215,7 +216,6 @@ class Endboss extends MovableObject {
                 step++;
     
                 if (this.world.character.isColliding(this)) {
-                    // console.log("Collision detected during jump!");
                     this.resetPosition();
                     clearInterval(this.currentInterval);
                     return;
@@ -224,7 +224,6 @@ class Endboss extends MovableObject {
                 if (step >= jumpSteps) {
                     clearInterval(this.currentInterval);
                     this.resetPosition();
-                    // console.log(`Jump finished. Final Y: ${this.y}`);
                 }
             }, stepDuration);
         }
@@ -242,7 +241,6 @@ class Endboss extends MovableObject {
         this.checkEndbossIsDead();
         this.world.audioHandler.toggleSound(this.endboss_damage_sound);
         this.world.audioHandler.toggleVolume(this.endboss_damage_sound, 0.2);
-        console.log(this.energy)
 
         this.currentInterval = setInterval(() => {
             this.endbossStatus = 'hurt';
