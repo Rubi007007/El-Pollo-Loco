@@ -26,7 +26,7 @@ class World {
     // TODO: Mobile Ansicht
     // TODO: Vollbildmodus
     // TODO: after Win -> länger warten im Startscreen -> schnarchen ausschalten
-    // TODO: Restartbutton funktioniert noch nicht
+    // TODO: Restartbutton funktioniert noch nicht richtig -> vorheriges Spiel läuft weiter im Hintergrund
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');

@@ -102,10 +102,6 @@ class Character extends MovableObject {
         setInterval(() => {
             this.isMoving = false;
 
-            // if (!this.invulnerable) {  // Nur die Kamera aktualisieren, wenn kein Bounce-Effekt aktiv ist
-            //     this.world.camera_x = -this.x + 100;
-            // }
-
             if (
                 this.world.keyboard.RIGHT &&
                 this.x < this.world.level.level_end_x &&

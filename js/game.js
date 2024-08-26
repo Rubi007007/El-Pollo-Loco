@@ -31,7 +31,6 @@ function startGame() {
 function restartGame() {
     if (world) {
         document.getElementById('end-screen').style.display = 'none';
-        delete World;
         resetGame();
         startGame();
     }
