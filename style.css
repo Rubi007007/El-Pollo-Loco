@@ -265,7 +265,7 @@ body {
 
 @keyframes slideIn {
     from {
-        transform: translateX(100vw);
+        transform: translateX(-100vw);
     }
 
     to {
