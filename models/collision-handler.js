@@ -42,7 +42,6 @@ class CollisionHandler {
             }
         });
 
-        // Endboss Kollisionen TODO: Hitbox passt noch nicht ganz
         if (this.world.endboss) {
             if (this.world.endboss.isColliding(char)) {
                 console.log('Endboss and character collide!');
@@ -65,10 +64,7 @@ class CollisionHandler {
                     console.log('Endboss hit by bottle!');
                     bottle.isUsed = true;
                     bottle.splashAnimation();
-                    // TODO: Hier soll eigentlich die Flasche erst nach 600ms gelöscht werden, damit die Splashanimation voll durchlaufen kann.
-                    // setTimeout(() => {
-                        this.world.throwableObjects.splice(i, 1);
-                    // }, 600);
+                    this.world.throwableObjects.splice(i, 1);
                     break;
                 }
             }
