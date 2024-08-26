@@ -4,7 +4,7 @@ let keyboard = new Keyboard();
 let isMuted;
 let btn_click_sound = new Audio('./audio/btn_click.mp3');
 let game_music = new Audio('./audio/game_music.mp3');
-let start_screen_music = new Audio('./audio/start_screen_music.mp3');
+// let start_screen_music = new Audio('./audio/start_screen_music.mp3');
 let gameover_sound = new Audio('./audio/game_over.mp3');
 let winning_sound = new Audio('./audio/winning_sound.mp3');
 
@@ -15,7 +15,7 @@ function init() {
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-    start_screen_music.pause();
+    // start_screen_music.pause();
     addKeyboardListeners();
     initLevel();
     world = new World(canvas, keyboard);
@@ -27,12 +27,20 @@ function startGame() {
     console.log('My Char is', world.character);
 }
 
-// TODO: wenn Game gewonnen, zum startScreen zurück
 function restartGame() {
     if (world) {
         document.getElementById('end-screen').style.display = 'none';
         resetGame();
         startGame();
+    }
+}
+
+function restartGameButton() {
+    if (world) {
+        clearInterval(world.gameInterval);
+        cancelAnimationFrame(world.animationFrame);
+        resetGame();
+        setTimeout(() => {startGame()}, 100);
     }
 }
 
@@ -58,12 +66,18 @@ function resetGame() {
     world.keyboard.RIGHT = false;
     world.keyboard.SPACE = false;
     world.keyboard.THROW = false;
+
+    game_music.currentTime = 0;
+    game_music.pause();
+    world = null;
+    document.getElementById('canvas').style.display = 'none';
 }
 
 function finishedGame() {
     game_music.pause();
     if (world.endbossSpawned) {
         world.endboss.endboss_theme.pause();
+        world.endboss.endboss_theme.currentTime = 0;
     }
     world.character.invulnerable = true;
     world.stopGame();

@@ -26,7 +26,9 @@ class World {
     // TODO: Mobile Ansicht
     // TODO: Vollbildmodus
     // TODO: after Win -> länger warten im Startscreen -> schnarchen ausschalten
-    // TODO: Restartbutton funktioniert noch nicht richtig -> vorheriges Spiel läuft weiter im Hintergrund
+    // TODO: FIXME: VERMUTLICH NUN GEFIXED Restartbutton funktioniert noch nicht richtig -> vorheriges Spiel läuft weiter im Hintergrund
+
+    // FIXME: Restart button Cooldown einfügen!
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -73,9 +75,11 @@ class World {
 
     stopGame() {
         clearInterval(world.gameInterval);
-        setTimeout(() => {
-            cancelAnimationFrame(world.animationFrame);
-        }, 800);
+        if (this.animationFrame) {
+            setTimeout(() => {
+                cancelAnimationFrame(this.animationFrame);
+            }, 800);
+        }
     }
 
     checkThrowObjects() {
