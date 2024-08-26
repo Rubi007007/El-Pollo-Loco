@@ -90,22 +90,30 @@ function btnSound() {
 }
 
 function openMenu() {
+    document.getElementById('menu-control').classList.remove('closing');
     document.getElementById('menu-control').style.display = 'flex';
     document.getElementById('background-overlay').style.display = 'block';
 }
 
 function openImpressum() {
+    document.getElementById('impressum').classList.remove('closing');
     document.getElementById('impressum').style.display = 'flex';
     document.getElementById('background-overlay').style.display = 'block';
 }
 
 function closeMenu() {
-    document.getElementById('menu-control').style.display = 'none';
+    document.getElementById('menu-control').classList.add('closing');
+    setTimeout(() => {
+        document.getElementById('menu-control').style.display = 'none';
+    }, 300);
     document.getElementById('background-overlay').style.display = 'none';
 }
 
 function closeImpressum() {
-    document.getElementById('impressum').style.display = 'none';
+    document.getElementById('impressum').classList.add('closing');
+    setTimeout(() => {
+        document.getElementById('impressum').style.display = 'none';
+    }, 300);
     document.getElementById('background-overlay').style.display = 'none';
 }
 
