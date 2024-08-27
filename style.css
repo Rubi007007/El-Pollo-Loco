@@ -1,6 +1,5 @@
 * {
     font-family: Mexican;
-    font-weight: 100;
     margin: 0;
 }
 
@@ -10,7 +9,9 @@ body {
     align-items: center;
     justify-content: center;
     background-image: url('./img/11_menu/background_v2.png');
-    background-position-y: -200px;
+    background-size: cover; /* Hintergrundbild skalieren */
+    background-position: center; /* Bild zentrieren */
+    /* background-position-y: -200px; */
     width: 100%;
     height: 100vh;
 }
@@ -22,7 +23,6 @@ body {
 @font-face {
     font-family: Mexican;
     src: url(./fonts/mexican-fiesta-cdnfonts/mexicanfiesta.ttf);
-    /* src: url(./fonts/ZABARS/Zabars.ttf); */
 }
 
 #fullscreen {
@@ -310,7 +310,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 720px) and (max-height: 480px)/*(orientation: landscape)*/{
+@media only screen and (max-width: 1000px) and (max-height: 480px)/*(orientation: landscape)*/{
     #fullscreen, #fullscreen > *, #start-screen-bg {
         width: 100%;
         height: 100vh;
@@ -352,21 +352,16 @@ body {
         display: none;
     }
 
-    #menu-btns {
-        display: none;
-    }
-
     #landscape {
         display: none;
     }
 
     #menu-btns {
         display: flex;
-        width: 84px;
-        height: 366px;
+        justify-content: center;
+        align-items: flex-end;
         top: 0;
         right: unset;
-        align-items: flex-end;
         z-index: 51;
     }
 
