@@ -39,6 +39,8 @@ function restartGameButton() {
     if (world) {
         clearInterval(world.gameInterval);
         cancelAnimationFrame(world.animationFrame);
+        document.getElementById('win-screen').style.display = 'none';
+        document.getElementById('end-screen').style.display = 'none';
         resetGame();
         setTimeout(() => {startGame()}, 100);
     }
