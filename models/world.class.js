@@ -22,13 +22,9 @@ class World {
     throwCooldownActive = false;
     throwCooldownDuration = 1000;
 
-    // TODO: Sounds stoppen nach Lose oder Win
-    // TODO: Mobile Ansicht
-    // TODO: Vollbildmodus
     // TODO: after Win -> länger warten im Startscreen -> schnarchen ausschalten
-    // TODO: FIXME: VERMUTLICH NUN GEFIXED Restartbutton funktioniert noch nicht richtig -> vorheriges Spiel läuft weiter im Hintergrund
-
-    // FIXME: Restart button Cooldown einfügen!
+    // TODO: Mobile -> buttons müssen drückbar sein (z-index), beide überlappen! (Evtl. beide in einen Container?)
+    // TODO: Keyboard in keyboard.class.js implementieren
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
