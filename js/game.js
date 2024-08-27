@@ -141,13 +141,16 @@ function closeImpressum() {
 
 function toggleVolumeBtn() {
     let speaker = document.getElementById('speaker-btn');
+    let speakerMobile = document.getElementById('speaker-btn-mobile');
 
     if (!isMuted) {
         speaker.src = './img/11_menu/speaker_volume_off.png';
+        speakerMobile.src = './img/11_menu/speaker_volume_off.png';
         game_music.volume = 0;
         isMuted = true;
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
+        speakerMobile.src = './img/11_menu/speaker_volume_on.png';
         isMuted = false;
         if (world) {
             world.audioHandler.toggleVolume(game_music, 0.04);
