@@ -22,8 +22,6 @@ class World {
     throwCooldownActive = false;
     throwCooldownDuration = 1000;
 
-    // TODO: Keyboard in keyboard.class.js implementieren
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
