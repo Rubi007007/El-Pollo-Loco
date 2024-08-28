@@ -5,7 +5,6 @@ let isMuted;
 let gameIsOver;
 let btn_click_sound = new Audio('./audio/btn_click.mp3');
 let game_music = new Audio('./audio/game_music.mp3');
-let start_screen_music = new Audio('./audio/start_screen_music.mp3');
 let gameover_sound = new Audio('./audio/game_over.mp3');
 let winning_sound = new Audio('./audio/winning_sound.mp3');
 
@@ -14,7 +13,6 @@ let winning_sound = new Audio('./audio/winning_sound.mp3');
  */
 function init() {
     canvas = document.getElementById('canvas');
-    handleStartscreenMusic();
 }
 
 /**
@@ -24,7 +22,6 @@ function init() {
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
-    start_screen_music.pause();
     addKeyboardListeners();
     initLevel();
     world = new World(canvas, keyboard);
@@ -68,7 +65,6 @@ function restartGameButton() {
  */
 function goToHomescreen() {
     gameIsOver = true;
-    handleStartscreenMusic();
     resetGame();
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
@@ -158,18 +154,6 @@ function btnSound() {
 }
 
 /**
- * Handles the start screen music, playing it if the game is not muted.
- */
-function handleStartscreenMusic() {
-    if (!isMuted) {
-        start_screen_music.play();
-        start_screen_music.volume = 0.1;
-        start_screen_music.loop = true;
-        start_screen_music.currentTime = 0;
-    }
-}
-
-/**
  * Opens the menu by making the menu elements visible and removing any closing animations.
  */
 function openMenu() {
@@ -217,23 +201,16 @@ function closeImpressum() {
 function toggleVolumeBtn() {
     let speaker = document.getElementById('speaker-btn');
     let speakerMobile = document.getElementById('speaker-btn-mobile');
-    let startScreen = document.getElementById('start-screen').style.display;
 
     if (!isMuted) {
         speaker.src = './img/11_menu/speaker_volume_off.png';
         speakerMobile.src = './img/11_menu/speaker_volume_off.png';
-        if (startScreen == 'block') {
-            start_screen_music.pause();
-        }
         game_music.volume = 0;
         isMuted = true;
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
         speakerMobile.src = './img/11_menu/speaker_volume_on.png';
         isMuted = false;
-        if (startScreen == 'block') {
-            start_screen_music.play();
-        }
         if (world) {
             world.audioHandler.toggleVolume(game_music, 0.04);
         }
