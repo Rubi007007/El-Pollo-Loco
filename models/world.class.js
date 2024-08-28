@@ -115,7 +115,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
 
-        this.ctx.translate(-this.camera_x, 0); // - Kamera -> verschiebt die Statusbar nicht
+        this.ctx.translate(-this.camera_x, 0);
         // ----- Space for fixed Objects ----- //
         this.addToMap(this.statusbarHealth);
         this.addToMap(this.statusbarCoin);
@@ -123,7 +123,8 @@ class World {
         if (this.endbossSpawned) {
             this.addToMap(this.statusbarEndboss);
         }
-        this.ctx.translate(this.camera_x, 0); // hier wieder aufgehoben
+        // ----- Space for fixed Objects ----- //
+        this.ctx.translate(this.camera_x, 0);
         
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.collectableBottles);
@@ -133,8 +134,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
 
-        // Draw() wird immer wieder aufgerufen
-        let self = this; // this wird innerhalb der u.a. Funktion nicht erkannt
+        let self = this;
         this.animationFrame = requestAnimationFrame(function() {
             self.draw();
         })

@@ -98,7 +98,6 @@ class Character extends MovableObject {
     animate() {
         this.resetIdleTimer();
 
-        // Bewegung und Interaktionen
         setInterval(() => {
             this.isMoving = false;
 
@@ -172,7 +171,6 @@ class Character extends MovableObject {
     }
 
     startAnimationIntervals() {
-        // Idle und Long Idle Animationen
         setInterval(() => {
             if (
                 !this.isMoving &&
@@ -189,7 +187,6 @@ class Character extends MovableObject {
             }
         }, 200);
 
-        // Andere Animationen (Jumping, Walking, Hurt, Dead)
         let animationInterval = setInterval(() => {
             if (this.isDead()) {
                 clearInterval(animationInterval);

@@ -9,6 +9,9 @@ let start_screen_music = new Audio('./audio/start_screen_music.mp3');
 let gameover_sound = new Audio('./audio/game_over.mp3');
 let winning_sound = new Audio('./audio/winning_sound.mp3');
 
+/**
+ * Initializes the game by setting up the canvas and handling the start screen music.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     handleStartscreenMusic();
@@ -56,7 +59,6 @@ function goToHomescreen() {
     document.getElementById('start-screen').style.display = 'block';
 }
 
-// TODO: Sounds resetten, werden dauerhaft abgespielt, sobald gameOver ist
 function resetGame() {
     world.collectedBottles = 0;
     world.collectedCoins = 0;
@@ -252,7 +254,6 @@ function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.webkitRequestFullscreen) {
-        // iOS Safari
         element.webkitRequestFullscreen();
     }
 }

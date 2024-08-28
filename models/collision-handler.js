@@ -25,7 +25,6 @@ class CollisionHandler {
                 );
             }
 
-            // for Schleife dafür, dass jede Flasche nur einen Gegner töten kann.
             for (let i = 0; i < this.world.throwableObjects.length; i++) {
                 let bottle = this.world.throwableObjects[i];
 
@@ -53,8 +52,7 @@ class CollisionHandler {
                     this.world.statusbarHealth.IMAGES_HEALTHBAR
                 );
             }
-    
-            // Überprüfe Kollisionen der Flaschen mit dem Endboss
+
             for (let i = 0; i < this.world.throwableObjects.length; i++) {
                 let bottle = this.world.throwableObjects[i];
     

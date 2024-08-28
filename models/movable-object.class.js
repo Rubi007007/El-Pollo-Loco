@@ -25,7 +25,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { // throwable Objects should always fall
+        if (this instanceof ThrowableObject) {
             return true;
         } else {
             return this.y < 150;
@@ -37,7 +37,6 @@ class MovableObject extends DrawableObject {
         return this.speedY < 0 && this.isAboveGround();
     }
 
-    // character.isColliding(chicken);
     isColliding(obj) {
         return this.x + this.offsetX < obj.x + obj.width &&
            this.x + this.offsetX + this.hitboxWidth > obj.x &&
@@ -69,8 +68,8 @@ class MovableObject extends DrawableObject {
     }
 
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; // Difference in ms
-        timePassed = timePassed / 1000; // Difference in s
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
         return timePassed < 1
     }
 
@@ -115,11 +114,11 @@ class MovableObject extends DrawableObject {
     }
 
     bounceEffectHit(enemy) {
-        const bounceDistance = 150;  // Gesamte Distanz für den Bounce-Effekt
-        const bounceSpeed = 15;      // Geschwindigkeit der Bewegung (je kleiner, desto langsamer)
-        const bounceSteps = 25;      // Anzahl der Schritte für den Bounce-Effekt
+        const bounceDistance = 150;
+        const bounceSpeed = 15;
+        const bounceSteps = 25;
         
-        let direction = this.x < enemy.x ? -1 : 1;  // Wenn der Gegner rechts ist, bounce nach links, sonst nach rechts
+        let direction = this.x < enemy.x ? -1 : 1;
         let step = 0;
         const distancePerStep = bounceDistance / bounceSteps;
         

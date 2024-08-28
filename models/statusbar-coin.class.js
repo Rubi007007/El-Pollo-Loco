@@ -26,6 +26,6 @@ class StatusbarCoin extends DrawableObject {
         world.audioHandler.toggleSound(this.collect_coin_sound);
         world.audioHandler.toggleVolume(this.collect_coin_sound, 0.6);
         this.collectedCoins += 1;
-        this.setPercentage(this.collectedCoins * 5, this.IMAGES_COINBAR); // * 10 für schnelleren Progress in Bar
+        this.setPercentage(this.collectedCoins * 5, this.IMAGES_COINBAR);
     }
 }

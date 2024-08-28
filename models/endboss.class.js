@@ -1,5 +1,4 @@
 class Endboss extends MovableObject {
-
     width = 400;
     height = 400;
     y = 55;
@@ -180,7 +179,6 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_DEAD);
         }, 200);
         
-        // TODO: Endboss kann Character nach Tot noch treffen -> deaktivieren
         setTimeout(() => {
             this.isEndbossDead = true;
         }, 1000);
@@ -206,10 +204,8 @@ class Endboss extends MovableObject {
                 this.x = startX - (step * jumpStepX);
         
                 if (step <= jumpSteps / 2) {
-                    // Sprung nach oben
                     this.y = startY - (step / (jumpSteps / 2)) * this.jumpHeight;
                 } else {
-                    // Sprung nach unten
                     this.y = startY - ((jumpSteps - step) / (jumpSteps / 2)) * this.jumpHeight;
                 }
         

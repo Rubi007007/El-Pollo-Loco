@@ -26,7 +26,7 @@ class StatusbarBottle extends DrawableObject {
         world.audioHandler.toggleSound(this.collect_bottle_sound);
         world.audioHandler.toggleVolume(this.collect_bottle_sound, 0.6);
         this.collectedBottles += 1;
-        this.setPercentage(this.collectedBottles * 10, this.IMAGES_BOTTLEBAR); // * 10 für schnelleren Progress in Bar
+        this.setPercentage(this.collectedBottles * 10, this.IMAGES_BOTTLEBAR);
     }
 
     availableBottles() {
