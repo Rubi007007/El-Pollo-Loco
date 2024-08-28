@@ -1,3 +1,7 @@
+/**
+ * Represents the Endboss character in the game.
+ * @extends MovableObject
+ */
 class Endboss extends MovableObject {
     width = 400;
     height = 400;
@@ -77,6 +81,9 @@ class Endboss extends MovableObject {
         }, 1800);
     }
 
+    /**
+     * Clears any ongoing animation intervals.
+     */
     clearAnimation() {
         if (this.currentInterval) {
             clearInterval(this.currentInterval);
@@ -84,6 +91,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Handles the alert state of the Endboss.
+     */
     alert() {
         this.clearAnimation();
         this.resetPosition();
@@ -100,6 +110,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Handles the walking state of the Endboss.
+     */
     walk() {
         this.clearAnimation();
         this.speed = 2.15;
@@ -118,6 +131,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Handles the attack state of the Endboss.
+     */
     attack() {
         this.clearAnimation();
         this.speed = 0;
@@ -137,6 +153,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Handles the attack state after being hit by the player.
+     */
     attackAfterHit() {
         this.clearAnimation();
         this.speed = 0;
@@ -153,6 +172,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Handles the attack state after taking damage.
+     */
     attackAfterDamage() {
         this.clearAnimation();
         this.speed = 80;
@@ -170,6 +192,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Handles the death state of the Endboss.
+     */
     dead() {
         this.clearAnimation();
         this.speed = 0;
@@ -184,6 +209,9 @@ class Endboss extends MovableObject {
         }, 1000);
     }
 
+    /**
+     * Makes the Endboss jump.
+     */
     endbossJump() {
         this.clearAnimation();
     
@@ -225,10 +253,16 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Resets the Endboss's Y position.
+     */
     resetPosition() {
         this.y = 55;
     }
 
+    /**
+     * Handles the Endboss being hit.
+     */
     endbossHitted() {
         this.clearAnimation();
         this.resetPosition();
@@ -251,6 +285,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Checks if the Endboss is dead and updates status.
+     */
     checkEndbossIsDead() {
         if (this.energy > 0) {
             return
@@ -260,6 +297,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Handles the Endboss's state and behavior.
+     */
     handleEndboss() {
         this.clearAnimation();
 
@@ -287,5 +327,4 @@ class Endboss extends MovableObject {
                 break;
         }
     }
-    
 }
