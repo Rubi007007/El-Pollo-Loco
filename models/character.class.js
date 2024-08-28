@@ -21,6 +21,7 @@ class Character extends MovableObject {
     idleTimer;
     idleTime = 10000;
     longIdleActive = false;
+    lastY = this.y;
     walking_sound = new Audio('./audio/walking.mp3');
     snore_sound = new Audio('./audio/snore.mp3');
     JUMP_SOUNDS = [];
@@ -35,16 +36,19 @@ class Character extends MovableObject {
         './img/2_character_pepe/2_walk/W-26.png',
     ];
 
-    IMAGES_JUMPING = [
-        './img/2_character_pepe/3_jump/J-31.png',
-        './img/2_character_pepe/3_jump/J-32.png',
+    IMAGES_JUMP_UP = [
+        // './img/2_character_pepe/3_jump/J-31.png',
+        // './img/2_character_pepe/3_jump/J-32.png',
         './img/2_character_pepe/3_jump/J-33.png',
         './img/2_character_pepe/3_jump/J-34.png',
         './img/2_character_pepe/3_jump/J-35.png',
+    ];
+
+    IMAGES_JUMP_DOWN = [
         './img/2_character_pepe/3_jump/J-36.png',
         './img/2_character_pepe/3_jump/J-37.png',
         './img/2_character_pepe/3_jump/J-38.png',
-        './img/2_character_pepe/3_jump/J-39.png',
+        // './img/2_character_pepe/3_jump/J-39.png',
     ];
 
     IMAGES_DEAD = [
@@ -92,7 +96,8 @@ class Character extends MovableObject {
     constructor() {
         super().loadImage('./img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_JUMP_UP);
+        this.loadImages(this.IMAGES_JUMP_DOWN);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_IDLE);
@@ -186,6 +191,8 @@ class Character extends MovableObject {
      * Handles idle animations, hurt animations, death animations, and more.
      */
     startAnimationIntervals() {
+        this.startJumpAnimation();
+
         setInterval(() => {
             if (
                 !this.isMoving &&
@@ -231,12 +238,26 @@ class Character extends MovableObject {
                         }
                     }
                 }
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else if (this.isMoving) {
+            } else if (this.isMoving && !this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 50);
+    }
+
+    /**
+     * Startet die Sprunganimationen (hoch und runter) mit einem separaten Intervall.
+     */
+    startJumpAnimation() {
+        this.jumpAnimationInterval = setInterval(() => {
+            if (this.isAboveGround()) {
+                if (this.y < this.lastY) {
+                    this.playAnimation(this.IMAGES_JUMP_UP);
+                } else {
+                    this.playAnimation(this.IMAGES_JUMP_DOWN);
+                }
+                this.lastY = this.y;
+            }
+        }, 150);
     }
 
     /**
