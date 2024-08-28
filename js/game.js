@@ -41,6 +41,7 @@ function startGame() {
  */
 function restartGame() {
     if (world) {
+        document.getElementById('win-screen').style.display = 'none';
         document.getElementById('end-screen').style.display = 'none';
         resetGame();
         startGame();
@@ -71,6 +72,7 @@ function goToHomescreen() {
     resetGame();
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
+    document.getElementById('end-screen').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
 }
 

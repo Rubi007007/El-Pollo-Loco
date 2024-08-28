@@ -10,8 +10,6 @@
 <body id="body" onload="init()">
     <h1 class="headline">El Pollo Loco</h1>
 
-    <!-- TODO: goToHomescreen Button bei Loose einfügen -->
-    <!-- TODO: Restart Button bei Win einfügen -->
     <!-- TODO: Console.logs entfernen -->
     <!-- TODO: Impressum erweitern durch externen Link entfernen -->
     <div id="fullscreen">
@@ -40,10 +38,12 @@
         </div>
         <canvas style="display: none" id="canvas" width="720" height="480"></canvas>
         <div id="end-screen" style="display: none">
-            <button class="end-game-btn game-btn btn" onclick="restartGame(), btnSound()">Neustarten</button>
+            <button class="end-game-btn game-btn second-btn btn" onclick="restartGame(), btnSound()">Neustarten</button>
+            <button class="end-game-btn game-btn btn" onclick="goToHomescreen(), btnSound()">Verlassen</button>
             <img id="end-screen-bg" class="end-screen-bg" src="./img/9_intro_outro_screens/game_over/game over.png" alt="">
         </div>
         <div id="win-screen" style="display: none">
+            <button class="restart-win-game-btn game-btn second-btn btn" onclick="restartGame(), btnSound()">Neustarten</button>
             <button class="win-game-btn game-btn btn" onclick="goToHomescreen(), btnSound()">Verlassen</button>
             <img id="win-screen-bg" class="win-screen-bg" src="./img/9_intro_outro_screens/win/won_2.png" alt="">
         </div>

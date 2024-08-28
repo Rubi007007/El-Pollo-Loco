@@ -82,8 +82,16 @@ body {
     transform: translate(-50%);
     position: absolute;
     top: 32px;
-    left: 50%;
+    left: 65%;
     z-index: 60;
+}
+
+.start-game-btn {
+    left: 50% !important;
+}
+
+.second-btn {
+    left: 35% !important;
 }
 
 .other-controls-btn {
