@@ -99,7 +99,7 @@ class Endboss extends MovableObject {
         this.resetPosition();
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
-        }, 200);
+        }, 170); // von 200 auf 170 //TODO: hier weiter machen -> Alertanimation und Walkanimation nun flüssiger dargestellt und Jump nicht mehr implementiert
 
         if (this.endbossStatus != 'hurt') {
             setTimeout(() => {
@@ -120,7 +120,7 @@ class Endboss extends MovableObject {
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
             this.moveLeft();
-        }, 200);
+        }, 120); // von 200 auf 120
 
         if (this.endbossStatus != 'hurt') {
             setTimeout(() => {
@@ -139,9 +139,6 @@ class Endboss extends MovableObject {
         this.speed = 0;
         this.resetPosition();
         this.currentInterval = setInterval(() => {
-            if (this.x >= 1500) {
-                this.endbossJump();
-            }
             this.playAnimation(this.IMAGES_ATTACK);
         }, 200);
         
@@ -154,7 +151,7 @@ class Endboss extends MovableObject {
     }
 
     /**
-     * Handles the attack state after being hit by the player.
+     * Handles the attack state after hitting the player.
      */
     attackAfterHit() {
         this.clearAnimation();
@@ -212,7 +209,7 @@ class Endboss extends MovableObject {
     /**
      * Makes the Endboss jump.
      */
-    endbossJump() {
+    /*endbossJump() {
         this.clearAnimation();
     
         let jumpDuration = 600;
@@ -251,7 +248,7 @@ class Endboss extends MovableObject {
                 }
             }, stepDuration);
         }
-    }
+    }*/
 
     /**
      * Resets the Endboss's Y position.
