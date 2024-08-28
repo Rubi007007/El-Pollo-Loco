@@ -176,7 +176,6 @@ class Character extends MovableObject {
         setInterval(() => {
             if (
                 !this.isMoving &&
-                !this.isDead() &&
                 !this.isHurt() &&
                 !this.isAboveGround()
             ) {
@@ -199,7 +198,7 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_DEAD);
                 }, 100);
                 endGame();
-                this.idleTime = 1000000;
+                this.idleTime = 9999999;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.resetIdleTimer();
@@ -236,10 +235,12 @@ class Character extends MovableObject {
         this.longIdleActive = false;
         this.snore_sound.pause();
 
-        this.idleTimer = setTimeout(() => {
-            this.longIdleActive = true;
-            this.idleTimer = null;
-        }, this.idleTime);
+        if (!gameIsWon && !this.isDead()) {
+            this.idleTimer = setTimeout(() => {
+                this.longIdleActive = true;
+                this.idleTimer = null;
+            }, this.idleTime);
+        }
     }
 
     addArraySounds() {

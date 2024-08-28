@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let isMuted;
+let gameIsWon;
 let btn_click_sound = new Audio('./audio/btn_click.mp3');
 let game_music = new Audio('./audio/game_music.mp3');
 let start_screen_music = new Audio('./audio/start_screen_music.mp3');
@@ -10,6 +11,7 @@ let winning_sound = new Audio('./audio/winning_sound.mp3');
 
 function init() {
     canvas = document.getElementById('canvas');
+    handleStartscreenMusic();
     // TODO: audio einbinden, sodass isMuted funktioniert
 }
 
@@ -48,12 +50,11 @@ function restartGameButton() {
 }
 
 function goToHomescreen() {
+    handleStartscreenMusic();
     resetGame();
     document.getElementById('canvas').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
-    world.audioHandler.toggleSound(start_screen_music);
-    world.audioHandler.toggleVolume(start_screen_music, 0.1)
 }
 
 // TODO: Sounds resetten, werden dauerhaft abgespielt, sobald gameOver ist
@@ -65,6 +66,8 @@ function resetGame() {
     world.character.JUMP_SOUNDS = [];
     world.character.HURT_SOUNDS = [];
     world.character.energy = 100;
+    world.character.resetIdleTimer();
+    
     world.invulnerable = false;
     world.keyboard.DOWN = false;
     world.keyboard.UP = false;
@@ -73,6 +76,7 @@ function resetGame() {
     world.keyboard.SPACE = false;
     world.keyboard.THROW = false;
 
+    gameIsWon = null;
     game_music.currentTime = 0;
     game_music.pause();
     world = null;
@@ -104,13 +108,23 @@ function winGame() {
     document.getElementById('win-screen').style.display = 'block';
     world.audioHandler.toggleSound(winning_sound);
     world.audioHandler.toggleVolume(winning_sound, 0.7);
+    gameIsWon = true;
     finishedGame();
 }
 
 function btnSound() {
-    if (world) {
+    if (world && !isMuted) {
         world.audioHandler.toggleSound(btn_click_sound);
         world.audioHandler.toggleVolume(btn_click_sound, 1);
+    }
+}
+
+function handleStartscreenMusic() {
+    if (!isMuted) {
+        start_screen_music.play();
+        start_screen_music.volume = 0.1;
+        start_screen_music.loop = true;
+        start_screen_music.currentTime = 0;
     }
 }
 
@@ -145,16 +159,23 @@ function closeImpressum() {
 function toggleVolumeBtn() {
     let speaker = document.getElementById('speaker-btn');
     let speakerMobile = document.getElementById('speaker-btn-mobile');
+    let startScreen = document.getElementById('start-screen').style.display;
 
     if (!isMuted) {
         speaker.src = './img/11_menu/speaker_volume_off.png';
         speakerMobile.src = './img/11_menu/speaker_volume_off.png';
+        if (startScreen == 'block') {
+            start_screen_music.pause();
+        }
         game_music.volume = 0;
         isMuted = true;
     } else if (isMuted) {
         speaker.src = './img/11_menu/speaker_volume_on.png';
         speakerMobile.src = './img/11_menu/speaker_volume_on.png';
         isMuted = false;
+        if (startScreen == 'block') {
+            start_screen_music.play();
+        }
         if (world) {
             world.audioHandler.toggleVolume(game_music, 0.04);
         }
