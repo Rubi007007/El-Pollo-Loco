@@ -207,8 +207,7 @@ function handleKeyDown(e) {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
     }
-    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) {
-        // 70: F 13: Enter 82: R
+    if (e.keyCode == 70) {
         keyboard.THROW = true;
     }
 }
@@ -229,7 +228,7 @@ function handleKeyUp(e) {
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
     }
-    if (e.keyCode == 70 || e.keyCode == 13 || e.keyCode == 82) {
+    if (e.keyCode == 70) {
         keyboard.THROW = false;
     }
 }
