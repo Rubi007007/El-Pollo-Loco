@@ -251,7 +251,7 @@ class Character extends MovableObject {
         this.longIdleActive = false;
         this.snore_sound.pause();
 
-        if (!gameIsWon && !this.isDead()) {
+        if (!gameIsOver && !this.isDead()) {
             this.idleTimer = setTimeout(() => {
                 this.longIdleActive = true;
                 this.idleTimer = null;

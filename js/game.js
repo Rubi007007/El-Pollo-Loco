@@ -2,7 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let isMuted;
-let gameIsWon;
+let gameIsOver;
 let btn_click_sound = new Audio('./audio/btn_click.mp3');
 let game_music = new Audio('./audio/game_music.mp3');
 let start_screen_music = new Audio('./audio/start_screen_music.mp3');
@@ -96,7 +96,7 @@ function resetGame() {
     world.keyboard.SPACE = false;
     world.keyboard.THROW = false;
 
-    gameIsWon = null;
+    gameIsOver = null;
     game_music.currentTime = 0;
     game_music.pause();
     world = null;
@@ -129,6 +129,7 @@ function endGame() {
     document.getElementById('end-screen').style.display = 'block';
     world.audioHandler.toggleSound(gameover_sound);
     world.audioHandler.toggleVolume(gameover_sound, 1);
+    gameIsOver = true;
     finishedGame();
 }
 
@@ -140,7 +141,7 @@ function winGame() {
     document.getElementById('win-screen').style.display = 'block';
     world.audioHandler.toggleSound(winning_sound);
     world.audioHandler.toggleVolume(winning_sound, 0.7);
-    gameIsWon = true;
+    gameIsOver = true;
     finishedGame();
 }
 
