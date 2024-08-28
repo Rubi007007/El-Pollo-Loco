@@ -22,8 +22,6 @@ class World {
     throwCooldownActive = false;
     throwCooldownDuration = 1000;
 
-    // TODO: after Win -> länger warten im Startscreen -> schnarchen ausschalten
-    // TODO: Mobile -> buttons müssen drückbar sein (z-index), beide überlappen! (Evtl. beide in einen Container?)
     // TODO: Keyboard in keyboard.class.js implementieren
 
     constructor(canvas, keyboard) {

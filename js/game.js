@@ -12,7 +12,6 @@ let winning_sound = new Audio('./audio/winning_sound.mp3');
 function init() {
     canvas = document.getElementById('canvas');
     handleStartscreenMusic();
-    // TODO: audio einbinden, sodass isMuted funktioniert
 }
 
 function startGame() {
