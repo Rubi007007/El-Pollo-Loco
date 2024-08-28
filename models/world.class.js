@@ -152,7 +152,7 @@ class World {
         }
 
         mO.draw(this.ctx);
-        mO.drawCollisionFrame(this.ctx);
+        // mO.drawCollisionFrame(this.ctx);
 
         if (mO.otherDirection) {
             this.flipImageBack(mO);
