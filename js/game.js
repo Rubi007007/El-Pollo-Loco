@@ -40,6 +40,7 @@ function startGame() {
  * Restarts the game by resetting the game state and calling the `startGame` function.
  */
 function restartGame() {
+
     if (world) {
         document.getElementById('win-screen').style.display = 'none';
         document.getElementById('end-screen').style.display = 'none';
@@ -68,6 +69,7 @@ function restartGameButton() {
  * shows the start screen while hiding other elements.
  */
 function goToHomescreen() {
+    gameIsOver = true;
     handleStartscreenMusic();
     resetGame();
     document.getElementById('canvas').style.display = 'none';
