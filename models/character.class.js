@@ -9,10 +9,10 @@ class Character extends MovableObject {
     height = 280;
     width = 140;
 
-    offsetX = 15;
-    offsetY = 100;
-    hitboxWidth = this.width - 45;
-    hitboxHeight = this.height - 112;
+    offsetX = 28;
+    offsetY = 120;
+    hitboxWidth = this.width - 70;
+    hitboxHeight = this.height - 140;
 
     y = 150;
     speed = 7;

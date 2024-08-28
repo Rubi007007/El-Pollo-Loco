@@ -7,8 +7,8 @@ class SmallChicken extends MovableObject {
     height = 60;
     width = 60;
     offsetY = 0;
-    offsetX = 0;
-    hitboxWidth = this.width;
+    offsetX = 7;
+    hitboxWidth = this.width - 12;
     hitboxHeight = this.height;
     type = 'SmallChicken';
     isDead = false;

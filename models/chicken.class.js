@@ -9,8 +9,8 @@ class Chicken extends MovableObject {
     height = 79;
     width = 79;
     offsetY = 0;
-    offsetX = 0;
-    hitboxWidth = this.width;
+    offsetX = 7;
+    hitboxWidth = this.width - 7;
     hitboxHeight = this.height;
     type = 'Chicken';
     isDead = false;
