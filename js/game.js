@@ -17,6 +17,10 @@ function init() {
     handleStartscreenMusic();
 }
 
+/**
+ * Starts the game by hiding the start screen, showing the canvas, adding keyboard listeners, 
+ * initializing the level, and starting game music.
+ */
 function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
@@ -32,6 +36,9 @@ function startGame() {
     console.log('My Char is', world.character);
 }
 
+/**
+ * Restarts the game by resetting the game state and calling the `startGame` function.
+ */
 function restartGame() {
     if (world) {
         document.getElementById('end-screen').style.display = 'none';
@@ -40,6 +47,10 @@ function restartGame() {
     }
 }
 
+/**
+ * Restarts the game through a button click, clearing intervals and animations, 
+ * and resetting the game with a slight delay.
+ */
 function restartGameButton() {
     if (world) {
         clearInterval(world.gameInterval);
@@ -51,6 +62,10 @@ function restartGameButton() {
     }
 }
 
+/**
+ * Navigates to the home screen, handles the start screen music, resets the game, and 
+ * shows the start screen while hiding other elements.
+ */
 function goToHomescreen() {
     handleStartscreenMusic();
     resetGame();
@@ -59,6 +74,10 @@ function goToHomescreen() {
     document.getElementById('start-screen').style.display = 'block';
 }
 
+/**
+ * Resets the game state, including character properties, keyboard input states, and music. 
+ * Hides the canvas and resets the world object.
+ */
 function resetGame() {
     world.collectedBottles = 0;
     world.collectedCoins = 0;
@@ -84,6 +103,10 @@ function resetGame() {
     document.getElementById('canvas').style.display = 'none';
 }
 
+/**
+ * Stops the game and handles the game music and boss music. 
+ * Makes the character invulnerable and stops the game processes.
+ */
 function finishedGame() {
     game_music.pause();
     if (world.endbossSpawned) {
@@ -98,6 +121,10 @@ function finishedGame() {
     removeKeyboardListeners();
 }
 
+/**
+ * Ends the game, shows the end screen, plays the game over sound, 
+ * and calls the `finishedGame` function to stop the game.
+ */
 function endGame() {
     document.getElementById('end-screen').style.display = 'block';
     world.audioHandler.toggleSound(gameover_sound);
@@ -105,6 +132,10 @@ function endGame() {
     finishedGame();
 }
 
+/**
+ * Handles winning the game, shows the win screen, plays the winning sound, 
+ * and calls the `finishedGame` function to stop the game.
+ */
 function winGame() {
     document.getElementById('win-screen').style.display = 'block';
     world.audioHandler.toggleSound(winning_sound);
@@ -113,6 +144,9 @@ function winGame() {
     finishedGame();
 }
 
+/**
+ * Plays a button click sound when the game is not muted.
+ */
 function btnSound() {
     if (world && !isMuted) {
         world.audioHandler.toggleSound(btn_click_sound);
@@ -120,6 +154,9 @@ function btnSound() {
     }
 }
 
+/**
+ * Handles the start screen music, playing it if the game is not muted.
+ */
 function handleStartscreenMusic() {
     if (!isMuted) {
         start_screen_music.play();
@@ -129,18 +166,28 @@ function handleStartscreenMusic() {
     }
 }
 
+/**
+ * Opens the menu by making the menu elements visible and removing any closing animations.
+ */
 function openMenu() {
     document.getElementById('menu-control').classList.remove('closing');
     document.getElementById('menu-control').style.display = 'flex';
     document.getElementById('background-overlay').style.display = 'block';
 }
 
+/**
+ * Opens the impressum (legal notice) by making it visible and removing any closing animations.
+ */
 function openImpressum() {
     document.getElementById('impressum').classList.remove('closing');
     document.getElementById('impressum').style.display = 'flex';
     document.getElementById('background-overlay').style.display = 'block';
 }
 
+/**
+ * Closes the menu by adding a closing animation, hiding the menu after a delay, 
+ * and hiding the background overlay.
+ */
 function closeMenu() {
     document.getElementById('menu-control').classList.add('closing');
     setTimeout(() => {
@@ -149,6 +196,10 @@ function closeMenu() {
     document.getElementById('background-overlay').style.display = 'none';
 }
 
+/**
+ * Closes the impressum by adding a closing animation, hiding it after a delay, 
+ * and hiding the background overlay.
+ */
 function closeImpressum() {
     document.getElementById('impressum').classList.add('closing');
     setTimeout(() => {
@@ -157,6 +208,9 @@ function closeImpressum() {
     document.getElementById('background-overlay').style.display = 'none';
 }
 
+/**
+ * Toggles the volume button state and handles muting or unmuting the game music.
+ */
 function toggleVolumeBtn() {
     let speaker = document.getElementById('speaker-btn');
     let speakerMobile = document.getElementById('speaker-btn-mobile');
@@ -183,16 +237,26 @@ function toggleVolumeBtn() {
     }
 }
 
+/**
+ * Adds event listeners for keyboard input (keydown and keyup events).
+ */
 function addKeyboardListeners() {
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 }
 
+/**
+ * Removes event listeners for keyboard input (keydown and keyup events).
+ */
 function removeKeyboardListeners() {
     window.removeEventListener('keydown', handleKeyDown);
     window.removeEventListener('keyup', handleKeyUp);
 }
 
+/**
+ * Handles keydown events and updates the keyboard input state accordingly.
+ * @param {KeyboardEvent} e - The keydown event.
+ */
 function handleKeyDown(e) {
     if (e.keyCode == 39 || e.keyCode == 68) {
         keyboard.RIGHT = true;
@@ -214,6 +278,10 @@ function handleKeyDown(e) {
     }
 }
 
+/**
+ * Handles keyup events and updates the keyboard input state accordingly.
+ * @param {KeyboardEvent} e - The keyup event.
+ */
 function handleKeyUp(e) {
     if (e.keyCode == 39 || e.keyCode == 68) {
         keyboard.RIGHT = false;
@@ -235,6 +303,9 @@ function handleKeyUp(e) {
     }
 }
 
+/**
+ * Enters fullscreen mode by adjusting the CSS classes and updating the fullscreen button.
+ */
 function fullscreen() {
     document.getElementById('canvas').classList.add('fullscreen');
     document.getElementById('start-screen').classList.add('fullscreen');
@@ -250,6 +321,10 @@ function fullscreen() {
     enterFullscreen(fullscreen);
 }
 
+/**
+ * Requests fullscreen mode for the specified element.
+ * @param {HTMLElement} element - The element to be displayed in fullscreen mode.
+ */
 function enterFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
@@ -258,6 +333,10 @@ function enterFullscreen(element) {
     }
 }
 
+/**
+ * Handles the change in fullscreen state and updates the UI elements 
+ * based on whether the fullscreen mode is active or not.
+ */
 document.addEventListener('fullscreenchange', function(){ 
     if (!document.fullscreenElement) { 
         document.getElementById('fullscreen-btn').src = './img/11_menu/fullscreen.png';
