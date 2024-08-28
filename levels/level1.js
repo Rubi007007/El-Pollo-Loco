@@ -1,5 +1,10 @@
 let level1;
 
+/**
+ * Initializes the level by creating arrays of bottles, coins, and enemies. 
+ * It populates these arrays with instances of `Bottle`, `Coin`, `Chicken`, and `SmallChicken`.
+ * Also, sets up background objects and clouds to create the level environment.
+ */
 function initLevel() {
     let bottles = [];
     let coins = [];
