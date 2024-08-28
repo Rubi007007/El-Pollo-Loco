@@ -15,7 +15,7 @@ function initLevel() {
         bottles.push(bottle);
     }
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 10; i++) {
         let coin = new Coin(coins);
         coins.push(coin);
     }
