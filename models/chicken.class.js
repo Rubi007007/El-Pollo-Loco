@@ -1,3 +1,9 @@
+/**
+ * Represents a Chicken enemy in the game, which is a movable object.
+ * Chickens move left on the screen and can switch between walking and dead states.
+ * @class
+ * @extends MovableObject
+ */
 class Chicken extends MovableObject {
     y = 343;
     height = 79;
@@ -29,6 +35,10 @@ class Chicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Handles the chicken's animation and movement. 
+     * Moves the chicken left continuously if not dead and switches animations between walking and dead states.
+     */
     animate() {
         setInterval(() => {
             if (!this.isDead) {
@@ -45,6 +55,11 @@ class Chicken extends MovableObject {
         }, 200);
     }
 
+    /**
+     * Places the chicken at a random x-coordinate without colliding with other chickens.
+     * Ensures that newly created chickens do not overlap with existing ones.
+     * @param {Array} existingChickens - Array of existing chickens to check for collisions.
+     */
     notCollidingChickens(existingChickens) {
         let isColliding;
         do {
