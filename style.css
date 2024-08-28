@@ -201,6 +201,17 @@ body {
     animation: slideIn 300ms both;
 }
 
+.menu-container-privacy {
+    position: relative !important;
+}
+
+.body-privacy {
+    height: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    flex-direction: row !important;
+}
+
 .closing {
     animation: slideOut 300ms forwards !important;
 }
@@ -277,6 +288,69 @@ body {
 
 .address {
     font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.external-link {
+    margin-top: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+#privacy-police {
+    width: auto;
+    max-width: 60%;
+}
+
+.privacy-police-external {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.whole-text > *, .list > *, a, .privacy-police {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.head {
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.paraHead {
+    margin-top: 12px;
+}
+
+.subheader {
+    font-size: 27px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.subSubheader {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.textHeader {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.list {
+    margin: 8px 0 12px 24px;
+}
+
+.list>li {
+    font-size: 14px;
+}
+
+.source {
+    margin-top: 12px;
 }
 
 .d-none {

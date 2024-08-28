@@ -35,18 +35,18 @@
         </div>
         <div id="start-screen" style="display: block">
             <button class="start-game-btn game-btn btn" onclick="startGame(), btnSound()">Start</button>
-            <img id="start-screen-bg" class="start-screen-bg" src="./img/9_intro_outro_screens/start/startscreen_2.png" alt="">
+            <img id="start-screen-bg" class="start-screen-bg" src="./img/9_intro_outro_screens/start/startscreen_2.png">
         </div>
         <canvas style="display: none" id="canvas" width="720" height="480"></canvas>
         <div id="end-screen" style="display: none">
             <button class="end-game-btn game-btn second-btn btn" onclick="restartGame(), btnSound()">Neustarten</button>
             <button class="end-game-btn game-btn btn" onclick="goToHomescreen(), btnSound()">Verlassen</button>
-            <img id="end-screen-bg" class="end-screen-bg" src="./img/9_intro_outro_screens/game_over/game over.png" alt="">
+            <img id="end-screen-bg" class="end-screen-bg" src="./img/9_intro_outro_screens/game_over/game over.png">
         </div>
         <div id="win-screen" style="display: none">
             <button class="restart-win-game-btn game-btn second-btn btn" onclick="restartGame(), btnSound()">Neustarten</button>
             <button class="win-game-btn game-btn btn" onclick="goToHomescreen(), btnSound()">Verlassen</button>
-            <img id="win-screen-bg" class="win-screen-bg" src="./img/9_intro_outro_screens/win/won_2.png" alt="">
+            <img id="win-screen-bg" class="win-screen-bg" src="./img/9_intro_outro_screens/win/won_2.png">
         </div>
     </div>
     
@@ -71,7 +71,7 @@
     <div class="assign-buttons-other">
         <div class="other-buttons">
             <button class="other-controls-btn btn" onclick="openMenu()">Other Controls</button>
-            <button class="other-controls-btn btn" onclick="openImpressum()">Impressum</button>
+            <button class="other-controls-btn btn" onclick="openImpressum()">Rechtliches</button>
         </div>
     </div>
 
@@ -79,7 +79,7 @@
     <!-- MENU -->
     <div id="menu-control" class="menu-container" style="display: none">
         <div class="close-menu" onclick="closeMenu()">X</div>
-        <h2 class="subheadline">Regular Controls<img class="underline" src="./img/11_menu/underline.png" alt=""></h2>
+        <h2 class="subheadline">Regular Controls<img class="underline" src="./img/11_menu/underline.png"></h2>
         <div class="standard-control-container">
             <div class="standard-control controls arrow">
                 <img class="arrow-btn" src="./img/11_menu/arrow_left.png">
@@ -99,9 +99,9 @@
             </div>
         </div>
 
-        <img class="dividing-line" src="./img/11_menu/mexican_line.png" alt="">
+        <img class="dividing-line" src="./img/11_menu/mexican_line.png">
 
-        <h2 class="subheadline">Alternative Controls<img class="underline" src="./img/11_menu/underline.png" alt=""></h2>
+        <h2 class="subheadline">Alternative Controls<img class="underline" src="./img/11_menu/underline.png"></h2>
         <div class="alternative-control-container">
             <div class="alternative-control controls">
                 <img class="arrow-btn" src="./img/11_menu/a_left.png">
@@ -125,24 +125,30 @@
     <!-- IMPRESSUM -->
     <div id="impressum" class="menu-container" style="display: none">
         <div class="close-menu" onclick="closeImpressum()">X</div>
-        <h2 class="subheadline subheadline-impressum">Impressum<img class="underline" src="./img/11_menu/underline.png" alt=""></h2>
+        <h2 class="subheadline subheadline-impressum">Impressum<img class="underline" src="./img/11_menu/underline.png"></h2>
         
         <h3 class="subheadline-address">Adresse</h3>
         <p class="address">Ruben Julius Schmittel</p>
         <p class="address">Am Köppel 33</p>
         <p class="address">57072 Siegen</p>
 
-        <img class="dividing-line" src="./img/11_menu/mexican_line.png" alt="">
+        <img class="dividing-line" src="./img/11_menu/mexican_line.png">
         
         <h3 class="subheadline-address">Kontakt</h3>
         <p class="address">Telefon: +49 171 / 56473139</p>
         <p class="address">E-Mail: ruschmittel@gmx.de</p>
 
-        <img class="dividing-line" src="./img/11_menu/mexican_line.png" alt="">
+        <img class="dividing-line" src="./img/11_menu/mexican_line.png">
         <h3 class="subheadline-address">Redaktionell<br>verantwortlich</h3>
         <p class="address">Ruben Julius Schmittel</p>
         <p class="address">Am Köppel 33</p>
         <p class="address">57072 Siegen</p>
+
+        <img class="dividing-line" src="./img/11_menu/mexican_line.png">
+        <div class="privacy-police-external">
+            <p class="privacy-police">Hier geht es zur Datenschutzerklärung:</p>
+            <a href="./privacy-police.html" target="_blank"><img class="external-link" src="./img/11_menu/arrow_external_link.png"></a>
+        </div>
     </div>
 
     <div id="landscape" class="d-none">
