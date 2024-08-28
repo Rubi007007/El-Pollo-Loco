@@ -1,3 +1,10 @@
+/**
+ * Represents the main character in the game, which is a movable object.
+ * The character has various states such as walking, jumping, being idle, hurt, or dead.
+ * It responds to user input and plays different animations and sounds.
+ * @class
+ * @extends MovableObject
+ */
 class Character extends MovableObject {
     height = 280;
     width = 140;
@@ -95,6 +102,10 @@ class Character extends MovableObject {
         this.addArraySounds();
     }
 
+    /**
+     * Handles the character's movement, animation, and sound based on user input.
+     * Animates the character based on its state (e.g., walking, jumping, idle).
+     */
     animate() {
         this.resetIdleTimer();
 
@@ -170,6 +181,10 @@ class Character extends MovableObject {
         this.startAnimationIntervals();
     }
 
+    /**
+     * Starts various animation intervals to update the character's state and appearance.
+     * Handles idle animations, hurt animations, death animations, and more.
+     */
     startAnimationIntervals() {
         setInterval(() => {
             if (
@@ -224,6 +239,10 @@ class Character extends MovableObject {
         }, 50);
     }
 
+    /**
+     * Resets the idle timer and stops the long idle animation if the character is moving.
+     * Initiates the long idle animation after a specified idle time.
+     */
     resetIdleTimer() {
         if (this.idleTimer) {
             clearTimeout(this.idleTimer);
@@ -240,6 +259,9 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Loads all jump and hurt sounds into respective arrays for use in the game.
+     */
     addArraySounds() {
         for (let i = 1; i <= 10; i++) {
             this.JUMP_SOUNDS.push(
