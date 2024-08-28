@@ -1,3 +1,7 @@
+/**
+ * Represents the status bar for the endboss's health in the game, extending from the `DrawableObject` class.
+ * Displays the endboss's health as a percentage and updates the status bar accordingly.
+ */
 class StatusbarEndboss extends DrawableObject {
     percentage = 100;
 

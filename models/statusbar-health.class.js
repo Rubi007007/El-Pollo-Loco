@@ -1,3 +1,7 @@
+/**
+ * Represents the status bar for the player's health in the game, extending from the `DrawableObject` class.
+ * Displays the player's health as a percentage and updates the status bar accordingly.
+ */
 class StatusbarHealth extends DrawableObject {
     percentage = 100;
 

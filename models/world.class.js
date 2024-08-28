@@ -1,3 +1,7 @@
+/**
+ * Manages the game world, including the character, enemies, background, and status bars.
+ * Handles game logic such as spawning enemies, throwing objects, and collision detection.
+ */
 class World {
     character = new Character();
     level = level1;
@@ -34,10 +38,16 @@ class World {
         this.run();
     }
 
+    /**
+     * Sets the world reference for the character and initializes the game loop.
+     */
     setWorld() {
         this.character.world = this;
     };
 
+    /**
+     * Starts the game loop, which periodically checks for collisions, throw objects, and endboss state.
+     */
     run() {
         this.gameInterval = setInterval(() => {
             this.collisionHandler.checkCollisions();
@@ -47,24 +57,36 @@ class World {
         }, 25);
     }
 
+    /**
+     * Spawns the endboss and adds it to the level's enemies list.
+     */
     spawnEndboss() {
         this.endboss = new Endboss(this);
         this.level.enemies.push(this.endboss);
         this.endbossSpawned = true;
     }
 
+    /**
+     * Checks if the endboss should be spawned based on the character's position.
+     */
     checkEndbossSpawn() {
         if (!this.endbossSpawned && this.character.x >= 2420) {
             this.spawnEndboss();
         }
     }
 
+    /**
+     * Checks if the endboss is dead and triggers the win condition if true.
+     */
     checkEndbossDead() {
         if (this.endboss && this.endboss.isEndbossDead) {
             winGame();
         }
     }
 
+    /**
+     * Stops the game by clearing the game interval and canceling any ongoing animations.
+     */
     stopGame() {
         clearInterval(world.gameInterval);
         if (this.animationFrame) {
@@ -74,6 +96,10 @@ class World {
         }
     }
 
+    /**
+     * Checks if a throw action is initiated, handles the creation and throwing of a throwable object,
+     * and manages the throw cooldown.
+     */
     checkThrowObjects() {
         if (this.keyboard.THROW && !this.throwPressed && this.statusbarBottle.availableBottles() && !this.throwCooldownActive) {
             let bottle;
@@ -108,6 +134,9 @@ class World {
         }
     }
 
+    /**
+     * Draws all game objects to the canvas, including background, character, status bars, and throwable objects.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -140,12 +169,22 @@ class World {
         })
     }
 
+    /**
+     * Adds multiple objects to the canvas map for rendering.
+     * 
+     * @param {Array} objects - The array of objects to add to the map.
+     */
     addObjectsToMap(objects) {
         objects.forEach(obj => {
             this.addToMap(obj);
         });
     }
 
+    /**
+     * Adds a single object to the canvas map for rendering, handling its direction if necessary.
+     * 
+     * @param {DrawableObject} mO - The object to add to the map.
+     */
     addToMap(mO) {
         if (mO.otherDirection) {
             this.flipImage(mO);
@@ -159,6 +198,11 @@ class World {
         }
     }
 
+    /**
+     * Flips the image of an object horizontally for rendering, useful for objects moving in the opposite direction.
+     * 
+     * @param {DrawableObject} mO - The object whose image will be flipped.
+     */
     flipImage(mO) {
         this.ctx.save();
         this.ctx.translate(mO.width, 0);
@@ -166,11 +210,22 @@ class World {
         mO.x = mO.x * -1;
     }
 
+    /**
+     * Restores the canvas context after an image has been flipped.
+     * 
+     * @param {DrawableObject} mO - The object whose image was flipped.
+     */
     flipImageBack(mO) {
         mO.x = mO.x * -1;
         this.ctx.restore();
     }
 
+    /**
+     * Plays a random sound from a given array of sounds.
+     * 
+     * @param {Array} array - The array of sound file paths.
+     * @returns {number} - The index of the randomly selected sound.
+     */
     playRandomSound(array) {
         return Math.round(Math.random() * (array.length - 1))
     }

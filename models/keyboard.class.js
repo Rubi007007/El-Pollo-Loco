@@ -1,3 +1,6 @@
+/**
+ * Represents the state of the keyboard inputs, specifically for mobile button interactions.
+ */
 class Keyboard {
     LEFT = false;
     RIGHT = false;
@@ -10,6 +13,10 @@ class Keyboard {
         this.btnPressEventsMobile();
     }
 
+    /**
+     * Registers event listeners for touch events on mobile directional buttons and action buttons. 
+     * Updates the corresponding state properties (e.g., LEFT, RIGHT, UP) based on user interaction.
+     */
     btnPressEventsMobile() {
         document.getElementById('arrow-btn-left-mobile').addEventListener('touchstart', (e) => {
             e.preventDefault();

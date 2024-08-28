@@ -1,3 +1,7 @@
+/**
+ * Represents a movable object in the game, extending from the `DrawableObject` class. 
+ * Handles movement, gravity, collisions, and interactions with other entities.
+ */
 class MovableObject extends DrawableObject {
     speed = 0.15;
     speedY = 0;
@@ -10,7 +14,10 @@ class MovableObject extends DrawableObject {
     small_chicken_sound = new Audio('./audio/chicken/small_chicken_damage_sound.mp3');
     chicken_sound = new Audio('./audio/chicken/chicken_damage_sound.mp3');
 
-
+    /**
+     * Applies gravity to the object by continuously updating its vertical position 
+     * and speed based on its acceleration. Ensures that the object remains above the ground.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -24,6 +31,11 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * Determines if the object is above the ground level.
+     * 
+     * @returns {boolean} - True if the object is above ground, or always true for throwable objects.
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true;
@@ -33,10 +45,21 @@ class MovableObject extends DrawableObject {
         
     }
 
+    /**
+     * Checks if the object is currently falling based on its vertical speed and ground position.
+     * 
+     * @returns {boolean} - True if the object is falling, false otherwise.
+     */
     isFalling() {
         return this.speedY < 0 && this.isAboveGround();
     }
 
+    /**
+     * Determines if this object is colliding with another object.
+     * 
+     * @param {Object} obj - The object to check collision with.
+     * @returns {boolean} - True if a collision is detected, false otherwise.
+     */
     isColliding(obj) {
         return this.x + this.offsetX < obj.x + obj.width &&
            this.x + this.offsetX + this.hitboxWidth > obj.x &&
@@ -44,6 +67,12 @@ class MovableObject extends DrawableObject {
            this.y + this.offsetY + this.hitboxHeight > obj.y;
     }
 
+    /**
+     * Handles the hit event when the object is attacked by an enemy. 
+     * Reduces the object's energy based on the enemy type and makes the object temporarily invulnerable.
+     * 
+     * @param {string} enemyType - The type of enemy (e.g., 'Chicken', 'SmallChicken', 'Endboss').
+     */
     hit(enemyType) {
         if (!this.invulnerable) {
             if (enemyType == 'Chicken') {
@@ -67,28 +96,52 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Checks if the object is currently hurt (i.e., hit within the last second).
+     * 
+     * @returns {boolean} - True if the object was hurt recently, false otherwise.
+     */
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;
         return timePassed < 1
     }
 
+    /**
+     * Checks if the object is dead (i.e., has no energy left).
+     * 
+     * @returns {boolean} - True if the object is dead, false otherwise.
+     */
     isDead() {
         return this.energy == 0;
     }
 
+    /**
+     * Moves the object to the right by increasing its x-coordinate based on its speed.
+     */
     moveRight() {
         this.x += this.speed;
     }
 
+    /**
+     * Moves the object to the left by decreasing its x-coordinate based on its speed.
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+    /**
+     * Makes the object jump by setting its vertical speed to a fixed value.
+     */
     jump() {
         this.speedY = 21;
     }
 
+    /**
+     * Handles the logic to kill an enemy, removes the enemy from the level after a delay.
+     * 
+     * @param {Object} enemy - The enemy to be killed.
+     */
     killEnemy(enemy) {
         let index = this.world.level.enemies.indexOf(enemy);
         this.enemyDies(enemy);
@@ -100,6 +153,11 @@ class MovableObject extends DrawableObject {
         }, 400);
     }
 
+    /**
+     * Triggers the death animation and sound for the enemy.
+     * 
+     * @param {Object} enemy - The enemy that dies.
+     */
     enemyDies(enemy) {
         enemy.isDead = true;
         enemy.animate();
@@ -113,6 +171,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Applies a bounce effect when the object hits an enemy, pushing the object away from the enemy.
+     * 
+     * @param {Object} enemy - The enemy that was hit.
+     */
     bounceEffectHit(enemy) {
         const bounceDistance = 150;
         const bounceSpeed = 15;
@@ -134,6 +197,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Plays a sequence of images to animate the object.
+     * 
+     * @param {Array} images - The array of image paths to be used in the animation.
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];

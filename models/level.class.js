@@ -1,3 +1,6 @@
+/**
+ * Represents a level in the game, containing all relevant entities such as enemies, clouds, background objects, and collectable items.
+ */
 class Level {
     enemies;
     clouds;

@@ -1,3 +1,7 @@
+/**
+ * Represents a small chicken enemy in the game, extending from the `MovableObject` class. 
+ * Handles movement, animation, and positioning to avoid collisions with other small chickens.
+ */
 class SmallChicken extends MovableObject {
     y = 360;
     height = 60;
@@ -29,6 +33,9 @@ class SmallChicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Animates the small chicken by moving it left when alive and switching between walking and dead animations based on its state.
+     */
     animate() {
         setInterval(() => {
             if (!this.isDead) {
@@ -45,6 +52,11 @@ class SmallChicken extends MovableObject {
         }, 200);
     }
 
+    /**
+     * Ensures that the new small chicken does not spawn in a position that collides with other existing small chickens.
+     * 
+     * @param {Array} existingSmallChickens - The array of existing small chickens to check for collisions.
+     */
     notCollidingSmallChickens(existingSmallChickens) {
         let isColliding;
         do {

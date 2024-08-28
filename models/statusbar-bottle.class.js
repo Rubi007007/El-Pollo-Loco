@@ -1,3 +1,7 @@
+/**
+ * Represents the status bar for collected bottles in the game, extending from the `DrawableObject` class.
+ * Tracks the number of collected bottles and updates the status bar display accordingly.
+ */
 class StatusbarBottle extends DrawableObject {
     percentage = 100;
     collectedBottles = 0;
@@ -22,6 +26,10 @@ class StatusbarBottle extends DrawableObject {
         this.setPercentage(this.collectedBottles, this.IMAGES_BOTTLEBAR);
     }
 
+    /**
+     * Updates the status bar when a bottle is collected, plays the collection sound, 
+     * and increments the collected bottles count.
+     */
     collectBottle() {
         world.audioHandler.toggleSound(this.collect_bottle_sound);
         world.audioHandler.toggleVolume(this.collect_bottle_sound, 0.6);
@@ -29,6 +37,11 @@ class StatusbarBottle extends DrawableObject {
         this.setPercentage(this.collectedBottles * 10, this.IMAGES_BOTTLEBAR);
     }
 
+    /**
+     * Checks if there are any collected bottles available.
+     * 
+     * @returns {boolean} - True if there is at least one collected bottle, false otherwise.
+     */
     availableBottles() {
         if (this.collectedBottles > 0) {
             return true;

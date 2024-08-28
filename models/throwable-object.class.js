@@ -1,3 +1,7 @@
+/**
+ * Represents a throwable object, specifically a bottle, in the game, extending from the `MovableObject` class.
+ * Handles the logic for throwing the bottle, playing animations, and managing the splash effect upon impact.
+ */
 class ThrowableObject extends MovableObject {
 
     throw_bottle_sound = new Audio('./audio/throw_bottle.mp3');
@@ -33,6 +37,10 @@ class ThrowableObject extends MovableObject {
         this.world.audioHandler.toggleVolume(this.throw_bottle_sound, 0.4);
     }
 
+    /**
+     * Handles the logic for throwing the bottle to the right, applying gravity, 
+     * animating the bottle's rotation, and triggering the splash animation upon impact.
+     */
     throwRight() {
         this.speedY = 17;
         this.applyGravity();
@@ -53,6 +61,10 @@ class ThrowableObject extends MovableObject {
         }, 25);
     }
     
+    /**
+     * Handles the logic for throwing the bottle to the left, applying gravity,
+     * animating the bottle's rotation, and triggering the splash animation upon impact.
+     */
     throwLeft() {
         this.speedY = 8;
         this.applyGravity();
@@ -72,6 +84,9 @@ class ThrowableObject extends MovableObject {
         }, 25);
     }
 
+    /**
+     * Removes the bottle from the world's list of throwable objects after a delay, simulating its disappearance after impact.
+     */
     deleteBottle() {
         setTimeout(() => {
             let index = world.throwableObjects.indexOf(this);
@@ -81,6 +96,9 @@ class ThrowableObject extends MovableObject {
         }, 250);
     }
 
+    /**
+     * Plays the splash animation when the bottle hits the ground and initiates the removal of the bottle after the animation completes.
+     */
     splashAnimation() {
         let splashIndex = 0;
         let splashInterval = setInterval(() => {

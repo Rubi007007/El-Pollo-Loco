@@ -1,3 +1,7 @@
+/**
+ * Represents the status bar for collected coins in the game, extending from the `DrawableObject` class.
+ * Tracks the number of collected coins and updates the status bar display accordingly.
+ */
 class StatusbarCoin extends DrawableObject {
     percentage = 100;
     collectedCoins = 0;
@@ -22,6 +26,10 @@ class StatusbarCoin extends DrawableObject {
         this.setPercentage(0, this.IMAGES_COINBAR);
     }
 
+    /**
+     * Updates the status bar when a coin is collected, plays the collection sound,
+     * and increments the collected coins count.
+     */
     collectCoin() {
         world.audioHandler.toggleSound(this.collect_coin_sound);
         world.audioHandler.toggleVolume(this.collect_coin_sound, 0.6);
