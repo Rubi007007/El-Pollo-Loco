@@ -32,8 +32,6 @@ function startGame() {
     world.audioHandler.toggleSound(game_music);
     world.audioHandler.toggleVolume(game_music, 0.1);
     game_music.loop = true;
-
-    console.log('My Char is', world.character);
 }
 
 /**
