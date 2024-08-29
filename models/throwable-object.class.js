@@ -55,8 +55,7 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.splashAnimation();
-                this.world.audioHandler.toggleSound(this.splash_bottle_sound);
-                this.world.audioHandler.toggleVolume(this.splash_bottle_sound, 0.1);
+                this.playBottleSplashSound();
             }
         }, 25);
     }
@@ -78,8 +77,7 @@ class ThrowableObject extends MovableObject {
                 this.acceleration = 0;
                 this.y = 350;
                 this.splashAnimation();
-                this.world.audioHandler.toggleSound(this.splash_bottle_sound);
-                this.world.audioHandler.toggleVolume(this.splash_bottle_sound, 0.1);
+                this.playBottleSplashSound();
             }
         }, 25);
     }
@@ -110,5 +108,14 @@ class ThrowableObject extends MovableObject {
                 this.deleteBottle();
             }
         }, 60);
+    }
+
+    /**
+     * Plays the bottle splash sound effect.
+     * Ensures that the sound is played and sets its volume to a specified level.
+     */
+    playBottleSplashSound() {
+        this.world.audioHandler.toggleSound(this.splash_bottle_sound);
+        this.world.audioHandler.toggleVolume(this.splash_bottle_sound, 0.1);
     }
 }
