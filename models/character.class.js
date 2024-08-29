@@ -35,8 +35,6 @@ class Character extends MovableObject {
     ];
 
     IMAGES_JUMP_UP = [
-        // './img/2_character_pepe/3_jump/J-31.png',
-        // './img/2_character_pepe/3_jump/J-32.png',
         './img/2_character_pepe/3_jump/J-33.png',
         './img/2_character_pepe/3_jump/J-34.png',
         './img/2_character_pepe/3_jump/J-35.png',
@@ -46,7 +44,6 @@ class Character extends MovableObject {
         './img/2_character_pepe/3_jump/J-36.png',
         './img/2_character_pepe/3_jump/J-37.png',
         './img/2_character_pepe/3_jump/J-38.png',
-        // './img/2_character_pepe/3_jump/J-39.png',
     ];
 
     IMAGES_DEAD = [
@@ -106,73 +103,17 @@ class Character extends MovableObject {
     }
 
     /**
-     * Handles the character's movement, animation, and sound based on user input.
-     * Animates the character based on its state (e.g., walking, jumping, idle).
+     * Starts the animation loop for the character.
+     * Updates the character's state and triggers animations based on its current status.
      */
     animate() {
         this.resetIdleTimer();
 
         setInterval(() => {
             this.isMoving = false;
-
-            if (
-                this.world.keyboard.RIGHT &&
-                this.x < this.world.level.level_end_x &&
-                !this.invulnerable
-            ) {
-                this.moveRight();
-                this.otherDirection = false;
-                this.isMoving = true;
-                this.resetIdleTimer();
-
-                if (this.walking_sound.paused) {
-                    this.world.audioHandler.toggleSound(this.walking_sound);
-                    this.world.audioHandler.toggleVolume(
-                        this.walking_sound,
-                        0.1
-                    );
-                }
-            }
-
-            if (this.world.keyboard.LEFT && this.x > -350 && !this.invulnerable) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.isMoving = true;
-                this.resetIdleTimer();
-
-                if (this.walking_sound.paused) {
-                    this.world.audioHandler.toggleSound(this.walking_sound);
-                    this.world.audioHandler.toggleVolume(
-                        this.walking_sound,
-                        0.1
-                    );
-                }
-            }
-
-            if (
-                (this.world.keyboard.UP && !this.isAboveGround() && !this.invulnerable) ||
-                (this.world.keyboard.SPACE && !this.isAboveGround() && !this.invulnerable)
-            ) {
-                this.jump();
-                this.resetIdleTimer();
-
-                const jumpSound =
-                    this.JUMP_SOUNDS[
-                        this.world.playRandomSound(this.JUMP_SOUNDS)
-                    ];
-                if (this.JUMP_SOUNDS.length > 0) {
-                    if (jumpSound.paused) {
-                        this.world.audioHandler.toggleSound(jumpSound);
-
-                        for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
-                            this.world.audioHandler.toggleVolume(
-                                this.JUMP_SOUNDS[i],
-                                0.2
-                            );
-                        }
-                    }
-                }
-            }
+            this.startMovingRightAnimation();
+            this.startMovingLeftAnimation();
+            this.checkJumping();
 
             if (!this.isMoving) {
                 this.walking_sound.pause();
@@ -185,57 +126,21 @@ class Character extends MovableObject {
     }
 
     /**
-     * Starts various animation intervals to update the character's state and appearance.
-     * Handles idle animations, hurt animations, death animations, and more.
+     * Starts the intervals for various animations.
+     * Triggers jump and idle animations, and handles the character's death and hurt states.
      */
     startAnimationIntervals() {
         this.startJumpAnimation();
-
-        setInterval(() => {
-            if (
-                !this.isMoving &&
-                !this.isHurt() &&
-                !this.isAboveGround()
-            ) {
-                if (this.longIdleActive) {
-                    this.playAnimation(this.IMAGES_LONG_IDLE);
-                    this.world.audioHandler.toggleSound(this.snore_sound);
-                    this.world.audioHandler.toggleVolume(this.snore_sound, 0.9);
-                } else {
-                    this.playAnimation(this.IMAGES_IDLE);
-                }
-            }
-        }, 200);
+        this.startIdleAnimation();
 
         let animationInterval = setInterval(() => {
             if (this.isDead()) {
-                clearInterval(animationInterval);
-                this.currentImage = 0;
-                setInterval(() => {
-                    this.playAnimation(this.IMAGES_DEAD);
-                }, 100);
-                endGame();
-                this.idleTime = 9999999;
+                this.startDeadAnimation(animationInterval);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.resetIdleTimer();
+                this.playHurtSounds();
 
-                const hurtSound =
-                    this.HURT_SOUNDS[
-                        this.world.playRandomSound(this.HURT_SOUNDS)
-                    ];
-                if (this.HURT_SOUNDS.length > 0) {
-                    if (hurtSound.paused) {
-                        this.world.audioHandler.toggleSound(hurtSound);
-    
-                        for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
-                            this.world.audioHandler.toggleVolume(
-                                this.HURT_SOUNDS[i],
-                                0.4
-                            );
-                        }
-                    }
-                }
             } else if (this.isMoving && !this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
@@ -243,7 +148,8 @@ class Character extends MovableObject {
     }
 
     /**
-     * Startet die Sprunganimationen (hoch und runter) mit einem separaten Intervall.
+     * Starts the jump animation sequence.
+     * Plays different animations based on the character's vertical movement.
      */
     startJumpAnimation() {
         this.jumpAnimationInterval = setInterval(() => {
@@ -259,8 +165,144 @@ class Character extends MovableObject {
     }
 
     /**
-     * Resets the idle timer and stops the long idle animation if the character is moving.
-     * Initiates the long idle animation after a specified idle time.
+     * Starts the idle animation sequence.
+     * Displays the appropriate idle animation based on the character's long idle state.
+     */
+    startIdleAnimation() {
+        setInterval(() => {
+            if (
+                !this.isMoving &&
+                !this.isHurt() &&
+                !this.isAboveGround()
+            ) {
+                if (this.longIdleActive) {
+                    this.playAnimation(this.IMAGES_LONG_IDLE);
+                    this.world.audioHandler.toggleSound(this.snore_sound);
+                    this.world.audioHandler.toggleVolume(this.snore_sound, 0.9);
+                } else {
+                    this.playAnimation(this.IMAGES_IDLE);
+                }
+            }
+        }, 200);
+    }
+
+    /**
+     * Handles the character's movement to the right.
+     * Updates the character's position and plays walking sounds if moving right.
+     */
+    startMovingRightAnimation() {
+        if (
+            this.world.keyboard.RIGHT &&
+            this.x < this.world.level.level_end_x &&
+            !this.invulnerable
+        ) {
+            this.moveRight();
+            this.otherDirection = false;
+            this.isMoving = true;
+            this.resetIdleTimer();
+            this.playWalkingSounds();
+        }
+    }
+
+    /**
+     * Handles the character's movement to the left.
+     * Updates the character's position and plays walking sounds if moving left.
+     */
+    startMovingLeftAnimation() {
+        if (this.world.keyboard.LEFT && this.x > -350 && !this.invulnerable) {
+            this.moveLeft();
+            this.otherDirection = true;
+            this.isMoving = true;
+            this.resetIdleTimer();
+            this.playWalkingSounds();
+        }
+    }
+    
+    /**
+     * Handles the character's death animation.
+     * Stops other animations and plays the death animation.
+     * @param {number} interval - The interval ID for the current animation loop.
+     */
+    startDeadAnimation(interval) {
+        clearInterval(interval);
+        this.currentImage = 0;
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_DEAD);
+        }, 100);
+        endGame();
+        this.idleTime = 9999999;
+    }
+
+    /**
+     * Checks if the character should jump based on user input.
+     * Triggers the jump action and plays jump sounds if jumping.
+     */
+    checkJumping() {
+        if ((this.world.keyboard.UP && !this.isAboveGround() && !this.invulnerable) ||
+            (this.world.keyboard.SPACE && !this.isAboveGround() && !this.invulnerable)) {
+            this.jump();
+            this.resetIdleTimer();
+            this.playJumpSounds();
+        }
+    }
+    
+    /**
+     * Plays walking sounds if the walking sound is not already playing.
+     */
+    playWalkingSounds() {
+        if (this.walking_sound.paused) {
+            this.world.audioHandler.toggleSound(this.walking_sound);
+            this.world.audioHandler.toggleVolume(this.walking_sound, 0.1);
+        }
+    }
+
+    /**
+     * Plays a random jump sound from the available jump sounds array.
+     */
+    playJumpSounds() {
+        const jumpSound =
+        this.JUMP_SOUNDS[
+            this.world.playRandomSound(this.JUMP_SOUNDS)
+        ];
+        if (this.JUMP_SOUNDS.length > 0) {
+            if (jumpSound.paused) {
+                this.world.audioHandler.toggleSound(jumpSound);
+
+                for (let i = 0; i < this.JUMP_SOUNDS.length; i++) {
+                    this.world.audioHandler.toggleVolume(
+                        this.JUMP_SOUNDS[i],
+                        0.2
+                    );
+                }
+            }
+        }
+    }
+
+    /**
+     * Plays a random hurt sound from the available hurt sounds array.
+     */
+    playHurtSounds() {
+        const hurtSound =
+        this.HURT_SOUNDS[
+            this.world.playRandomSound(this.HURT_SOUNDS)
+        ];
+        if (this.HURT_SOUNDS.length > 0) {
+            if (hurtSound.paused) {
+                this.world.audioHandler.toggleSound(hurtSound);
+
+                for (let i = 0; i < this.HURT_SOUNDS.length; i++) {
+                    this.world.audioHandler.toggleVolume(
+                        this.HURT_SOUNDS[i],
+                        0.4
+                    );
+                }
+            }
+        }
+    }
+
+    /**
+     * Resets the idle timer and updates the long idle state.
+     * Activates the long idle state if the character remains idle for a specified duration.
      */
     resetIdleTimer() {
         if (this.idleTimer) {
@@ -279,7 +321,8 @@ class Character extends MovableObject {
     }
 
     /**
-     * Loads all jump and hurt sounds into respective arrays for use in the game.
+     * Adds sound effects for jumping and hurting to the character.
+     * Loads a predefined number of jump and hurt sound files into the respective arrays.
      */
     addArraySounds() {
         for (let i = 1; i <= 10; i++) {
