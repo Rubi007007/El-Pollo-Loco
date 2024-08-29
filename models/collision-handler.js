@@ -7,12 +7,6 @@ class CollisionHandler {
         this.world = world;
     }
 
-    /**
-     * Checks for collisions between the character and other entities such as enemies, throwable objects, and collectables.
-     * - Handles collisions between the character and enemies, including bouncing and health updates.
-     * - Handles collisions between throwable objects and enemies, including removing objects after use.
-     * - Updates the status bars when coins and bottles are collected.
-     */
     checkCollisions() {
         const char = this.world.character;
 
