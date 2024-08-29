@@ -22,6 +22,7 @@ class World {
     statusbarBottle = new StatusbarBottle();
     statusbarEndboss = new StatusbarEndboss();
     throwableObjects = [];
+    bottle;
     throwPressed = false;
     throwCooldownActive = false;
     throwCooldownDuration = 1000;
@@ -102,36 +103,61 @@ class World {
      */
     checkThrowObjects() {
         if (this.keyboard.THROW && !this.throwPressed && this.statusbarBottle.availableBottles() && !this.throwCooldownActive) {
-            let bottle;
-            
-            if (!this.character.otherDirection) {
-                bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120, this);
-                bottle.throwRight();
-            } else if (this.character.otherDirection) {
-                bottle = new ThrowableObject(this.character.x, this.character.y + 145, this);
-                bottle.throwLeft();
-            }
-            
-            this.throwableObjects.push(bottle);
-            this.statusbarBottle.collectedBottles -= 1;
-            this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10, this.statusbarBottle.IMAGES_BOTTLEBAR);
-
-            this.throwPressed = true;
-
-            this.throwCooldownActive = true;
-            setTimeout(() => {
-                this.throwCooldownActive = false;
-            }, this.throwCooldownDuration);
-
+            this.throwedObjectLeftOrRight();
+            this.throwedObject(this.bottle);
+            this.cooldownThrowableObject();
         } else if (this.keyboard.THROW && !this.statusbarBottle.availableBottles()) {
-            this.audioHandler.toggleSound(this.out_of_bottles_sound);
-            this.audioHandler.toggleVolume(this.out_of_bottles_sound, 0.1);
-            this.throwPressed = true;
+            this.outOfThrowableObjects();
         }
 
         if (!this.keyboard.THROW) {
             this.throwPressed = false;
         }
+    }
+
+    /**
+     * Checks if a throw action is initiated, handles the creation and throwing of a throwable object,
+     * and manages the throw cooldown.
+     */
+    throwedObjectLeftOrRight() {
+        if (!this.character.otherDirection) {
+            this.bottle = new ThrowableObject(this.character.x + 80, this.character.y + 120, this);
+            this.bottle.throwRight();
+        } else if (this.character.otherDirection) {
+            this.bottle = new ThrowableObject(this.character.x, this.character.y + 145, this);
+            this.bottle.throwLeft();
+        }
+    }
+
+    /**
+     * Manages the cooldown period after a throwable object is thrown.
+     */
+    cooldownThrowableObject() {
+        this.throwCooldownActive = true;
+        setTimeout(() => {
+            this.throwCooldownActive = false;
+        }, this.throwCooldownDuration);
+    }
+
+    /**
+     * Adds a throwable object to the list of throwable objects and updates the bottle count.
+     * @param {ThrowableObject} bottle - The throwable object to add.
+     */
+    throwedObject(bottle) {
+        this.throwableObjects.push(bottle);
+        this.statusbarBottle.collectedBottles -= 1;
+        this.statusbarBottle.setPercentage(this.statusbarBottle.collectedBottles * 10, this.statusbarBottle.IMAGES_BOTTLEBAR);
+        this.throwPressed = true;
+    }
+
+    /**
+     * Handles the situation when there are no throwable objects left.
+     * Plays a sound effect and sets the throwPressed flag to true.
+     */
+    outOfThrowableObjects() {
+        this.audioHandler.toggleSound(this.out_of_bottles_sound);
+        this.audioHandler.toggleVolume(this.out_of_bottles_sound, 0.1);
+        this.throwPressed = true;
     }
 
     /**
@@ -145,14 +171,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
 
         this.ctx.translate(-this.camera_x, 0);
-        // ----- Space for fixed Objects ----- //
-        this.addToMap(this.statusbarHealth);
-        this.addToMap(this.statusbarCoin);
-        this.addToMap(this.statusbarBottle);
-        if (this.endbossSpawned) {
-            this.addToMap(this.statusbarEndboss);
-        }
-        // ----- Space for fixed Objects ----- //
+        this.drawFixedObjects();
         this.ctx.translate(this.camera_x, 0);
         
         this.addToMap(this.character);
@@ -167,6 +186,19 @@ class World {
         this.animationFrame = requestAnimationFrame(function() {
             self.draw();
         })
+    }
+
+    /**
+     * Draws fixed objects on the map, including status bars for health, coins, bottles, and the endboss.
+     * Adds these objects to the map for rendering based on their current state.
+     */
+    drawFixedObjects() {
+        this.addToMap(this.statusbarHealth);
+        this.addToMap(this.statusbarCoin);
+        this.addToMap(this.statusbarBottle);
+        if (this.endbossSpawned) {
+            this.addToMap(this.statusbarEndboss);
+        }
     }
 
     /**
