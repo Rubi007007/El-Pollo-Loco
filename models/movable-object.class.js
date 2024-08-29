@@ -134,6 +134,7 @@ class MovableObject extends DrawableObject {
      * Makes the object jump by setting its vertical speed to a fixed value.
      */
     jump() {
+        this.currentImage = 0;
         this.speedY = 21;
     }
 

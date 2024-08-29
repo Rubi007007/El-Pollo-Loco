@@ -8,12 +8,10 @@
 class Character extends MovableObject {
     height = 280;
     width = 140;
-
     offsetX = 28;
     offsetY = 120;
     hitboxWidth = this.width - 70;
     hitboxHeight = this.height - 140;
-
     y = 150;
     speed = 7;
     world;
@@ -257,7 +255,7 @@ class Character extends MovableObject {
                 }
                 this.lastY = this.y;
             }
-        }, 150);
+        }, 140);
     }
 
     /**
