@@ -35,7 +35,6 @@ function startGame() {
  * Restarts the game by resetting the game state and calling the `startGame` function.
  */
 function restartGame() {
-
     if (world) {
         document.getElementById('win-screen').style.display = 'none';
         document.getElementById('end-screen').style.display = 'none';
@@ -80,25 +79,38 @@ function resetGame() {
     world.collectedBottles = 0;
     world.collectedCoins = 0;
     world.audioHandler.isStopped = false;
+    resetCharacterStates();
+    world.invulnerable = false;
+    resetKeyboardStates();
+    gameIsOver = null;
+    game_music.currentTime = 0;
+    game_music.pause();
+    world = null;
+    document.getElementById('canvas').style.display = 'none';
+}
+
+/**
+ * Resets the states of the character, including invulnerability, sounds, energy, 
+ * and idle timer.
+ */
+function resetCharacterStates() {
     world.character.invulnerable = false;
     world.character.JUMP_SOUNDS = [];
     world.character.HURT_SOUNDS = [];
     world.character.energy = 100;
     world.character.resetIdleTimer();
-    
-    world.invulnerable = false;
+}
+
+/**
+ * Resets the states of the keyboard, setting all input flags to false.
+ */
+function resetKeyboardStates() {
     world.keyboard.DOWN = false;
     world.keyboard.UP = false;
     world.keyboard.LEFT = false;
     world.keyboard.RIGHT = false;
     world.keyboard.SPACE = false;
     world.keyboard.THROW = false;
-
-    gameIsOver = null;
-    game_music.currentTime = 0;
-    game_music.pause();
-    world = null;
-    document.getElementById('canvas').style.display = 'none';
 }
 
 /**
