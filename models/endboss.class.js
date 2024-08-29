@@ -84,34 +84,6 @@ class Endboss extends MovableObject {
     }
 
     /**
-     * Clears any ongoing animation intervals.
-     */
-    clearAnimation() {
-        if (this.currentInterval) {
-            clearInterval(this.currentInterval);
-            this.currentInterval = null;
-        }
-    }
-
-    addTimeout(callback, delay) {
-        this.clearTimeouts();
-        const timeoutId = setTimeout(() => {
-            callback();
-            this.removeTimeout(timeoutId);
-        }, delay);
-        this.activeTimeouts.push(timeoutId);
-    }
-
-    clearTimeouts() {
-        this.activeTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
-        this.activeTimeouts = [];
-    }
-
-    removeTimeout(timeoutId) {
-        this.activeTimeouts = this.activeTimeouts.filter(id => id !== timeoutId);
-    }
-
-    /**
      * Handles the alert state of the Endboss.
      */
     alert() {
@@ -198,13 +170,8 @@ class Endboss extends MovableObject {
 
         this.invulnerable = true;
         this.clearAnimation();
-        this.endbossStatus = 'hurt';
         this.takingDamageAnimation();
-        this.world.audioHandler.toggleSound(this.endboss_damage_sound);
-        this.world.audioHandler.toggleVolume(this.endboss_damage_sound, 0.2);
-        this.energy -= 20;
-        this.world.statusbarEndboss.setPercentage(this.energy, world.statusbarEndboss.IMAGES_ENDBOSSBAR)
-        this.checkEndbossIsDead();
+        this.endbossLooseEnergy();
 
         if (this.energy > 0) {
             this.addTimeout(() => {
@@ -213,6 +180,16 @@ class Endboss extends MovableObject {
                 this.handleEndboss();
             }, 1800);
         }
+    }
+
+    /**
+     * Reduces the Endboss's energy by 20 and updates the status bar.
+     * Also checks if the Endboss is dead after losing energy.
+    */
+    endbossLooseEnergy() {
+        this.energy -= 20;
+        this.world.statusbarEndboss.setPercentage(this.energy, world.statusbarEndboss.IMAGES_ENDBOSSBAR)
+        this.checkEndbossIsDead();
     }
 
     /**
@@ -240,6 +217,11 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Animates the Endboss in the walking state and moves it to the left.
+     * @param {number} speed - The speed at which the Endboss moves.
+     * @param {number} interval - The interval (in milliseconds) for the animation.
+     */
     walkAnimation(speed, interval) {
         this.speed = speed;
         this.currentInterval = setInterval(() => {
@@ -248,6 +230,9 @@ class Endboss extends MovableObject {
         }, interval);
     }
 
+    /**
+     * Animates the Endboss in the alert state without movement.
+     */
     alertAnimation() {
         this.speed = 0;
         this.currentInterval = setInterval(() => {
@@ -255,6 +240,9 @@ class Endboss extends MovableObject {
         }, 170);
     }
 
+    /**
+     * Animates the Endboss in the attack state without movement.
+     */
     attackAnimation() {
         this.speed = 0;
         this.currentInterval = setInterval(() => {
@@ -262,18 +250,67 @@ class Endboss extends MovableObject {
         }, 100);
     }
 
+    /**
+     * Animates the Endboss in the hurt state, representing it taking damage.
+     */
     takingDamageAnimation() {
+        this.endbossStatus = 'hurt';
         this.speed = 0;
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_HURT);
         }, 140);
+        this.world.audioHandler.toggleSound(this.endboss_damage_sound);
+        this.world.audioHandler.toggleVolume(this.endboss_damage_sound, 0.2);
     }
 
+    /**
+     * Animates the Endboss in the dead state, representing its death.
+     */
     deadAnimation() {
         this.speed = 0;
         this.currentInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_DEAD);
         }, 110);
+    }
+
+    /**
+     * Clears any ongoing animation intervals.
+     */
+    clearAnimation() {
+        if (this.currentInterval) {
+            clearInterval(this.currentInterval);
+            this.currentInterval = null;
+        }
+    }
+
+    /**
+     * Adds a timeout function and stores its ID for later removal.
+     * @param {Function} callback - The function to execute after the delay.
+     * @param {number} delay - The delay (in milliseconds) before executing the callback.
+     */
+    addTimeout(callback, delay) {
+        this.clearTimeouts();
+        const timeoutId = setTimeout(() => {
+            callback();
+            this.removeTimeout(timeoutId);
+        }, delay);
+        this.activeTimeouts.push(timeoutId);
+    }
+
+    /**
+     * Clears all active timeouts that were previously set.
+     */
+    clearTimeouts() {
+        this.activeTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+        this.activeTimeouts = [];
+    }
+
+    /**
+     * Removes a specific timeout from the list of active timeouts.
+     * @param {number} timeoutId - The ID of the timeout to remove.
+     */
+    removeTimeout(timeoutId) {
+        this.activeTimeouts = this.activeTimeouts.filter(id => id !== timeoutId);
     }
 
     /**
